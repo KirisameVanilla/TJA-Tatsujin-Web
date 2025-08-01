@@ -1,0 +1,29 @@
+{
+  "name": "tja-tatsujin-web",
+  "version": "1.0.0",
+  "description": "> **TJA no Tatsujin**",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KirisameVanilla/TJA-Tatsujin-Web.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KirisameVanilla/TJA-Tatsujin-Web/issues"
+  },
+  "homepage": "https://github.com/KirisameVanilla/TJA-Tatsujin-Web#readme",
+  "devDependencies": {
+    "vite": "^7.0.6"
+  },
+  "dependencies": {
+    "jszip": "^3.10.1"
+  }
+}

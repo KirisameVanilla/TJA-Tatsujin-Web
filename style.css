@@ -1,0 +1,418 @@
+:root {
+    --primary-color: #e74c3c;
+    --hover-color: #c0392b;
+    --text-color: #333;
+    --bg-color: #f9f9f9;
+    --card-bg: #ffffff;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.6;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1.2rem;
+    text-align: center;
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+header a {
+    color: white;
+    position: absolute;
+    right: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+header a:hover {
+    color: #fff;
+    transform: translateY(-50%) scale(1.1);
+    transition: transform 0.1s;
+}
+
+.language-switch {
+    position: absolute;
+    left: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.language-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    transition: all 0.1s ease;
+}
+
+.language-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.language-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 120px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.1s ease;
+    margin-top: 8px;
+}
+
+.language-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.language-option {
+    padding: 10px 15px;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.1s ease;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.language-option:last-child {
+    border-bottom: none;
+}
+
+.language-option:hover {
+    background-color: #f8f9fa;
+}
+
+.language-option.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.language-text {
+    font-weight: 500;
+}
+
+
+main {
+    flex: 1;
+    padding: 1.5rem;
+    max-width: 700px;
+    width: 100%;
+    margin: 1rem auto;
+    box-sizing: border-box;
+}
+
+/* API Configuration Section */
+.api-config-section {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 2rem;
+    border: 2px solid #e0e0e0;
+}
+
+.api-config-section h3 {
+    margin: 0 0 1rem 0;
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.config-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.config-row label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.config-row input {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.config-row input:focus {
+    border-color: var(--primary-color);
+}
+
+#save-config {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+}
+
+#save-config:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
+}
+
+#save-config:active {
+    transform: translateY(0);
+}
+
+#search {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    border: 2px solid #ddd;
+    border-radius: var(--border-radius);
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.1s;
+}
+
+#search:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 8px rgba(231, 76, 60, 0.2);
+}
+
+button#start {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    margin: 1rem auto 0 auto;
+    display: block;
+    transition: background-color 0.1s, transform 0.1s;
+}
+
+button#start:hover:not([disabled]) {
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
+}
+
+button#start:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+ul#results {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    border-radius: var(--border-radius);
+    background-color: var(--card-bg);
+    box-shadow: var(--box-shadow);
+}
+
+li {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.1s;
+}
+
+li:hover {
+    background-color: #fdf2f2;
+}
+
+li.selected {
+    background-color: #fceae9;
+    color: var(--primary-color);
+    font-weight: bold;
+    border-left: 4px solid var(--primary-color);
+}
+
+.status {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: #f1f1f1;
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    color: #555;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+footer {
+    text-align: center;
+    padding: 1.2rem;
+    margin-top: auto;
+    color: #777;
+    font-size: 0.9rem;
+    background-color: #f0f0f0;
+    border-top: 1px solid #ddd;
+}
+
+footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+.toggle-container {
+    margin: 1.2rem 0 0.5rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.switch-label {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.95rem;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.switch-label input {
+    display: none;
+}
+
+.switch-label .slider {
+    position: relative;
+    width: 42px;
+    height: 22px;
+    background-color: #ccc;
+    border-radius: 22px;
+    transition: 0.1s;
+}
+
+.switch-label .slider::before {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: white;
+    top: 2px;
+    left: 2px;
+    transition: 0.1s;
+}
+
+.switch-label input:checked+.slider {
+    background-color: var(--primary-color);
+}
+
+.switch-label input:checked+.slider::before {
+    transform: translateX(20px);
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 1rem;
+        position: relative;
+    }
+
+    .language-switch {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    header a {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    header h1 {
+        margin-top: 0;
+        font-size: 1.5rem;
+    }
+
+    .language-btn {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+    .language-dropdown {
+        min-width: 100px;
+    }
+}
+
+@media (max-width: 600px) {
+    main {
+        padding: 1rem;
+    }
+
+    button#start {
+        font-size: 1rem;
+        padding: 0.6rem 1.2rem;
+    }
+    
+    .api-config-section {
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .api-config-section h3 {
+        font-size: 1.1rem;
+    }
+    
+    .config-row {
+        margin-bottom: 0.8rem;
+    }
+    
+    .config-row input {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+    }
+    
+    #save-config {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}

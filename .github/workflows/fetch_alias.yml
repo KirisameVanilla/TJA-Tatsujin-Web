@@ -1,4 +1,4 @@
-name: Update alias.json from structure.json via API
+name: Update alias.json from API structure
 
 on:
   workflow_dispatch:
@@ -8,65 +8,29 @@ on:
 permissions:
   contents: write
 
+env:
+  API_URL: ${{ secrets.API_URL }}
+
 jobs:
   update-alias:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout this repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Download structure.json via GitHub API
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          curl -s -H "Authorization: token $GH_TOKEN" \
-            -H "Accept: application/vnd.github.v3.raw" \
-            https://api.github.com/repos/KirisameVanilla/Taiko-Songs/contents/structure.json \
-            -o structure.json
+      - name: Install dependencies
+        run: pip install requests
 
       - name: Update alias.json
-        run: |
-          import json
-          import os
-
-          # 读取 structure.json
-          with open("structure.json", "r", encoding="utf-8") as f:
-              structure = json.load(f)
-          structure_keys = set(structure.keys())
-
-          # 读取或初始化 alias.json
-          alias_path = "alias.json"
-          if os.path.exists(alias_path):
-              with open(alias_path, "r", encoding="utf-8") as f:
-                  alias = json.load(f)
-          else:
-              alias = {}
-
-          # 找出需要添加的新 key
-          new_keys = structure_keys - alias.keys()
-
-          updated = False
-          for key in sorted(new_keys):
-              alias[key] = []
-              updated = True
-
-          # 写入（仅当有更新）
-          if updated:
-              with open(alias_path, "w", encoding="utf-8") as f:
-                  json.dump(alias, f, ensure_ascii=False, indent=4, sort_keys=True)
-          else:
-              print("No new keys to add.")
-        shell: python
+        run: python fetch_alias.py
 
       - name: Commit and push if alias.json changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add alias.json
-          git diff --cached --quiet || (git commit -m "Update alias.json from structure.json" && git push)
+          git diff --cached --quiet || (git commit -m "ci: Update alias.json from API structure" && git push)
