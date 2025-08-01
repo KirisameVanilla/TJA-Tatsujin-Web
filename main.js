@@ -193,6 +193,11 @@ async function downloadFilesFromStructure ( selectedKey, alias, zip )
   const repoNameInput = document.getElementById( 'repo-name' );
   const saveConfigBtn = document.getElementById( 'save-config' );
 
+  // 设置弹窗相关元素
+  const settingsBtn = document.getElementById( 'settings-btn' );
+  const settingsModal = document.getElementById( 'settings-modal' );
+  const closeModal = settingsModal.querySelector( '.close' );
+
   // 加载保存的API配置
   const savedConfig = getApiConfig();
   apiHostInput.value = savedConfig.host;
@@ -282,6 +287,39 @@ async function downloadFilesFromStructure ( selectedKey, alias, zip )
     searchInput.value = '';
     renderResults( [] );
     startBtn.disabled = true;
+    
+    // 关闭弹窗
+    settingsModal.classList.remove( 'show' );
+  } );
+
+  // 设置按钮点击事件 - 打开弹窗
+  settingsBtn.addEventListener( 'click', () =>
+  {
+    settingsModal.classList.add( 'show' );
+  } );
+
+  // 关闭按钮点击事件
+  closeModal.addEventListener( 'click', () =>
+  {
+    settingsModal.classList.remove( 'show' );
+  } );
+
+  // 点击弹窗背景关闭弹窗
+  settingsModal.addEventListener( 'click', ( e ) =>
+  {
+    if ( e.target === settingsModal )
+    {
+      settingsModal.classList.remove( 'show' );
+    }
+  } );
+
+  // ESC键关闭弹窗
+  document.addEventListener( 'keydown', ( e ) =>
+  {
+    if ( e.key === 'Escape' && settingsModal.classList.contains( 'show' ) )
+    {
+      settingsModal.classList.remove( 'show' );
+    }
   } );
 
   // 监听语言切换事件，重新渲染搜索结果

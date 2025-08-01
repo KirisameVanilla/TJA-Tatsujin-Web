@@ -18,24 +18,6 @@
   </header>
 
   <main>
-    <!-- API Configuration Section -->
-    <div class="api-config-section">
-      <h3 data-i18n="apiConfigTitle">API 配置</h3>
-      <div class="config-row">
-        <label for="api-host" data-i18n="apiHostLabel">API 主机地址:</label>
-        <input id="api-host" type="text" data-i18n="apiHostPlaceholder" placeholder="例如: xxx.xxx.xx" />
-      </div>
-      <div class="config-row">
-        <label for="repo-owner" data-i18n="repoOwnerLabel">仓库所有者:</label>
-        <input id="repo-owner" type="text" data-i18n="repoOwnerPlaceholder" placeholder="例如: xxx" />
-      </div>
-      <div class="config-row">
-        <label for="repo-name" data-i18n="repoNameLabel">仓库名称:</label>
-        <input id="repo-name" type="text" data-i18n="repoNamePlaceholder" placeholder="例如: xxx" />
-      </div>
-      <button id="save-config" data-i18n="saveConfig">保存配置</button>
-    </div>
-
     <input id="search" data-i18n="searchPlaceholder" placeholder="输入搜索关键字" autocomplete="off" />
     <button id="start" data-i18n="startDownload" disabled>开始下载</button>
     <div class="toggle-container">
@@ -53,6 +35,36 @@
     &copy; 2025 <a href="https://github.com/KirisameVanilla" target="_blank">KirisameVanilla</a><br />
     <span data-i18n="footerText">非官方项目，仅供学习交流。</span>
   </footer>
+
+  <!-- 设置按钮 -->
+  <button id="settings-btn" class="settings-btn" title="设置">
+    <i class="fas fa-cog"></i>
+  </button>
+
+  <!-- 设置弹窗 -->
+  <div id="settings-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 data-i18n="apiConfigTitle">API 配置</h3>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="config-row">
+          <label for="api-host" data-i18n="apiHostLabel">API 主机地址:</label>
+          <input id="api-host" type="text" data-i18n="apiHostPlaceholder" placeholder="例如: xxx.xxx.xx" />
+        </div>
+        <div class="config-row">
+          <label for="repo-owner" data-i18n="repoOwnerLabel">仓库所有者:</label>
+          <input id="repo-owner" type="text" data-i18n="repoOwnerPlaceholder" placeholder="例如: xxx" />
+        </div>
+        <div class="config-row">
+          <label for="repo-name" data-i18n="repoNameLabel">仓库名称:</label>
+          <input id="repo-name" type="text" data-i18n="repoNamePlaceholder" placeholder="例如: xxx" />
+        </div>
+        <button id="save-config" data-i18n="saveConfig">保存配置</button>
+      </div>
+    </div>
+  </div>
 
   <script type="module" src="./main.js"></script>
 </body>
