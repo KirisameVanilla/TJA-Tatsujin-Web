@@ -7,7 +7,12 @@ function getApiConfig() {
   if (config) {
     return JSON.parse(config);
   }
-  return updateStatus( i18n.t( 'apiConfigNotFound' ) );
+  updateStatus( i18n.t( 'apiConfigNotFound' ) );
+  return {
+    host: '',
+    owner: '',
+    repo: ''
+  };
 }
 
 // 保存API配置
