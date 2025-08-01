@@ -140,7 +140,11 @@
         "path": "08 Live Festival Mode/23 Special Medley -Seventh Digest-"
     },
     "2354 Prelude for The Journey of Sunlight": {
-        "alias": ["23時54分、陽の旅路へのプレリュード", "2354", "23点54分，通往阳光旅途的前奏"],
+        "alias": [
+            "23時54分、陽の旅路へのプレリュード",
+            "2354",
+            "23点54分，通往阳光旅途的前奏"
+        ],
         "path": "09 Namco Original/2354 Prelude for The Journey of Sunlight"
     },
     "24 ALLSTARS Commemoration Festival -Red Version-": {
@@ -2219,7 +2223,9 @@
         "path": "09 Namco Original/Dondokodon Seasons"
     },
     "Donkama 2000": {
-        "alias": ["咚奏箱2000"],
+        "alias": [
+            "咚奏箱2000"
+        ],
         "path": "09 Namco Original/Donkama 2000"
     },
     "Donko no First Date": {
@@ -2503,7 +2509,9 @@
         "path": "06 Classical/Eine Kleine Nachtmusik"
     },
     "EkiBEN 2000": {
-        "alias": ["铁路便当2000"],
+        "alias": [
+            "铁路便当2000"
+        ],
         "path": "09 Namco Original/EkiBEN 2000"
     },
     "Electric Postman": {
@@ -3531,7 +3539,10 @@
         "path": "03 Vocaloid/Hatsune Miku no Shoushitsu -Gekijouban-"
     },
     "Haya Saitama 2000": {
-        "alias": ["快埼玉2000", "速埼玉"],
+        "alias": [
+            "快埼玉2000",
+            "速埼玉"
+        ],
         "path": "09 Namco Original/Haya Saitama 2000"
     },
     "Hayabusa": {
@@ -4705,7 +4716,9 @@
         "path": "02 Anime/Kazetachi no Koe"
     },
     "Kechadon 2000": {
-        "alias": ["卡恰咚2000"],
+        "alias": [
+            "卡恰咚2000"
+        ],
         "path": "09 Namco Original/Kechadon 2000"
     },
     "Kenka Joutou": {
@@ -4925,11 +4938,15 @@
         "path": "09 Namco Original/Kissa Rain"
     },
     "Kita Saitama 200": {
-        "alias": ["北埼玉200"],
+        "alias": [
+            "北埼玉200"
+        ],
         "path": "09 Namco Original/Kita Saitama 200"
     },
     "Kita Saitama 2000": {
-        "alias": ["北埼玉2000"],
+        "alias": [
+            "北埼玉2000"
+        ],
         "path": "09 Namco Original/Kita Saitama 2000"
     },
     "Kita Sakaba": {
@@ -5637,7 +5654,9 @@
         "path": "07 Game Music/Machiuke Prince"
     },
     "Mada Saitama 2000": {
-        "alias": ["还是埼玉2000"],
+        "alias": [
+            "还是埼玉2000"
+        ],
         "path": "09 Namco Original/Mada Saitama 2000"
     },
     "Madou Gensoukyoku": {
@@ -5845,7 +5864,9 @@
         "path": "01 Pop/Mata Koko de Aimashou"
     },
     "Mata Saitama 2000": {
-        "alias": ["又埼玉2000"],
+        "alias": [
+            "又埼玉2000"
+        ],
         "path": "09 Namco Original/Mata Saitama 2000"
     },
     "Material Girl": {
@@ -6669,7 +6690,9 @@
         "path": "01 Pop/Nonsense Bungaku"
     },
     "Norudon 2000": {
-        "alias": ["搭车咚2000"],
+        "alias": [
+            "搭车咚2000"
+        ],
         "path": "09 Namco Original/Norudon 2000"
     },
     "Nosferatu": {
@@ -7257,7 +7280,9 @@
         "path": "07 Game Music/Positive!"
     },
     "Practice Love": {
-        "alias": ["修炼爱情"],
+        "alias": [
+            "修炼爱情"
+        ],
         "path": "01 Pop/Practice Love"
     },
     "Precious": {
@@ -7349,7 +7374,9 @@
         "path": "02 Anime/QUESTION"
     },
     "Qiang Jun Ling": {
-        "alias": ["将军令"],
+        "alias": [
+            "将军令"
+        ],
         "path": "01 Pop/Qiang Jun Ling"
     },
     "Qing Bu Zhi Jing": {
@@ -7365,7 +7392,9 @@
         "path": "01 Pop/Qun Bai Yao Yao"
     },
     "R.I.P. Hero": {
-        "alias": ["そして勇者は眠りにつく"],
+        "alias": [
+            "そして勇者は眠りにつく"
+        ],
         "path": "09 Namco Original/R.I.P. Hero"
     },
     "RAGE vs self": {
@@ -7725,7 +7754,9 @@
         "path": "04 Children and Folk/Russian Folk Medley"
     },
     "Ryougen no Mai": {
-        "alias": ["燎原之舞"],
+        "alias": [
+            "燎原之舞"
+        ],
         "path": "09 Namco Original/Ryougen no Mai"
     },
     "Ryoumaden": {
@@ -7925,7 +7956,9 @@
         "path": "02 Anime/Saikou Toutatsuten"
     },
     "Saitama 2000": {
-        "alias": ["埼玉2000"],
+        "alias": [
+            "埼玉2000"
+        ],
         "path": "09 Namco Original/Saitama 2000"
     },
     "Sakasama Sekai": {
@@ -8209,11 +8242,15 @@
         "path": "04 Children and Folk/Shima Uta"
     },
     "Shimedore 2000": {
-        "alias": ["组曲2000"],
+        "alias": [
+            "组曲2000"
+        ],
         "path": "09 Namco Original/Shimedore 2000"
     },
     "Shimedore 2000+": {
-        "alias": ["组曲2000+"],
+        "alias": [
+            "组曲2000+"
+        ],
         "path": "09 Namco Original/Shimedore 2000+"
     },
     "Shin Garyoutensei": {
@@ -8489,7 +8526,9 @@
         "path": "02 Anime/Sore wa Bokutachi no Kiseki"
     },
     "Soroban 2000": {
-        "alias": ["珠算2000"],
+        "alias": [
+            "珠算2000"
+        ],
         "path": "09 Namco Original/Soroban 2000"
     },
     "Sotsu Omeshiki": {
@@ -8773,7 +8812,9 @@
         "path": "04 Children and Folk/Suudara Bushi"
     },
     "Suuhaa 2000": {
-        "alias": ["吸哈2000"],
+        "alias": [
+            "吸哈2000"
+        ],
         "path": "09 Namco Original/Suuhaa 2000"
     },
     "Swan": {
@@ -8933,7 +8974,9 @@
         "path": "09 Namco Original/Tabaneito"
     },
     "Taberuna 2000": {
-        "alias": ["禁食2000"],
+        "alias": [
+            "禁食2000"
+        ],
         "path": "09 Namco Original/Taberuna 2000"
     },
     "Tabetemo Tabetemo": {
@@ -9053,7 +9096,9 @@
         "path": "10 Taiko Towers/Taiko Tower 10 Kara-kuchi"
     },
     "Taiko no 2000": {
-        "alias": ["远鼓的2000"],
+        "alias": [
+            "远鼓的2000"
+        ],
         "path": "09 Namco Original/Taiko no 2000"
     },
     "Taiko no Tatsujin Ai no Theme": {
@@ -9193,7 +9238,9 @@
         "path": "09 Namco Original/Tengu-bayashi"
     },
     "Tenjiku 2000": {
-        "alias": ["天竺2000"],
+        "alias": [
+            "天竺2000"
+        ],
         "path": "09 Namco Original/Tenjiku 2000"
     },
     "Tenka Touitsu Roku": {
@@ -10053,7 +10100,9 @@
         "path": "04 Children and Folk/Warabe Uta Medley -RT Version-"
     },
     "Waraeru 2000": {
-        "alias": ["可笑可啸2000"],
+        "alias": [
+            "可笑可啸2000"
+        ],
         "path": "09 Namco Original/Waraeru 2000"
     },
     "Warau ga Kachi! de GO!": {
@@ -10253,7 +10302,9 @@
         "path": "01 Pop/Wu Niang"
     },
     "XDAY 2000": {
-        "alias": ["X-DAY2000"],
+        "alias": [
+            "X-DAY2000"
+        ],
         "path": "09 Namco Original/XDAY 2000"
     },
     "XEVIOUS": {
@@ -10443,7 +10494,9 @@
         "path": "09 Namco Original/Yokuderu 15300"
     },
     "Yokuderu 2000": {
-        "alias": ["有得忙2000"],
+        "alias": [
+            "有得忙2000"
+        ],
         "path": "09 Namco Original/Yokuderu 2000"
     },
     "Yomi no Izanami": {
@@ -10663,7 +10716,9 @@
         "path": "01 Pop/Zhong Guo Hua"
     },
     "Zoku Shimedore 2000": {
-        "alias": ["续组曲2000"],
+        "alias": [
+            "续组曲2000"
+        ],
         "path": "09 Namco Original/Zoku Shimedore 2000"
     },
     "Zouo to Shuuaku no Hanataba": {
