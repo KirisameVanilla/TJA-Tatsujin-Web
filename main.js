@@ -7,7 +7,7 @@ function getApiConfig() {
   if (config) {
     return JSON.parse(config);
   }
-  throw new Error(i18n.t('apiConfigNotFound'));
+  return updateStatus( i18n.t( 'apiConfigNotFound' ) );
 }
 
 // 保存API配置
