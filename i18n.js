@@ -11,7 +11,7 @@ const translations = {
     // 主要内容
     searchPlaceholder: '输入搜索关键字',
     startDownload: '开始下载',
-    useProxy: '使用私人提供的加速代理(因为CORS, 请务必使用)',
+    useProxy: '使用私人提供的加速代理（因为CORS, 请务必使用）',
     
     // API 配置
     apiConfigTitle: 'API 配置',
