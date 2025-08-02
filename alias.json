@@ -447,9 +447,17 @@
         "alias": [],
         "path": "01 Pop/Ai Qing 36 Ji"
     },
+    "Ai Scream": {
+        "alias": [],
+        "path": "02 Anime/Ai Scream"
+    },
     "Ai Senshi": {
         "alias": [],
         "path": "02 Anime/Ai Senshi"
+    },
+    "Ai Shite Ai Shite Ai Shite": {
+        "alias": [],
+        "path": "03 Vocaloid/Ai Shite Ai Shite Ai Shite"
     },
     "Ai Uta": {
         "alias": [],
@@ -1182,6 +1190,10 @@
     "Break Line": {
         "alias": [],
         "path": "09 Namco Original/Break Line"
+    },
+    "Break Through the Dome": {
+        "alias": [],
+        "path": "07 Game Music/Break Through the Dome"
     },
     "Break the Chain": {
         "alias": [],
@@ -4019,6 +4031,10 @@
         "alias": [],
         "path": "01 Pop/Idol Kyousenshi"
     },
+    "Idol Warrior": {
+        "alias": [],
+        "path": "03 Vocaloid/Idol Warrior"
+    },
     "If You're Happy And You Know It": {
         "alias": [],
         "path": "04 Children and Folk/If You're Happy And You Know It"
@@ -6013,6 +6029,10 @@
         "alias": [],
         "path": "03 Vocaloid/Miku Miku ni Shite Ageru♪ [Shite Yan yo]"
     },
+    "Mimukawa Nice Try": {
+        "alias": [],
+        "path": "03 Vocaloid/Mimukawa Nice Try"
+    },
     "Minimoni. Jan-Ken-Pyon!": {
         "alias": [],
         "path": "01 Pop/Minimoni. Jan-Ken-Pyon!"
@@ -6136,6 +6156,10 @@
     "Momotarou -Beena Version-": {
         "alias": [],
         "path": "04 Children and Folk/Momotarou -Beena Version-"
+    },
+    "Monitoring": {
+        "alias": [],
+        "path": "03 Vocaloid/Monitoring"
     },
     "Monkey Magic": {
         "alias": [],
@@ -6839,6 +6863,10 @@
         "alias": [],
         "path": "09 Namco Original/Omoi o Te ni Negai o Komete"
     },
+    "On-Party": {
+        "alias": [],
+        "path": "04 Children and Folk/On-Party"
+    },
     "Onara Hazukashikunai yo": {
         "alias": [],
         "path": "01 Pop/Onara Hazukashikunai yo"
@@ -7501,6 +7529,10 @@
         "alias": [],
         "path": "06 Classical/Radetzky March"
     },
+    "Radiant": {
+        "alias": [],
+        "path": "07 Game Music/Radiant"
+    },
     "Radio Taisou Dai Ichi": {
         "alias": [],
         "path": "04 Children and Folk/Radio Taisou Dai Ichi"
@@ -7696,6 +7728,10 @@
     "Rokuchounen to Ichiya Monogatari": {
         "alias": [],
         "path": "03 Vocaloid/Rokuchounen to Ichiya Monogatari"
+    },
+    "Rolling Girl": {
+        "alias": [],
+        "path": "03 Vocaloid/Rolling Girl"
     },
     "Romance": {
         "alias": [],
@@ -8742,6 +8778,10 @@
     "Summer Time Cinderella": {
         "alias": [],
         "path": "01 Pop/Summer Time Cinderella"
+    },
+    "Suna no Wakusei": {
+        "alias": [],
+        "path": "03 Vocaloid/Suna no Wakusei"
     },
     "Sunao ni Naretara": {
         "alias": [],
@@ -10792,6 +10832,10 @@
     "ignited": {
         "alias": [],
         "path": "02 Anime/ignited"
+    },
+    "il vento doro": {
+        "alias": [],
+        "path": "02 Anime/il vento doro"
     },
     "independent": {
         "alias": [],
