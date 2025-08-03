@@ -11,13 +11,14 @@ function getApiConfig() {
   return {
     host: '',
     owner: '',
-    repo: ''
+    repo: '',
+    useProxy: true // 默认启用代理
   };
 }
 
 // 保存API配置
-function saveApiConfig(host, owner, repo) {
-  const config = { host, owner, repo };
+function saveApiConfig(host, owner, repo, useProxy) {
+  const config = { host, owner, repo, useProxy };
   localStorage.setItem('apiConfig', JSON.stringify(config));
   return config;
 }
@@ -34,7 +35,8 @@ function resetStatus ()
 
 function isProxyEnabled ()
 {
-  return document.getElementById( 'use-proxy' ).checked;
+  const config = getApiConfig();
+  return config.useProxy !== undefined ? config.useProxy : true; // 默认启用代理
 }
 
 // 加载 alias.json（本地）
@@ -191,6 +193,7 @@ async function downloadFilesFromStructure ( selectedKey, alias, zip )
   const apiHostInput = document.getElementById( 'api-host' );
   const repoOwnerInput = document.getElementById( 'repo-owner' );
   const repoNameInput = document.getElementById( 'repo-name' );
+  const useProxyInput = document.getElementById( 'use-proxy' );
   const saveConfigBtn = document.getElementById( 'save-config' );
 
   // 设置弹窗相关元素
@@ -203,6 +206,7 @@ async function downloadFilesFromStructure ( selectedKey, alias, zip )
   apiHostInput.value = savedConfig.host;
   repoOwnerInput.value = savedConfig.owner;
   repoNameInput.value = savedConfig.repo;
+  useProxyInput.checked = savedConfig.useProxy !== undefined ? savedConfig.useProxy : true;
 
   let selectedKey = null;
 
@@ -272,6 +276,7 @@ async function downloadFilesFromStructure ( selectedKey, alias, zip )
     const host = apiHostInput.value.trim();
     const owner = repoOwnerInput.value.trim();
     const repo = repoNameInput.value.trim();
+    const useProxy = useProxyInput.checked;
     
     if ( !host || !owner || !repo )
     {
@@ -279,7 +284,7 @@ async function downloadFilesFromStructure ( selectedKey, alias, zip )
       return;
     }
     
-    saveApiConfig( host, owner, repo );
+    saveApiConfig( host, owner, repo, useProxy );
     updateStatus( i18n.t( 'configSaved' ) + ' (＾▽＾)' );
     
     // 清空搜索结果，因为API配置已改变
@@ -288,8 +293,10 @@ async function downloadFilesFromStructure ( selectedKey, alias, zip )
     renderResults( [] );
     startBtn.disabled = true;
     
-    // 关闭弹窗
-    settingsModal.classList.remove( 'show' );
+    // 延迟关闭弹窗，让用户看到成功消息
+    setTimeout(() => {
+      settingsModal.classList.remove( 'show' );
+    }, 800);
   } );
 
   // 设置按钮点击事件 - 打开弹窗
@@ -336,5 +343,7 @@ async function downloadFilesFromStructure ( selectedKey, alias, zip )
     apiHostInput.placeholder = i18n.t( 'apiHostPlaceholder' );
     repoOwnerInput.placeholder = i18n.t( 'repoOwnerPlaceholder' );
     repoNameInput.placeholder = i18n.t( 'repoNamePlaceholder' );
+    // 确保代理设置保持当前配置
+    useProxyInput.checked = currentConfig.useProxy !== undefined ? currentConfig.useProxy : true;
   } );
 } )();
