@@ -20,13 +20,6 @@
   <main>
     <input id="search" data-i18n="searchPlaceholder" placeholder="输入搜索关键字" autocomplete="off" />
     <button id="start" data-i18n="startDownload" disabled>开始下载</button>
-    <div class="toggle-container">
-      <label class="switch-label">
-        <input type="checkbox" id="use-proxy" />
-        <span class="slider"></span>
-        <span data-i18n="useProxy">使用私人提供的加速代理</span>
-      </label>
-    </div>
     <div class="status" id="status"></div>
     <ul id="results"></ul>
   </main>
@@ -60,6 +53,13 @@
         <div class="config-row">
           <label for="repo-name" data-i18n="repoNameLabel">仓库名称:</label>
           <input id="repo-name" type="text" data-i18n="repoNamePlaceholder" placeholder="例如: xxx" />
+        </div>
+        <div class="config-row">
+          <label class="switch-label">
+            <input type="checkbox" id="use-proxy" />
+            <span class="slider"></span>
+            <span data-i18n="useProxy">使用私人提供的加速代理</span>
+          </label>
         </div>
         <button id="save-config" data-i18n="saveConfig">保存配置</button>
       </div>

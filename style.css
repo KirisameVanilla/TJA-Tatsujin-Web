@@ -448,6 +448,15 @@ footer a:hover {
     transition: border-color 0.3s ease;
 }
 
+/* 特殊样式：在modal中的switch不应用input样式 */
+.modal-body .config-row .switch-label input {
+    padding: 0;
+    font-size: inherit;
+    border: none;
+    border-radius: 0;
+    display: none;
+}
+
 .modal-body .config-row input:focus {
     border-color: var(--primary-color);
 }
