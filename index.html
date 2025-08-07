@@ -66,18 +66,6 @@
             <!-- API 配置项将动态添加到这里 -->
           </div>
         </div>
-        <div class="config-section mb-8">
-          <div class="config-row flex flex-col mb-4">
-            <label class="switch-label relative inline-flex items-center text-sm gap-2 cursor-pointer">
-              <input type="checkbox" id="use-proxy" class="sr-only" />
-              <span class="slider relative w-11 h-6 bg-gray-400 rounded-full transition-all duration-100">
-                <span
-                  class="slider-dot absolute w-4.5 h-4.5 bg-white rounded-full top-0.5 left-0.5 transition-transform duration-100"></span>
-              </span>
-              <span data-i18n="useProxy">使用私人提供的加速代理</span>
-            </label>
-          </div>
-        </div>
 
         <!-- 添加/编辑 API 表单 -->
         <div id="api-form" class="api-form border border-gray-200 rounded-lg p-6 bg-gray-50 mt-4 hidden">
@@ -110,6 +98,16 @@
             <label for="repo-name" data-i18n="repoNameLabel" class="font-medium mb-2 text-gray-800">仓库名称:</label>
             <input id="repo-name" type="text" data-i18n="repoNamePlaceholder" placeholder="例如: xxx"
               class="p-3 text-base border-2 border-gray-300 rounded-lg outline-none transition-colors duration-300 focus:border-red-500" />
+          </div>
+          <div class="config-row flex flex-col mb-4">
+            <label class="switch-label relative inline-flex items-center text-sm gap-2 cursor-pointer">
+              <input type="checkbox" id="api-use-proxy" class="sr-only" />
+              <span class="slider relative w-11 h-6 bg-gray-400 rounded-full transition-all duration-100">
+                <span
+                  class="slider-dot absolute w-4.5 h-4.5 bg-white rounded-full top-0.5 left-0.5 transition-transform duration-100"></span>
+              </span>
+              <span data-i18n="apiUseProxy">使用加速代理</span>
+            </label>
           </div>
           <div class="form-actions flex gap-4 mt-6">
             <button id="save-api" data-i18n="saveApi"
