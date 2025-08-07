@@ -4,6 +4,138 @@
 :root {
     --primary-color: #e74c3c;
     --hover-color: #c0392b;
+    
+    /* 浅色模式变量 */
+    --bg-color: #f9fafb;
+    --card-bg-color: #ffffff;
+    --text-color: #1f2937;
+    --text-secondary: #6b7280;
+    --border-color: #e5e7eb;
+    --input-bg: #ffffff;
+    --status-bg: #f3f4f6;
+    --footer-bg: #f3f4f6;
+    --modal-bg: #ffffff;
+}
+
+/* 深色模式变量 */
+[data-theme="dark"] {
+    --bg-color: #111827;
+    --card-bg-color: #1f2937;
+    --text-color: #f9fafb;
+    --text-secondary: #d1d5db;
+    --border-color: #374151;
+    --input-bg: #374151;
+    --status-bg: #1f2937;
+    --footer-bg: #1f2937;
+    --modal-bg: #1f2937;
+}
+
+/* 应用主题变量 */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 深色模式下的各种元素样式 */
+[data-theme="dark"] .bg-gray-50 {
+    background-color: var(--bg-color) !important;
+}
+
+[data-theme="dark"] .bg-white {
+    background-color: var(--card-bg-color) !important;
+}
+
+[data-theme="dark"] .bg-gray-100 {
+    background-color: var(--status-bg) !important;
+}
+
+[data-theme="dark"] .text-gray-800 {
+    color: var(--text-color) !important;
+}
+
+[data-theme="dark"] .text-gray-600 {
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .text-gray-500 {
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .border-gray-200,
+[data-theme="dark"] .border-gray-300 {
+    border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] input,
+[data-theme="dark"] select {
+    background-color: var(--input-bg) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] input::placeholder {
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .modal-content {
+    background-color: var(--modal-bg) !important;
+}
+
+[data-theme="dark"] .bg-gray-50:not(.slider) {
+    background-color: var(--status-bg) !important;
+}
+
+/* 深色模式下的特殊调整 */
+[data-theme="dark"] footer {
+    background-color: var(--footer-bg) !important;
+    border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .result-item:hover {
+    background-color: #374151 !important;
+}
+
+[data-theme="dark"] .api-item:hover {
+    background-color: #374151 !important;
+}
+
+[data-theme="dark"] .language-dropdown {
+    background-color: var(--card-bg-color) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-color) !important;
+}
+
+[data-theme="dark"] .language-option {
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .language-option:hover {
+    background-color: #374151 !important;
+}
+
+/* 主题切换按钮动画 */
+#theme-icon {
+    transition: transform 0.3s ease;
+}
+
+.theme-transition {
+    transform: rotate(180deg);
+}
+
+/* 主题设置按钮组样式 */
+.theme-actions {
+    min-width: 200px;
+}
+
+.theme-actions button {
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+header {
+    background: linear-gradient(135deg, rgb(237, 0, 0) 0%, rgb(237, 116, 0) 100%) !important;
 }
 
 /* 语言切换按钮样式 */

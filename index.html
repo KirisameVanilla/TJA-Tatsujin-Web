@@ -48,11 +48,41 @@
     <div
       class="modal-content bg-white rounded-xl shadow-2xl w-11/12 max-w-lg max-h-4/5 overflow-y-auto animate-fade-in">
       <div class="modal-header flex justify-between items-center p-6 border-b border-gray-200">
-        <h3 data-i18n="apiConfigTitle" class="m-0 text-red-500 text-xl font-semibold">API 配置</h3>
+        <h3 data-i18n="apiConfigTitle" class="m-0 text-red-500 text-xl font-semibold">设置</h3>
         <span
           class="close text-3xl font-bold text-gray-400 cursor-pointer leading-none p-0 bg-transparent border-0 transition-colors duration-300 hover:text-red-500">&times;</span>
       </div>
       <div class="modal-body p-6">
+        <!-- 主题设置部分 -->
+        <div class="config-section mb-8">
+          <div class="section-header mb-4">
+            <h4 data-i18n="themeSettings" class="m-0 text-gray-800 text-lg">主题设置</h4>
+          </div>
+          <div class="theme-setting-item flex justify-between items-center p-4 border border-gray-200 rounded-lg bg-gray-50">
+            <div class="theme-info">
+              <div class="theme-name font-medium mb-1 text-gray-800">
+                <i class="fas fa-palette mr-2"></i>
+                <span data-i18n="currentTheme">当前主题</span>
+              </div>
+              <div class="theme-description text-sm text-gray-600">
+                <span id="theme-status" data-i18n="lightTheme">浅色模式</span>
+              </div>
+            </div>
+            <div class="theme-actions flex gap-2">
+              <button id="theme-toggle"
+                class="bg-red-500 text-white border-0 px-4 py-2 rounded-lg cursor-pointer transition-all duration-200 hover:bg-red-600 hover:scale-105 flex items-center gap-2 flex-1">
+                <i class="fas fa-moon" id="theme-icon"></i>
+                <span data-i18n="toggleTheme">切换主题</span>
+              </button>
+              <button id="theme-auto"
+                class="bg-gray-500 text-white border-0 px-3 py-2 rounded-lg cursor-pointer transition-all duration-200 hover:bg-gray-600 hover:scale-105 flex items-center gap-2">
+                <i class="fas fa-clock"></i>
+                <span data-i18n="autoTheme">自动</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        
         <div class="config-section mb-8">
           <div class="section-header flex justify-between items-center mb-4">
             <h4 data-i18n="apiListTitle" class="m-0 text-gray-800 text-lg">API 配置列表</h4>
