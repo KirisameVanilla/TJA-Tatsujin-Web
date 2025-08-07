@@ -1,5 +1,8 @@
 import JSZip from "jszip";
 import i18n from "./i18n.js";
+import Kuroshiro from "kuroshiro";
+import KuromojiAnalyzer from "kuroshiro-analyzer-kuromoji";
+import { pinyin } from "pinyin";
 
 // 获取API配置列表
 function getApiConfigs() {
@@ -195,6 +198,17 @@ async function downloadFilesFromStructure ( selectedKey, alias, zip )
 // 主入口
 ( async () =>
 {
+  // 初始化 Kuroshiro 用于日文罗马音转换
+  const kuroshiro = new Kuroshiro();
+  let kuroshiroInitialized = false;
+  try {
+    await kuroshiro.init(new KuromojiAnalyzer());
+    kuroshiroInitialized = true;
+  } catch (e) {
+    console.warn('Kuroshiro initialization failed:', e);
+    // 即使失败也继续运行，只是不支持日文转换功能
+  }
+
   let zip;
   try
   {
@@ -248,6 +262,7 @@ async function downloadFilesFromStructure ( selectedKey, alias, zip )
 
   let selectedKey = null;
   let editingApiId = null; // 用于跟踪正在编辑的API
+  let searchTimeout = null; // 搜索防抖
 
   // 渲染API列表
   function renderApiList() {
@@ -388,16 +403,166 @@ async function downloadFilesFromStructure ( selectedKey, alias, zip )
   // 初始化API列表
   renderApiList();
 
-  function filterKeys ( query )
-  {
-    const q = query.trim().toLowerCase();
-    if ( !q ) return [];
-    return Object.entries( alias ).filter( ( [key, val] ) =>
-    {
-      if ( key.toLowerCase().includes( q ) ) return true;
-      return val.alias.some( a => a.toLowerCase().includes( q ) );
+  // 智能搜索辅助函数
+  
+  // 创建缓存对象
+  const searchCache = {
+    pinyin: new Map(),
+    romaji: new Map(),
+    normalized: new Map()
+  };
+  
+  // 标准化文本：去除空格、符号，转换为小写
+  function normalizeText(text) {
+    if (searchCache.normalized.has(text)) {
+      return searchCache.normalized.get(text);
+    }
+    
+    const result = text
+      .toLowerCase()
+      .replace(/[\s\-_\.\/\\\(\)\[\]{}'"!@#\$%\^&\*\+=;:,<>?\|~`]/g, '') // 移除空格和常见符号
+      .replace(/[ー]/g, '') // 移除日文长音符
+      .trim();
+      
+    searchCache.normalized.set(text, result);
+    return result;
+  }
 
-    } ).map( ( [key] ) => key );
+  // 将中文转换为拼音
+  function toPinyin(text) {
+    if (searchCache.pinyin.has(text)) {
+      return searchCache.pinyin.get(text);
+    }
+    
+    try {
+      const result = pinyin(text, {
+        style: 'NORMAL', // 不带音调
+        segment: true    // 启用分词
+      }).flat().join('').toLowerCase();
+      
+      searchCache.pinyin.set(text, result);
+      return result;
+    } catch (e) {
+      searchCache.pinyin.set(text, '');
+      return '';
+    }
+  }
+
+  // 将日文转换为罗马音
+  async function toRomaji(text) {
+    if (searchCache.romaji.has(text)) {
+      return searchCache.romaji.get(text);
+    }
+    
+    if (!kuroshiroInitialized) {
+      searchCache.romaji.set(text, '');
+      return '';
+    }
+    
+    try {
+      const result = await kuroshiro.convert(text, { mode: 'normal', to: 'romaji' });
+      const normalized = normalizeText(result);
+      searchCache.romaji.set(text, normalized);
+      return normalized;
+    } catch (e) {
+      searchCache.romaji.set(text, '');
+      return '';
+    }
+  }
+
+  // 将日文平假名转换为片假名，或片假名转换为平假名
+  function convertKana(text) {
+    // 平假名转片假名
+    const toKatakana = text.replace(/[\u3041-\u3096]/g, function(match) {
+      return String.fromCharCode(match.charCodeAt(0) + 0x60);
+    });
+    // 片假名转平假名
+    const toHiragana = text.replace(/[\u30a1-\u30f6]/g, function(match) {
+      return String.fromCharCode(match.charCodeAt(0) - 0x60);
+    });
+    return { toKatakana, toHiragana };
+  }
+
+  // 智能匹配函数
+  async function smartMatch(query, target, alias) {
+    const normalizedQuery = normalizeText(query);
+    if (!normalizedQuery) return false;
+
+    // 1. 直接匹配（标准化后）
+    const normalizedTarget = normalizeText(target);
+    if (normalizedTarget.includes(normalizedQuery)) return true;
+
+    // 2. 匹配别名
+    for (const a of alias) {
+      const normalizedAlias = normalizeText(a);
+      if (normalizedAlias.includes(normalizedQuery)) return true;
+    }
+
+    // 3. 拼音匹配（对中文内容）
+    const targetPinyin = toPinyin(target);
+    if (targetPinyin && targetPinyin.includes(normalizeText(toPinyin(query)))) return true;
+
+    for (const a of alias) {
+      const aliasPinyin = toPinyin(a);
+      if (aliasPinyin && aliasPinyin.includes(normalizeText(toPinyin(query)))) return true;
+    }
+
+    // 4. 日文相关匹配
+    if (kuroshiroInitialized) {
+      // 罗马音匹配
+      const queryRomaji = await toRomaji(query);
+      const targetRomaji = await toRomaji(target);
+      
+      if (queryRomaji && targetRomaji && targetRomaji.includes(queryRomaji)) return true;
+      
+      for (const a of alias) {
+        const aliasRomaji = await toRomaji(a);
+        if (queryRomaji && aliasRomaji && aliasRomaji.includes(queryRomaji)) return true;
+      }
+
+      // 输入罗马音匹配日文
+      if (/^[a-zA-Z\s]+$/.test(query)) { // 如果输入是纯英文
+        if (targetRomaji && targetRomaji.includes(normalizedQuery)) return true;
+        
+        for (const a of alias) {
+          const aliasRomaji = await toRomaji(a);
+          if (aliasRomaji && aliasRomaji.includes(normalizedQuery)) return true;
+        }
+      }
+    }
+
+    // 5. 假名转换匹配（平假名<->片假名）
+    const kanaConversions = convertKana(query);
+    const targetKanaConversions = convertKana(target);
+    
+    if (normalizeText(targetKanaConversions.toKatakana).includes(normalizedQuery) ||
+        normalizeText(targetKanaConversions.toHiragana).includes(normalizedQuery)) return true;
+    
+    for (const a of alias) {
+      const aliasKanaConversions = convertKana(a);
+      if (normalizeText(aliasKanaConversions.toKatakana).includes(normalizedQuery) ||
+          normalizeText(aliasKanaConversions.toHiragana).includes(normalizedQuery)) return true;
+    }
+
+    return false;
+  }
+
+  async function filterKeys ( query )
+  {
+    const q = query.trim();
+    if ( !q ) return [];
+    
+    const matchedKeys = [];
+    const entries = Object.entries(alias);
+    
+    // 使用 Promise.all 来并行处理所有匹配检查
+    const matchPromises = entries.map(async ([key, val]) => {
+      const isMatch = await smartMatch(q, key, val.alias);
+      return isMatch ? key : null;
+    });
+    
+    const results = await Promise.all(matchPromises);
+    return results.filter(key => key !== null);
   }
 
   function renderResults ( keys )
@@ -430,10 +595,19 @@ async function downloadFilesFromStructure ( selectedKey, alias, zip )
   searchInput.addEventListener( 'input', () =>
   {
     selectedKey = null;
-    const matchedKeys = filterKeys( searchInput.value );
-    renderResults( matchedKeys );
     startBtn.disabled = true;
-    resetStatus();
+    
+    // 清除之前的搜索超时
+    if (searchTimeout) {
+      clearTimeout(searchTimeout);
+    }
+    
+    // 设置防抖延迟
+    searchTimeout = setTimeout(async () => {
+      const matchedKeys = await filterKeys( searchInput.value );
+      renderResults( matchedKeys );
+      resetStatus();
+    }, 300); // 300ms 延迟
   } );
 
   startBtn.addEventListener( 'click', async () =>
@@ -487,10 +661,10 @@ async function downloadFilesFromStructure ( selectedKey, alias, zip )
   } );
 
   // 监听语言切换事件，重新渲染搜索结果
-  window.addEventListener( 'languageChanged', () =>
+  window.addEventListener( 'languageChanged', async () =>
   {
     // 重新渲染当前搜索结果
-    const matchedKeys = filterKeys( searchInput.value );
+    const matchedKeys = await filterKeys( searchInput.value );
     renderResults( matchedKeys );
     // 重置状态消息
     resetStatus();
