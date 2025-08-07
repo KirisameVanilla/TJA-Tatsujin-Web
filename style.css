@@ -150,6 +150,13 @@ input:checked + .slider .slider-dot {
     font-weight: 600;
     margin-bottom: 0.25rem;
     color: #1f2937;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.proxy-status {
+    font-size: 0.75rem;
 }
 
 .api-details {

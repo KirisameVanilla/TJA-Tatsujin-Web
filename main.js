@@ -26,24 +26,6 @@ function getRandomApiConfig() {
   return configs[randomIndex];
 }
 
-// 获取通用设置（代理等）
-function getGeneralConfig() {
-  const config = localStorage.getItem('generalConfig');
-  if (config) {
-    return JSON.parse(config);
-  }
-  return {
-    useProxy: true // 默认启用代理
-  };
-}
-
-// 保存通用设置
-function saveGeneralConfig(useProxy) {
-  const config = { useProxy };
-  localStorage.setItem('generalConfig', JSON.stringify(config));
-  return config;
-}
-
 // 兼容旧版本配置的迁移函数
 function migrateOldConfig() {
   const oldConfig = localStorage.getItem('apiConfig');
@@ -56,17 +38,14 @@ function migrateOldConfig() {
         name: '迁移的配置',
         host: parsed.host,
         owner: parsed.owner,
-        repo: parsed.repo
+        repo: parsed.repo,
+        useProxy: parsed.useProxy !== undefined ? parsed.useProxy : true
       }];
       saveApiConfigs(newConfigs);
       
-      // 保存代理设置
-      if (parsed.useProxy !== undefined) {
-        saveGeneralConfig(parsed.useProxy);
-      }
-      
       // 删除旧配置
       localStorage.removeItem('apiConfig');
+      localStorage.removeItem('generalConfig'); // 清除旧的全局配置
     }
   }
 }
@@ -81,10 +60,10 @@ function resetStatus ()
   updateStatus( i18n.t( 'greeting' ) );
 }
 
-function isProxyEnabled ()
+function isProxyEnabled ( apiConfig )
 {
-  const config = getGeneralConfig();
-  return config.useProxy !== undefined ? config.useProxy : true; // 默认启用代理
+  // 如果API配置中没有useProxy字段，默认使用代理
+  return apiConfig.useProxy !== undefined ? apiConfig.useProxy : true;
 }
 
 // 加载 alias.json（本地）
@@ -105,7 +84,7 @@ async function getFilesFromPath ( basePath )
   }
   
   // 为API调用使用代理（如果启用）
-  const baseURL = isProxyEnabled() ? 
+  const baseURL = isProxyEnabled(apiConfig) ? 
     `https://ghproxy.vanillaaaa.org/https://${apiConfig.host}/api/v1/repos/${apiConfig.owner}/${apiConfig.repo}/contents` :
     `https://${apiConfig.host}/api/v1/repos/${apiConfig.owner}/${apiConfig.repo}/contents`;
   const files = [];
@@ -181,7 +160,7 @@ async function downloadFilesFromStructure ( selectedKey, alias, zip )
     throw new Error(i18n.t('noApiConfigured'));
   }
   
-  const baseURL = isProxyEnabled() ? 
+  const baseURL = isProxyEnabled(apiConfig) ? 
     `https://ghproxy.vanillaaaa.org/https://${apiConfig.host}/${apiConfig.owner}/${apiConfig.repo}/raw/branch` : 
     `https://${apiConfig.host}/${apiConfig.owner}/${apiConfig.repo}/raw/branch`;
 
@@ -258,18 +237,14 @@ async function downloadFilesFromStructure ( selectedKey, alias, zip )
   const apiHostInput = document.getElementById( 'api-host' );
   const repoOwnerInput = document.getElementById( 'repo-owner' );
   const repoNameInput = document.getElementById( 'repo-name' );
+  const apiUseProxyInput = document.getElementById( 'api-use-proxy' );
   const saveApiBtn = document.getElementById( 'save-api' );
   const cancelApiBtn = document.getElementById( 'cancel-api' );
-  const useProxyInput = document.getElementById( 'use-proxy' );
 
   // 设置弹窗相关元素
   const settingsBtn = document.getElementById( 'settings-btn' );
   const settingsModal = document.getElementById( 'settings-modal' );
   const closeModal = settingsModal.querySelector( '.close' );
-
-  // 加载保存的通用配置
-  const generalConfig = getGeneralConfig();
-  useProxyInput.checked = generalConfig.useProxy !== undefined ? generalConfig.useProxy : true;
 
   let selectedKey = null;
   let editingApiId = null; // 用于跟踪正在编辑的API
@@ -287,11 +262,13 @@ async function downloadFilesFromStructure ( selectedKey, alias, zip )
     configs.forEach(config => {
       const apiItem = document.createElement('div');
       apiItem.className = 'api-item';
+      const proxyStatus = config.useProxy !== false ? '🟢' : '🔴';
       apiItem.innerHTML = `
         <div class="api-info">
           <div class="api-name">
             <span class="api-type-badge">${config.type.toUpperCase()}</span>
             ${config.name}
+            <span class="proxy-status" title="${config.useProxy !== false ? i18n.t('proxyEnabled') : i18n.t('proxyDisabled')}">${proxyStatus}</span>
           </div>
           <div class="api-details">${config.host}/${config.owner}/${config.repo}</div>
         </div>
@@ -327,12 +304,14 @@ async function downloadFilesFromStructure ( selectedKey, alias, zip )
       apiHostInput.value = config.host;
       repoOwnerInput.value = config.owner;
       repoNameInput.value = config.repo;
+      apiUseProxyInput.checked = config.useProxy !== false; // 默认为true
     } else {
       apiTypeInput.value = 'gitea';
       apiNameInput.value = '';
       apiHostInput.value = '';
       repoOwnerInput.value = '';
       repoNameInput.value = '';
+      apiUseProxyInput.checked = true; // 默认启用代理
     }
     
     apiForm.style.display = 'block';
@@ -351,6 +330,7 @@ async function downloadFilesFromStructure ( selectedKey, alias, zip )
     const host = apiHostInput.value.trim();
     const owner = repoOwnerInput.value.trim();
     const repo = repoNameInput.value.trim();
+    const useProxy = apiUseProxyInput.checked;
     
     if (!name || !host || !owner || !repo) {
       updateStatus(i18n.t('configRequired') + ' (´･ω･`)');
@@ -363,7 +343,7 @@ async function downloadFilesFromStructure ( selectedKey, alias, zip )
       // 编辑现有配置
       const index = configs.findIndex(c => c.id === editingApiId);
       if (index !== -1) {
-        configs[index] = { ...configs[index], type, name, host, owner, repo };
+        configs[index] = { ...configs[index], type, name, host, owner, repo, useProxy };
       }
     } else {
       // 添加新配置
@@ -373,7 +353,8 @@ async function downloadFilesFromStructure ( selectedKey, alias, zip )
         name,
         host,
         owner,
-        repo
+        repo,
+        useProxy
       };
       configs.push(newConfig);
     }
@@ -475,12 +456,6 @@ async function downloadFilesFromStructure ( selectedKey, alias, zip )
   saveApiBtn.addEventListener('click', saveApi);
   cancelApiBtn.addEventListener('click', hideApiForm);
 
-  // 保存通用配置事件
-  useProxyInput.addEventListener('change', () => {
-    saveGeneralConfig(useProxyInput.checked);
-    updateStatus(i18n.t('configSaved') + ' (＾▽＾)');
-  });
-
   // 设置按钮点击事件 - 打开弹窗
   settingsBtn.addEventListener( 'click', () =>
   {
@@ -524,12 +499,9 @@ async function downloadFilesFromStructure ( selectedKey, alias, zip )
     renderApiList();
     
     // 更新API配置表单的占位符文本
-    const currentConfig = getGeneralConfig();
     apiNameInput.placeholder = i18n.t( 'apiNamePlaceholder' );
     apiHostInput.placeholder = i18n.t( 'apiHostPlaceholder' );
     repoOwnerInput.placeholder = i18n.t( 'repoOwnerPlaceholder' );
     repoNameInput.placeholder = i18n.t( 'repoNamePlaceholder' );
-    // 确保代理设置保持当前配置
-    useProxyInput.checked = currentConfig.useProxy !== undefined ? currentConfig.useProxy : true;
   } );
 } )();

@@ -22,6 +22,7 @@ const translations = {
     apiTypeLabel: 'API 类型',
     apiNameLabel: '配置名称',
     apiNamePlaceholder: '例如: 主服务器',
+    apiUseProxy: '使用加速代理（推荐开启）',
     saveApi: '保存 API',
     cancelApi: '取消',
     deleteApi: '删除',
@@ -39,6 +40,8 @@ const translations = {
     saveConfig: '保存配置',
     configSaved: '配置已保存！',
     configRequired: '请填写完整的API配置信息',
+    proxyEnabled: '代理已启用',
+    proxyDisabled: '代理已禁用',
     
     // 状态信息
     greeting: '你好~ (*・ω・)ﾉ',
@@ -96,6 +99,7 @@ const translations = {
     apiTypeLabel: 'API Type',
     apiNameLabel: 'Configuration Name',
     apiNamePlaceholder: 'e.g.: Main Server',
+    apiUseProxy: 'Use acceleration proxy (recommended)',
     saveApi: 'Save API',
     cancelApi: 'Cancel',
     deleteApi: 'Delete',
@@ -113,6 +117,8 @@ const translations = {
     saveConfig: 'Save Configuration',
     configSaved: 'Configuration saved!',
     configRequired: 'Please fill in complete API configuration',
+    proxyEnabled: 'Proxy enabled',
+    proxyDisabled: 'Proxy disabled',
     
     // 状态信息
     greeting: 'Hello~ (*・ω・)ﾉ',
