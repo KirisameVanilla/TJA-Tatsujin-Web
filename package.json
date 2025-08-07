@@ -1,6 +1,7 @@
 {
   "name": "tja-tatsujin-web",
   "version": "1.0.0",
+  "type": "module",
   "description": "> **TJA no Tatsujin**",
   "main": "main.js",
   "scripts": {
@@ -24,6 +25,8 @@
     "vite": "^7.0.6"
   },
   "dependencies": {
-    "jszip": "^3.10.1"
+    "@tailwindcss/vite": "^4.1.11",
+    "jszip": "^3.10.1",
+    "tailwindcss": "^4.1.11"
   }
 }

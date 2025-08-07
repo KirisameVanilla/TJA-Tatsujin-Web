@@ -9,91 +9,114 @@
   <link rel="stylesheet" href="./style.css" />
 </head>
 
-<body>
-  <header>
-    <a href="https://github.com/KirisameVanilla/TJA-Tatsujin-Web" target="_blank" data-i18n="githubTitle" title="查看项目源码">
+<body class="font-sans bg-gray-50 text-gray-800 min-h-screen flex flex-col leading-relaxed">
+  <header class="bg-red-500 text-white p-5 text-center rounded-b-3xl shadow-md relative">
+    <a href="https://github.com/KirisameVanilla/TJA-Tatsujin-Web" target="_blank" data-i18n="githubTitle" title="查看项目源码"
+      class="text-white absolute right-5 top-1/2 transform -translate-y-1/2 text-2xl hover:scale-110 transition-transform duration-100">
       <i class="fab fa-github"></i>
     </a>
-    <h1 data-i18n="headerTitle">TJA-Tatsujin</h1>
+    <h1 data-i18n="headerTitle" class="m-0 text-3xl">TJA-Tatsujin</h1>
   </header>
 
-  <main>
-    <input id="search" data-i18n="searchPlaceholder" placeholder="输入搜索关键字" autocomplete="off" />
-    <button id="start" data-i18n="startDownload" disabled>开始下载</button>
-    <div class="status" id="status"></div>
-    <ul id="results"></ul>
+  <main class="flex-1 p-6 max-w-3xl w-full mx-auto my-4 box-border">
+    <input id="search" data-i18n="searchPlaceholder" placeholder="输入搜索关键字" autocomplete="off"
+      class="w-full p-3 text-lg border-2 border-gray-300 rounded-xl outline-none box-border transition-colors duration-100 focus:border-red-500 focus:shadow-lg focus:shadow-red-100" />
+    <button id="start" data-i18n="startDownload" disabled
+      class="bg-red-500 text-white border-0 px-6 py-3 text-lg rounded-xl cursor-pointer mx-auto mt-4 block transition-all duration-100 hover:bg-red-600 hover:-translate-y-0.5 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:transform-none">开始下载</button>
+    <div class="status mt-6 p-4 bg-gray-100 rounded-xl text-sm text-gray-600 whitespace-pre-wrap break-words"
+      id="status"></div>
+    <ul id="results"
+      class="list-none p-0 mt-4 max-h-80 overflow-y-auto border border-gray-200 rounded-xl bg-white shadow-lg"></ul>
   </main>
 
-  <footer>
-    &copy; 2025 <a href="https://github.com/KirisameVanilla" target="_blank">KirisameVanilla</a><br />
+  <footer class="text-center p-5 mt-auto text-gray-500 text-sm bg-gray-100 border-t border-gray-300">
+    &copy; 2025 <a href="https://github.com/KirisameVanilla" target="_blank"
+      class="text-red-500 no-underline hover:underline">KirisameVanilla</a><br />
     <span data-i18n="footerText">非官方项目，仅供学习交流。</span>
   </footer>
 
   <!-- 设置按钮 -->
-  <button id="settings-btn" class="settings-btn" title="设置">
+  <button id="settings-btn"
+    class="fixed bottom-8 right-8 w-15 h-15 bg-red-500 text-white border-0 rounded-full text-2xl cursor-pointer shadow-lg transition-all duration-300 z-50 flex items-center justify-center hover:bg-red-600 hover:scale-110 hover:shadow-xl active:scale-95"
+    title="设置">
     <i class="fas fa-cog"></i>
   </button>
 
   <!-- 设置弹窗 -->
-  <div id="settings-modal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 data-i18n="apiConfigTitle">API 配置</h3>
-        <span class="close">&times;</span>
+  <div id="settings-modal"
+    class="modal hidden fixed z-50 left-0 top-0 w-full h-full bg-transparent bg-opacity-100 backdrop-blur-sm items-center justify-center">
+    <div
+      class="modal-content bg-white rounded-xl shadow-2xl w-11/12 max-w-lg max-h-4/5 overflow-y-auto animate-fade-in">
+      <div class="modal-header flex justify-between items-center p-6 border-b border-gray-200">
+        <h3 data-i18n="apiConfigTitle" class="m-0 text-red-500 text-xl font-semibold">API 配置</h3>
+        <span
+          class="close text-3xl font-bold text-gray-400 cursor-pointer leading-none p-0 bg-transparent border-0 transition-colors duration-300 hover:text-red-500">&times;</span>
       </div>
-      <div class="modal-body">
-        <div class="config-section">
-          <div class="section-header">
-            <h4 data-i18n="apiListTitle">API 配置列表</h4>
-            <button id="add-api" class="add-btn" data-i18n="addApi" title="添加 API">
+      <div class="modal-body p-6">
+        <div class="config-section mb-8">
+          <div class="section-header flex justify-between items-center mb-4">
+            <h4 data-i18n="apiListTitle" class="m-0 text-gray-800 text-lg">API 配置列表</h4>
+            <button id="add-api"
+              class="add-btn bg-red-500 text-white border-0 rounded-full w-8 h-8 flex items-center justify-center cursor-pointer transition-all duration-200 hover:bg-red-600 hover:scale-110"
+              data-i18n="addApi" title="添加 API">
               <i class="fas fa-plus"></i>
             </button>
           </div>
-          <div id="api-list" class="api-list">
+          <div id="api-list" class="api-list max-h-80 overflow-y-auto border border-gray-200 rounded-lg bg-gray-50">
             <!-- API 配置项将动态添加到这里 -->
           </div>
         </div>
-        
-        <div class="config-section">
-          <div class="config-row">
-            <label class="switch-label">
-              <input type="checkbox" id="use-proxy" />
-              <span class="slider"></span>
+        <div class="config-section mb-8">
+          <div class="config-row flex flex-col mb-4">
+            <label class="switch-label relative inline-flex items-center text-sm gap-2 cursor-pointer">
+              <input type="checkbox" id="use-proxy" class="sr-only" />
+              <span class="slider relative w-11 h-6 bg-gray-400 rounded-full transition-all duration-100">
+                <span
+                  class="slider-dot absolute w-4.5 h-4.5 bg-white rounded-full top-0.5 left-0.5 transition-transform duration-100"></span>
+              </span>
               <span data-i18n="useProxy">使用私人提供的加速代理</span>
             </label>
           </div>
         </div>
 
         <!-- 添加/编辑 API 表单 -->
-        <div id="api-form" class="api-form" style="display: none;">
-          <h4 id="api-form-title" data-i18n="addApiTitle">添加 API 配置</h4>
-          <div class="config-row">
-            <label for="api-type" data-i18n="apiTypeLabel">API 类型:</label>
-            <select id="api-type">
+        <div id="api-form" class="api-form border border-gray-200 rounded-lg p-6 bg-gray-50 mt-4 hidden">
+          <h4 id="api-form-title" data-i18n="addApiTitle" class="m-0 mb-4 text-gray-800">添加 API 配置</h4>
+          <div class="config-row flex flex-col mb-4">
+            <label for="api-type" data-i18n="apiTypeLabel" class="font-medium mb-2 text-gray-800">API 类型:</label>
+            <select id="api-type"
+              class="p-3 text-base border-2 border-gray-300 rounded-lg outline-none transition-colors duration-300 focus:border-red-500">
               <option value="gitea">Gitea</option>
               <option value="github">GitHub</option>
               <option value="gitlab">GitLab</option>
             </select>
           </div>
-          <div class="config-row">
-            <label for="api-name" data-i18n="apiNameLabel">配置名称:</label>
-            <input id="api-name" type="text" data-i18n="apiNamePlaceholder" placeholder="例如: 主服务器" />
+          <div class="config-row flex flex-col mb-4">
+            <label for="api-name" data-i18n="apiNameLabel" class="font-medium mb-2 text-gray-800">配置名称:</label>
+            <input id="api-name" type="text" data-i18n="apiNamePlaceholder" placeholder="例如: 主服务器"
+              class="p-3 text-base border-2 border-gray-300 rounded-lg outline-none transition-colors duration-300 focus:border-red-500" />
           </div>
-          <div class="config-row">
-            <label for="api-host" data-i18n="apiHostLabel">API 主机地址:</label>
-            <input id="api-host" type="text" data-i18n="apiHostPlaceholder" placeholder="例如: xxx.xxx.xx" />
+          <div class="config-row flex flex-col mb-4">
+            <label for="api-host" data-i18n="apiHostLabel" class="font-medium mb-2 text-gray-800">API 主机地址:</label>
+            <input id="api-host" type="text" data-i18n="apiHostPlaceholder" placeholder="例如: xxx.xxx.xx"
+              class="p-3 text-base border-2 border-gray-300 rounded-lg outline-none transition-colors duration-300 focus:border-red-500" />
           </div>
-          <div class="config-row">
-            <label for="repo-owner" data-i18n="repoOwnerLabel">仓库所有者:</label>
-            <input id="repo-owner" type="text" data-i18n="repoOwnerPlaceholder" placeholder="例如: xxx" />
+          <div class="config-row flex flex-col mb-4">
+            <label for="repo-owner" data-i18n="repoOwnerLabel" class="font-medium mb-2 text-gray-800">仓库所有者:</label>
+            <input id="repo-owner" type="text" data-i18n="repoOwnerPlaceholder" placeholder="例如: xxx"
+              class="p-3 text-base border-2 border-gray-300 rounded-lg outline-none transition-colors duration-300 focus:border-red-500" />
           </div>
-          <div class="config-row">
-            <label for="repo-name" data-i18n="repoNameLabel">仓库名称:</label>
-            <input id="repo-name" type="text" data-i18n="repoNamePlaceholder" placeholder="例如: xxx" />
+          <div class="config-row flex flex-col mb-4">
+            <label for="repo-name" data-i18n="repoNameLabel" class="font-medium mb-2 text-gray-800">仓库名称:</label>
+            <input id="repo-name" type="text" data-i18n="repoNamePlaceholder" placeholder="例如: xxx"
+              class="p-3 text-base border-2 border-gray-300 rounded-lg outline-none transition-colors duration-300 focus:border-red-500" />
           </div>
-          <div class="form-actions">
-            <button id="save-api" data-i18n="saveApi">保存 API</button>
-            <button id="cancel-api" data-i18n="cancelApi">取消</button>
+          <div class="form-actions flex gap-4 mt-6">
+            <button id="save-api" data-i18n="saveApi"
+              class="flex-1 p-3 border-0 rounded-md cursor-pointer text-base transition-all duration-200 bg-red-500 text-white hover:bg-red-600">保存
+              API</button>
+            <button id="cancel-api" data-i18n="cancelApi"
+              class="flex-1 p-3 border-0 rounded-md cursor-pointer text-base transition-all duration-200 bg-gray-500 text-white hover:bg-gray-600">取消</button>
           </div>
         </div>
       </div>
