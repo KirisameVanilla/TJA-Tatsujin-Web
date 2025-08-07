@@ -47,5 +47,14 @@ export default {
     outDir: 'dist',
     assetsDir: './assets'
   },
-  plugins: [minifyJsonPlugin(),tailwindcss()]
+  plugins: [minifyJsonPlugin(), tailwindcss()],
+  define: {
+    global: 'globalThis'
+  },
+  resolve: {
+    alias: {
+      path: 'path-browserify',
+      fs: false
+    }
+  }
 };
