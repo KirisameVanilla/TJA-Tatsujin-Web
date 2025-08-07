@@ -1,60 +1,15 @@
+@import "tailwindcss";
+
+/* 自定义CSS变量，用于一些特殊场景 */
 :root {
     --primary-color: #e74c3c;
     --hover-color: #c0392b;
-    --text-color: #333;
-    --bg-color: #f9f9f9;
-    --card-bg: #ffffff;
-    --border-radius: 12px;
-    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    line-height: 1.6;
-}
-
-header {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 1.2rem;
-    text-align: center;
-    border-bottom-left-radius: var(--border-radius);
-    border-bottom-right-radius: var(--border-radius);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 1.8rem;
-}
-
-header a {
-    color: white;
-    position: absolute;
-    right: 1.2rem;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.5rem;
-    text-decoration: none;
-}
-
-header a:hover {
-    color: #fff;
-    transform: translateY(-50%) scale(1.1);
-    transition: transform 0.1s;
-}
-
+/* 语言切换按钮样式 */
 .language-switch {
     position: absolute;
-    left: 1.2rem;
+    left: 1.25rem; /* left-5 */
     top: 50%;
     transform: translateY(-50%);
 }
@@ -103,7 +58,7 @@ header a:hover {
 
 .language-option {
     padding: 10px 15px;
-    color: var(--text-color);
+    color: #333;
     cursor: pointer;
     transition: all 0.1s ease;
     border-bottom: 1px solid #f0f0f0;
@@ -118,7 +73,7 @@ header a:hover {
 }
 
 .language-option.active {
-    background-color: var(--primary-color);
+    background-color: #e74c3c;
     color: white;
 }
 
@@ -126,359 +81,57 @@ header a:hover {
     font-weight: 500;
 }
 
-
-main {
-    flex: 1;
-    padding: 1.5rem;
-    max-width: 700px;
-    width: 100%;
-    margin: 1rem auto;
-    box-sizing: border-box;
-}
-
-#search {
-    width: 100%;
-    padding: 0.75rem;
-    font-size: 1.1rem;
-    border: 2px solid #ddd;
-    border-radius: var(--border-radius);
-    outline: none;
-    box-sizing: border-box;
-    transition: border-color 0.1s;
-}
-
-#search:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 8px rgba(231, 76, 60, 0.2);
-}
-
-button#start {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    font-size: 1.1rem;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    margin: 1rem auto 0 auto;
-    display: block;
-    transition: background-color 0.1s, transform 0.1s;
-}
-
-button#start:hover:not([disabled]) {
-    background-color: var(--hover-color);
-    transform: translateY(-2px);
-}
-
-button#start:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-    transform: none;
-}
-
-ul#results {
-    list-style: none;
-    padding: 0;
-    margin-top: 1rem;
-    max-height: 300px;
-    overflow-y: auto;
-    border: 1px solid #eee;
-    border-radius: var(--border-radius);
-    background-color: var(--card-bg);
-    box-shadow: var(--box-shadow);
-}
-
-li {
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid #f0f0f0;
+/* 列表项的特殊样式 - 这些需要通过JavaScript动态添加类来实现 */
+.result-item {
+    padding: 1rem 0.75rem;
+    border-bottom: 1px solid #f3f4f6;
     cursor: pointer;
     transition: background-color 0.1s;
 }
 
-li:hover {
-    background-color: #fdf2f2;
+.result-item:hover {
+    background-color: #fef2f2;
 }
 
-li.selected {
-    background-color: #fceae9;
-    color: var(--primary-color);
+.result-item.selected {
+    background-color: #fee2e2;
+    color: #ef4444;
     font-weight: bold;
-    border-left: 4px solid var(--primary-color);
+    border-left: 4px solid #ef4444;
 }
 
-.status {
-    margin-top: 1.5rem;
-    padding: 1rem;
-    background-color: #f1f1f1;
-    border-radius: var(--border-radius);
-    font-size: 0.9rem;
-    color: #555;
-    white-space: pre-wrap;
-    word-wrap: break-word;
+/* 开关按钮的特殊样式 - Tailwind 无法处理的复杂伪元素 */
+input:checked + .slider {
+    background-color: #ef4444; /* red-500 */
 }
 
-footer {
-    text-align: center;
-    padding: 1.2rem;
-    margin-top: auto;
-    color: #777;
-    font-size: 0.9rem;
-    background-color: #f0f0f0;
-    border-top: 1px solid #ddd;
-}
-
-footer a {
-    color: var(--primary-color);
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
-}
-
-.toggle-container {
-    margin: 1.2rem 0 0.5rem 0;
-    display: flex;
-    justify-content: center;
-}
-
-.switch-label {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    font-size: 0.95rem;
-    gap: 0.5rem;
-    cursor: pointer;
-}
-
-.switch-label input {
-    display: none;
-}
-
-.switch-label .slider {
-    position: relative;
-    width: 42px;
-    height: 22px;
-    background-color: #ccc;
-    border-radius: 22px;
-    transition: 0.1s;
-}
-
-.switch-label .slider::before {
-    content: "";
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background-color: white;
-    top: 2px;
-    left: 2px;
-    transition: 0.1s;
-}
-
-.switch-label input:checked+.slider {
-    background-color: var(--primary-color);
-}
-
-.switch-label input:checked+.slider::before {
+input:checked + .slider .slider-dot {
     transform: translateX(20px);
 }
 
-@media (max-width: 768px) {
-    header {
-        padding: 1rem;
-        position: relative;
-    }
-
-    .language-switch {
-        position: absolute;
-        left: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    header a {
-        position: absolute;
-        right: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    header h1 {
-        margin-top: 0;
-        font-size: 1.5rem;
-    }
-
-    .language-btn {
-        padding: 6px 10px;
-        font-size: 12px;
-    }
-
-    .language-dropdown {
-        min-width: 100px;
-    }
+.slider .slider-dot {
+    width: 18px;
+    height: 18px;
 }
 
-@media (max-width: 600px) {
-    main {
-        padding: 1rem;
-    }
-
-    button#start {
-        font-size: 1rem;
-        padding: 0.6rem 1.2rem;
-    }
+/* 修复width和height */
+.w-4\.5 {
+    width: 1.125rem; /* 18px */
 }
 
-/* 设置按钮 */
-.settings-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    font-size: 1.5rem;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.h-4\.5 {
+    height: 1.125rem; /* 18px */
 }
 
-.settings-btn:hover {
-    background-color: var(--hover-color);
-    transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-}
-
-.settings-btn:active {
-    transform: scale(0.95);
-}
-
-/* 弹窗样式 */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-    align-items: center;
-    justify-content: center;
-}
-
-.modal.show {
-    display: flex;
-    animation: fadeIn 0.3s ease;
-}
-
-.modal-content {
-    background-color: white;
-    border-radius: var(--border-radius);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    width: 90%;
-    max-width: 500px;
-    max-height: 80vh;
-    overflow-y: auto;
-    animation: slideIn 0.3s ease;
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem;
-    border-bottom: 1px solid #eee;
-}
-
-.modal-header h3 {
-    margin: 0;
-    color: var(--primary-color);
-    font-size: 1.3rem;
-    font-weight: 600;
-}
-
-.close {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #aaa;
-    cursor: pointer;
-    line-height: 1;
-    padding: 0;
-    background: none;
-    border: none;
-    transition: color 0.3s ease;
-}
-
-.close:hover {
-    color: var(--primary-color);
-}
-
-.modal-body {
-    padding: 1.5rem;
-}
-
-.config-section {
-    margin-bottom: 2rem;
-}
-
-.section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.section-header h4 {
-    margin: 0;
-    color: var(--text-color);
-    font-size: 1.1rem;
-}
-
-.add-btn {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.add-btn:hover {
-    background-color: var(--hover-color);
-    transform: scale(1.1);
-}
-
-.api-list {
-    max-height: 300px;
-    overflow-y: auto;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    background-color: #fafafa;
-}
-
+/* API项目的动态样式 */
 .api-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e5e7eb;
     background-color: white;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s;
 }
 
 .api-item:last-child {
@@ -486,7 +139,7 @@ footer a:hover {
 }
 
 .api-item:hover {
-    background-color: #f5f5f5;
+    background-color: #f9fafb;
 }
 
 .api-info {
@@ -496,21 +149,21 @@ footer a:hover {
 .api-name {
     font-weight: 600;
     margin-bottom: 0.25rem;
-    color: var(--text-color);
+    color: #1f2937;
 }
 
 .api-details {
-    font-size: 0.9rem;
-    color: #666;
+    font-size: 0.875rem;
+    color: #6b7280;
 }
 
 .api-type-badge {
     display: inline-block;
-    background-color: var(--primary-color);
+    background-color: #ef4444;
     color: white;
-    padding: 2px 8px;
-    border-radius: 12px;
-    font-size: 0.8rem;
+    padding: 0.125rem 0.5rem;
+    border-radius: 0.75rem;
+    font-size: 0.75rem;
     margin-right: 0.5rem;
 }
 
@@ -520,131 +173,37 @@ footer a:hover {
 }
 
 .api-action-btn {
-    background: none;
+    background: transparent;
     border: none;
     cursor: pointer;
     padding: 0.5rem;
-    border-radius: 4px;
-    transition: background-color 0.2s ease;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s;
 }
 
 .api-action-btn:hover {
-    background-color: #e0e0e0;
+    background-color: #e5e7eb;
 }
 
 .api-action-btn.edit {
-    color: #007bff;
+    color: #2563eb;
 }
 
 .api-action-btn.delete {
-    color: #dc3545;
+    color: #dc2626;
 }
 
-.api-form {
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 1.5rem;
-    background-color: #f9f9f9;
-    margin-top: 1rem;
-}
-
-.api-form h4 {
-    margin: 0 0 1rem 0;
-    color: var(--text-color);
-}
-
-.form-actions {
+/* 弹窗显示动画 */
+.modal.show {
     display: flex;
-    gap: 1rem;
-    margin-top: 1.5rem;
+    animation: fadeIn 0.3s ease;
 }
 
-.form-actions button {
-    flex: 1;
-    padding: 0.75rem;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: all 0.2s ease;
+.modal-content {
+    animation: slideIn 0.3s ease;
 }
 
-#save-api {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-#save-api:hover {
-    background-color: var(--hover-color);
-}
-
-#cancel-api {
-    background-color: #6c757d;
-    color: white;
-}
-
-#cancel-api:hover {
-    background-color: #545b62;
-}
-
-.modal-body .config-row {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1rem;
-}
-
-.modal-body .config-row label {
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-    color: var(--text-color);
-}
-
-.modal-body .config-row input {
-    padding: 0.75rem;
-    font-size: 1rem;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    outline: none;
-    transition: border-color 0.3s ease;
-}
-
-/* 特殊样式：在modal中的switch不应用input样式 */
-.modal-body .config-row .switch-label input {
-    padding: 0;
-    font-size: inherit;
-    border: none;
-    border-radius: 0;
-    display: none;
-}
-
-.modal-body .config-row input:focus {
-    border-color: var(--primary-color);
-}
-
-.modal-body #save-config {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 0.5rem;
-    width: 100%;
-}
-
-.modal-body #save-config:hover {
-    background-color: var(--hover-color);
-    transform: translateY(-2px);
-}
-
-.modal-body #save-config:active {
-    transform: translateY(0);
-}
-
-/* 动画 */
+/* 动画关键帧 */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -661,36 +220,77 @@ footer a:hover {
     }
 }
 
-/* 响应式设计 - 弹窗 */
+/* 响应式设计 */
 @media (max-width: 768px) {
     .settings-btn {
-        width: 50px;
-        height: 50px;
-        font-size: 1.2rem;
-        bottom: 20px;
-        right: 20px;
+        width: 3rem !important;
+        height: 3rem !important;
+        font-size: 1.125rem !important;
+        bottom: 1.25rem !important;
+        right: 1.25rem !important;
     }
     
     .modal-content {
-        width: 95%;
-        margin: 10px;
+        width: 91.666667% !important;
+        margin: 0.625rem !important;
     }
     
     .modal-header {
-        padding: 1rem;
+        padding: 1rem !important;
     }
     
     .modal-body {
-        padding: 1rem;
+        padding: 1rem !important;
     }
     
-    .modal-body .config-row input {
-        padding: 0.6rem;
-        font-size: 0.9rem;
+    .modal-body .config-row input, 
+    .modal-body .config-row select {
+        padding: 0.625rem !important;
+        font-size: 0.875rem !important;
+    }
+
+    /* 语言切换按钮的响应式样式 */
+    .language-switch {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .language-btn {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+    .language-dropdown {
+        min-width: 100px;
+    }
+}
+
+@media (max-width: 600px) {
+    main {
+        padding: 1rem !important;
+    }
+
+    button#start {
+        font-size: 1rem !important;
+        padding: 0.625rem 1.25rem !important;
     }
     
-    .modal-body #save-config {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.9rem;
+    header {
+        padding: 1rem !important;
+        position: relative;
+    }
+    
+    header a {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    header h1 {
+        margin-top: 0;
+        font-size: 1.5rem !important;
     }
 }

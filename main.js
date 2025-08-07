@@ -425,8 +425,11 @@ async function downloadFilesFromStructure ( selectedKey, alias, zip )
     keys.forEach( key =>
     {
       const li = document.createElement( 'li' );
+      li.className = 'result-item px-4 py-3 border-b border-gray-100 cursor-pointer transition-colors duration-100 hover:bg-red-50';
       li.textContent = key;
-      if ( key === selectedKey ) li.classList.add( 'selected' );
+      if ( key === selectedKey ) {
+        li.classList.add( 'selected', 'bg-red-100', 'text-red-500', 'font-bold', 'border-l-4', 'border-red-500' );
+      }
       li.onclick = () =>
       {
         selectedKey = key;
