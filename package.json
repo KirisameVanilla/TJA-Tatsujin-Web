@@ -27,6 +27,9 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
     "jszip": "^3.10.1",
+    "kuroshiro": "^1.2.0",
+    "kuroshiro-analyzer-kuromoji": "^1.1.0",
+    "pinyin": "^4.0.0",
     "tailwindcss": "^4.1.11"
   }
 }
