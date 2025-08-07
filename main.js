@@ -483,67 +483,66 @@ async function downloadFilesFromStructure ( selectedKey, alias, zip )
     return { toKatakana, toHiragana };
   }
 
-  // 智能匹配函数
+  // 生成所有可能的搜索词（标准化、拼音、罗马音、假名转换）
+  async function generateSearchTerms(text) {
+    const terms = new Set();
+    
+    // 1. 标准化文本
+    const normalized = normalizeText(text);
+    if (normalized) terms.add(normalized);
+    
+    // 2. 拼音（中文）
+    const pinyinText = toPinyin(text);
+    if (pinyinText) terms.add(pinyinText);
+    
+    // 3. 罗马音（日文）
+    if (kuroshiroInitialized) {
+      const romajiText = await toRomaji(text);
+      if (romajiText) terms.add(romajiText);
+    }
+    
+    // 4. 假名转换
+    const kanaConversions = convertKana(text);
+    const normalizedKatakana = normalizeText(kanaConversions.toKatakana);
+    const normalizedHiragana = normalizeText(kanaConversions.toHiragana);
+    if (normalizedKatakana) terms.add(normalizedKatakana);
+    if (normalizedHiragana) terms.add(normalizedHiragana);
+    
+    // 5. 如果是日文假名，也添加其罗马音
+    if (kuroshiroInitialized && /[\u3040-\u309F\u30A0-\u30FF]/.test(text)) {
+      const katakanaRomaji = await toRomaji(kanaConversions.toKatakana);
+      const hiraganaRomaji = await toRomaji(kanaConversions.toHiragana);
+      if (katakanaRomaji) terms.add(katakanaRomaji);
+      if (hiraganaRomaji) terms.add(hiraganaRomaji);
+    }
+    
+    return Array.from(terms).filter(term => term.length > 0);
+  }
+
+  // 优化后的智能匹配函数
   async function smartMatch(query, target, alias) {
     const normalizedQuery = normalizeText(query);
     if (!normalizedQuery) return false;
 
-    // 1. 直接匹配（标准化后）
-    const normalizedTarget = normalizeText(target);
-    if (normalizedTarget.includes(normalizedQuery)) return true;
-
-    // 2. 匹配别名
-    for (const a of alias) {
-      const normalizedAlias = normalizeText(a);
-      if (normalizedAlias.includes(normalizedQuery)) return true;
-    }
-
-    // 3. 拼音匹配（对中文内容）
-    const targetPinyin = toPinyin(target);
-    if (targetPinyin && targetPinyin.includes(normalizeText(toPinyin(query)))) return true;
-
-    for (const a of alias) {
-      const aliasPinyin = toPinyin(a);
-      if (aliasPinyin && aliasPinyin.includes(normalizeText(toPinyin(query)))) return true;
-    }
-
-    // 4. 日文相关匹配
-    if (kuroshiroInitialized) {
-      // 罗马音匹配
-      const queryRomaji = await toRomaji(query);
-      const targetRomaji = await toRomaji(target);
-      
-      if (queryRomaji && targetRomaji && targetRomaji.includes(queryRomaji)) return true;
-      
-      for (const a of alias) {
-        const aliasRomaji = await toRomaji(a);
-        if (queryRomaji && aliasRomaji && aliasRomaji.includes(queryRomaji)) return true;
-      }
-
-      // 输入罗马音匹配日文
-      if (/^[a-zA-Z\s]+$/.test(query)) { // 如果输入是纯英文
-        if (targetRomaji && targetRomaji.includes(normalizedQuery)) return true;
-        
-        for (const a of alias) {
-          const aliasRomaji = await toRomaji(a);
-          if (aliasRomaji && aliasRomaji.includes(normalizedQuery)) return true;
+    // 生成查询词的所有搜索形式
+    const queryTerms = await generateSearchTerms(query);
+    
+    // 生成目标的所有搜索形式（包括别名）
+    const allTargets = [target, ...alias];
+    const targetTermsSets = await Promise.all(
+      allTargets.map(t => generateSearchTerms(t))
+    );
+    const allTargetTerms = targetTermsSets.flat();
+    
+    // 检查是否有任意查询词匹配任意目标词
+    for (const queryTerm of queryTerms) {
+      for (const targetTerm of allTargetTerms) {
+        if (targetTerm.includes(queryTerm)) {
+          return true;
         }
       }
     }
-
-    // 5. 假名转换匹配（平假名<->片假名）
-    const kanaConversions = convertKana(query);
-    const targetKanaConversions = convertKana(target);
     
-    if (normalizeText(targetKanaConversions.toKatakana).includes(normalizedQuery) ||
-        normalizeText(targetKanaConversions.toHiragana).includes(normalizedQuery)) return true;
-    
-    for (const a of alias) {
-      const aliasKanaConversions = convertKana(a);
-      if (normalizeText(aliasKanaConversions.toKatakana).includes(normalizedQuery) ||
-          normalizeText(aliasKanaConversions.toHiragana).includes(normalizedQuery)) return true;
-    }
-
     return false;
   }
 
