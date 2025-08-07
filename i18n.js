@@ -11,10 +11,9 @@ const translations = {
     // 主要内容
     searchPlaceholder: '输入搜索关键字',
     startDownload: '开始下载',
-    useProxy: '使用私人提供的加速代理（因为CORS, 请务必使用）',
     
     // API 配置
-    apiConfigTitle: 'API 配置',
+    apiConfigTitle: '设置',
     apiListTitle: 'API 配置列表',
     addApi: '添加 API',
     addApiTitle: '添加 API 配置',
@@ -37,8 +36,6 @@ const translations = {
     repoOwnerPlaceholder: '例如: xxx',
     repoNameLabel: '仓库名称',
     repoNamePlaceholder: '例如: xxx',
-    saveConfig: '保存配置',
-    configSaved: '配置已保存！',
     configRequired: '请填写完整的API配置信息',
     proxyEnabled: '代理已启用',
     proxyDisabled: '代理已禁用',
@@ -46,13 +43,11 @@ const translations = {
     // 状态信息
     greeting: '你好~ (*・ω・)ﾉ',
     loadingAlias: '加载 alias.json 失败啦 (；´д｀)ゞ',
-    loadingStructure: '加载 structure.json 失败啦 (；´д｀)ゞ',
     searching: '搜索中...',
     downloading: '下载中...',
     downloadComplete: '下载完成！',
     downloadError: '下载失败！',
     noResults: '没有找到相关结果，请重试',
-    selectSong: '请选择要下载的歌曲',
     fetchFilesSuccess: '获取文件列表成功！',
     
     // 初始化和加载相关
@@ -74,7 +69,17 @@ const translations = {
     footerText: '非官方项目，仅供学习交流。',
     
     // 语言切换
-    languageSwitch: '切换语言'
+    languageSwitch: '切换语言',
+    
+    // 主题切换
+    toggleTheme: '切换主题',
+    autoTheme: '自动',
+    themeSettings: '主题设置',
+    currentTheme: '当前主题',
+    lightTheme: '浅色模式',
+    darkTheme: '深色模式',
+    autoThemeDay: '自动选择 (白天)',
+    autoThemeNight: '自动选择 (夜晚)'
   },
   
   'en': {
@@ -88,10 +93,9 @@ const translations = {
     // 主要内容
     searchPlaceholder: 'Enter search keywords',
     startDownload: 'Start Download',
-    useProxy: 'Use provided acceleration proxy (CORS issue, please use)',
     
     // API 配置
-    apiConfigTitle: 'API Configuration',
+    apiConfigTitle: 'Settings',
     apiListTitle: 'API Configuration List',
     addApi: 'Add API',
     addApiTitle: 'Add API Configuration',
@@ -114,8 +118,6 @@ const translations = {
     repoOwnerPlaceholder: 'e.g.: xxx',
     repoNameLabel: 'Repository Name',
     repoNamePlaceholder: 'e.g.: xxx',
-    saveConfig: 'Save Configuration',
-    configSaved: 'Configuration saved!',
     configRequired: 'Please fill in complete API configuration',
     proxyEnabled: 'Proxy enabled',
     proxyDisabled: 'Proxy disabled',
@@ -123,13 +125,11 @@ const translations = {
     // 状态信息
     greeting: 'Hello~ (*・ω・)ﾉ',
     loadingAlias: 'Failed to load alias.json (；´д｀)ゞ',
-    loadingStructure: 'Failed to load structure.json (；´д｀)ゞ',
     searching: 'Searching...',
     downloading: 'Downloading...',
     downloadComplete: 'Download completed!',
     downloadError: 'Download failed!',
     noResults: 'No results found, please try again',
-    selectSong: 'Please select a song to download',
     fetchFilesSuccess: 'File list fetched successfully!',
     
     // 初始化和加载相关
@@ -151,7 +151,17 @@ const translations = {
     footerText: 'Unofficial project, for learning and communication only.',
     
     // 语言切换
-    languageSwitch: 'Switch Language'
+    languageSwitch: 'Switch Language',
+    
+    // 主题切换
+    toggleTheme: 'Toggle Theme',
+    autoTheme: 'Auto',
+    themeSettings: 'Theme Settings',
+    currentTheme: 'Current Theme',
+    lightTheme: 'Light Mode',
+    darkTheme: 'Dark Mode',
+    autoThemeDay: 'Auto (Day)',
+    autoThemeNight: 'Auto (Night)'
   }
 };
 
