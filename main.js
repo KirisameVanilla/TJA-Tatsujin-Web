@@ -1,8 +1,8 @@
-import JSZip from "jszip";
-import i18n from "./i18n.js";
-import Kuroshiro from "kuroshiro";
-import KuromojiAnalyzer from "kuroshiro-analyzer-kuromoji";
-import { pinyin } from "pinyin";
+import JSZip from 'jszip';
+import i18n from './i18n.js';
+import Kuroshiro from 'kuroshiro';
+import KuromojiAnalyzer from 'kuroshiro-analyzer-kuromoji';
+import { pinyin } from 'pinyin';
 
 /**
  * 获取API配置列表
@@ -209,7 +209,7 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
   updateStatus(`${i18n.t('downloadComplete')} ${i18n.formatFilesPackaged(files.length)} (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧`);
 }
 
-(async () => {
+(async() => {
   const kuroshiro = new Kuroshiro();
   let kuroshiroInitialized = false;
   try {
@@ -306,7 +306,6 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
     }
 
     const now = new Date();
-    const currentHour = now.getHours();
     const currentSession = getCurrentTimeSession();
 
     if (currentSession !== lastChangeSession) {
@@ -577,7 +576,7 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
 
     const result = text
       .toLowerCase()
-      .replace(/[\s\-_\.\/\\\(\)\[\]{}'"!@#\$%\^&\*\+=;:,<>?\|~`]/g, '')
+      .replace(/[\s\-_./\\()[\]{}'"!@#$%^&*+=;:,<>?|~`]/g, '')
       .replace(/[ー]/g, '')
       .trim();
 
@@ -641,10 +640,10 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
    * @returns {Object} 包含toKatakana和toHiragana属性的对象
    */
   function convertKana(text) {
-    const toKatakana = text.replace(/[\u3041-\u3096]/g, function (match) {
+    const toKatakana = text.replace(/[\u3041-\u3096]/g, function(match) {
       return String.fromCharCode(match.charCodeAt(0) + 0x60);
     });
-    const toHiragana = text.replace(/[\u30a1-\u30f6]/g, function (match) {
+    const toHiragana = text.replace(/[\u30a1-\u30f6]/g, function(match) {
       return String.fromCharCode(match.charCodeAt(0) - 0x60);
     });
     return { toKatakana, toHiragana };
@@ -724,10 +723,9 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
     const q = query.trim();
     if (!q) return [];
 
-    const matchedKeys = [];
     const entries = Object.entries(alias);
 
-    const matchPromises = entries.map(async ([key, val]) => {
+    const matchPromises = entries.map(async([key, val]) => {
       const isMatch = await smartMatch(q, key, val.alias);
       return isMatch ? key : null;
     });
@@ -771,14 +769,14 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
       clearTimeout(searchTimeout);
     }
 
-    searchTimeout = setTimeout(async () => {
+    searchTimeout = setTimeout(async() => {
       const matchedKeys = await filterKeys(searchInput.value);
       renderResults(matchedKeys);
       resetStatus();
     }, 300);
   });
 
-  startBtn.addEventListener('click', async () => {
+  startBtn.addEventListener('click', async() => {
     if (!selectedKey) return;
     startBtn.disabled = true;
     updateStatus(i18n.t('downloading') + '... (ﾟ▽ﾟ)/');
@@ -819,7 +817,7 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
     }
   });
 
-  window.addEventListener('languageChanged', async () => {
+  window.addEventListener('languageChanged', async() => {
     const matchedKeys = await filterKeys(searchInput.value);
     renderResults(matchedKeys);
     resetStatus();
