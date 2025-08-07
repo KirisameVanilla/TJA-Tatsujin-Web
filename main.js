@@ -1,7 +1,6 @@
 import JSZip from 'jszip';
 import i18n from './i18n.js';
-import Kuroshiro from 'kuroshiro';
-import KuromojiAnalyzer from 'kuroshiro-analyzer-kuromoji';
+import * as wanakana from 'wanakana';
 import { pinyin } from 'pinyin';
 
 /**
@@ -210,15 +209,6 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
 }
 
 (async() => {
-  const kuroshiro = new Kuroshiro();
-  let kuroshiroInitialized = false;
-  try {
-    await kuroshiro.init(new KuromojiAnalyzer());
-    kuroshiroInitialized = true;
-  } catch (e) {
-    console.warn('Kuroshiro initialization failed:', e);
-  }
-
   let zip;
   try {
     updateStatus(i18n.t('loadingJSZip'));
@@ -611,20 +601,15 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
   /**
    * 将日文转换为罗马音，使用缓存提高性能
    * @param {string} text 日文文本
-   * @returns {Promise<string>} 罗马音文本（标准化后）
+   * @returns {string} 罗马音文本（标准化后）
    */
-  async function toRomaji(text) {
+  function toRomaji(text) {
     if (searchCache.romaji.has(text)) {
       return searchCache.romaji.get(text);
     }
 
-    if (!kuroshiroInitialized) {
-      searchCache.romaji.set(text, '');
-      return '';
-    }
-
     try {
-      const result = await kuroshiro.convert(text, { mode: 'normal', to: 'romaji' });
+      const result = wanakana.toRomaji(text);
       const normalized = normalizeText(result);
       searchCache.romaji.set(text, normalized);
       return normalized;
@@ -652,9 +637,9 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
   /**
    * 生成文本的所有可能搜索词（标准化、拼音、罗马音、假名转换）
    * @param {string} text 源文本
-   * @returns {Promise<Array<string>>} 所有可能的搜索词数组
+   * @returns {Array<string>} 所有可能的搜索词数组
    */
-  async function generateSearchTerms(text) {
+  function generateSearchTerms(text) {
     const terms = new Set();
 
     const normalized = normalizeText(text);
@@ -663,10 +648,9 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
     const pinyinText = toPinyin(text);
     if (pinyinText) terms.add(pinyinText);
 
-    if (kuroshiroInitialized) {
-      const romajiText = await toRomaji(text);
-      if (romajiText) terms.add(romajiText);
-    }
+    // 使用 wanakana 进行罗马音转换
+    const romajiText = toRomaji(text);
+    if (romajiText) terms.add(romajiText);
 
     const kanaConversions = convertKana(text);
     const normalizedKatakana = normalizeText(kanaConversions.toKatakana);
@@ -674,9 +658,10 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
     if (normalizedKatakana) terms.add(normalizedKatakana);
     if (normalizedHiragana) terms.add(normalizedHiragana);
 
-    if (kuroshiroInitialized && /[\u3040-\u309F\u30A0-\u30FF]/.test(text)) {
-      const katakanaRomaji = await toRomaji(kanaConversions.toKatakana);
-      const hiraganaRomaji = await toRomaji(kanaConversions.toHiragana);
+    // 对假名转换结果也进行罗马音转换
+    if (/[\u3040-\u309F\u30A0-\u30FF]/.test(text)) {
+      const katakanaRomaji = toRomaji(kanaConversions.toKatakana);
+      const hiraganaRomaji = toRomaji(kanaConversions.toHiragana);
       if (katakanaRomaji) terms.add(katakanaRomaji);
       if (hiraganaRomaji) terms.add(hiraganaRomaji);
     }
@@ -689,19 +674,16 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
    * @param {string} query 搜索查询字符串
    * @param {string} target 目标字符串
    * @param {Array<string>} alias 别名数组
-   * @returns {Promise<boolean>} 是否匹配
+   * @returns {boolean} 是否匹配
    */
-  async function smartMatch(query, target, alias) {
+  function smartMatch(query, target, alias) {
     const normalizedQuery = normalizeText(query);
     if (!normalizedQuery) return false;
 
-    const queryTerms = await generateSearchTerms(query);
+    const queryTerms = generateSearchTerms(query);
 
     const allTargets = [target, ...alias];
-    const targetTermsSets = await Promise.all(
-      allTargets.map(t => generateSearchTerms(t))
-    );
-    const allTargetTerms = targetTermsSets.flat();
+    const allTargetTerms = allTargets.map(t => generateSearchTerms(t)).flat();
 
     for (const queryTerm of queryTerms) {
       for (const targetTerm of allTargetTerms) {
@@ -717,21 +699,23 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
   /**
    * 根据查询字符串过滤匹配的键名
    * @param {string} query 搜索查询字符串
-   * @returns {Promise<Array<string>>} 匹配的键名数组
+   * @returns {Array<string>} 匹配的键名数组
    */
-  async function filterKeys(query) {
+  function filterKeys(query) {
     const q = query.trim();
     if (!q) return [];
 
     const entries = Object.entries(alias);
 
-    const matchPromises = entries.map(async([key, val]) => {
-      const isMatch = await smartMatch(q, key, val.alias);
-      return isMatch ? key : null;
-    });
+    const matchedKeys = [];
+    for (const [key, val] of entries) {
+      const isMatch = smartMatch(q, key, val.alias);
+      if (isMatch) {
+        matchedKeys.push(key);
+      }
+    }
 
-    const results = await Promise.all(matchPromises);
-    return results.filter(key => key !== null);
+    return matchedKeys;
   }
 
   /**
@@ -769,8 +753,8 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
       clearTimeout(searchTimeout);
     }
 
-    searchTimeout = setTimeout(async() => {
-      const matchedKeys = await filterKeys(searchInput.value);
+    searchTimeout = setTimeout(() => {
+      const matchedKeys = filterKeys(searchInput.value);
       renderResults(matchedKeys);
       resetStatus();
     }, 300);
@@ -817,8 +801,8 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
     }
   });
 
-  window.addEventListener('languageChanged', async() => {
-    const matchedKeys = await filterKeys(searchInput.value);
+  window.addEventListener('languageChanged', () => {
+    const matchedKeys = filterKeys(searchInput.value);
     renderResults(matchedKeys);
     resetStatus();
 

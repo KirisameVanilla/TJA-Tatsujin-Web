@@ -30,14 +30,14 @@
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-promise": "^6.6.0",
+    "path-browserify": "^1.0.1",
     "vite": "^7.0.6"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
     "jszip": "^3.10.1",
-    "kuroshiro": "^1.2.0",
-    "kuroshiro-analyzer-kuromoji": "^1.1.0",
     "pinyin": "^4.0.0",
-    "tailwindcss": "^4.1.11"
+    "tailwindcss": "^4.1.11",
+    "wanakana": "^5.3.1"
   }
 }
