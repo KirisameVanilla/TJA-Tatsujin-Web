@@ -1,0 +1,18 @@
+# 依赖文件
+node_modules/
+venv/
+
+# 构建产物
+dist/
+build/
+
+# 字体文件
+fonts/
+
+# 压缩文件
+*.min.js
+*.min.css
+
+# 临时文件
+*.tmp
+.cache/

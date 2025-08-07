@@ -1,11 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", "./main.js"],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}', './main.js'],
   theme: {
     extend: {
       spacing: {
         '4.5': '1.125rem', // 18px
-        '15': '3.75rem', // 60px
+        '15': '3.75rem' // 60px
       },
       colors: {
         primary: {
@@ -36,4 +36,4 @@ export default {
     }
   },
   plugins: []
-}
+};
