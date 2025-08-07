@@ -1192,7 +1192,11 @@
         "path": "09 Namco Original/Break Line"
     },
     "Break Through the Dome": {
-        "alias": ["冲破穹顶", "明日方舟", "Arknights"],
+        "alias": [
+            "冲破穹顶",
+            "明日方舟",
+            "Arknights"
+        ],
         "path": "07 Game Music/Break Through the Dome"
     },
     "Break the Chain": {
@@ -2615,11 +2619,15 @@
         "path": "07 Game Music/FLOWER"
     },
     "FREEDOM DiVE": {
-        "alias": ["自由落体"],
+        "alias": [
+            "自由落体"
+        ],
         "path": "05 Variety/FREEDOM DiVE"
     },
     "FUJIN Rumble": {
-        "alias": ["风神"],
+        "alias": [
+            "风神"
+        ],
         "path": "07 Game Music/FUJIN Rumble"
     },
     "FUNKTASTIC": {
@@ -2971,7 +2979,9 @@
         "path": "05 Variety/Ganso! Genius Cirno-chan☆"
     },
     "Garakuta Doll Play": {
-        "alias": ["GDP"],
+        "alias": [
+            "GDP"
+        ],
         "path": "07 Game Music/Garakuta Doll Play"
     },
     "Garyoutensei": {
@@ -3211,7 +3221,9 @@
         "path": "04 Children and Folk/Got Boost"
     },
     "Got more raves": {
-        "alias": ["郭沫若"],
+        "alias": [
+            "郭沫若"
+        ],
         "path": "07 Game Music/Got more raves"
     },
     "Gotoubun no Kimochi": {
@@ -3351,7 +3363,9 @@
         "path": "01 Pop/Hadaka no Kokoro"
     },
     "Hai Yorokonde": {
-        "alias": ["乐意效劳"],
+        "alias": [
+            "乐意效劳"
+        ],
         "path": "01 Pop/Hai Yorokonde"
     },
     "Haikei Doppelganger": {
@@ -3447,7 +3461,9 @@
         "path": "02 Anime/Happy Happy"
     },
     "Happy Synthesizer": {
-        "alias": ["快乐合成器"],
+        "alias": [
+            "快乐合成器"
+        ],
         "path": "03 Vocaloid/Happy Synthesizer"
     },
     "Happy Wedding-mae Song": {
@@ -3523,7 +3539,9 @@
         "path": "07 Game Music/Hashi!"
     },
     "Hataraku 2000": {
-        "alias": ["工作2000"],
+        "alias": [
+            "工作2000"
+        ],
         "path": "09 Namco Original/Hataraku 2000"
     },
     "Hater": {
@@ -3626,7 +3644,9 @@
         "path": "01 Pop/Hello, world!"
     },
     "Help me Saitama 2000": {
-        "alias": ["帮帮我，埼玉2000"],
+        "alias": [
+            "帮帮我，埼玉2000"
+        ],
         "path": "05 Variety/Help me Saitama 2000"
     },
     "Help me, ERINNNNNN!!": {
@@ -4044,7 +4064,10 @@
         "path": "01 Pop/Igaku"
     },
     "Ignis Danse": {
-        "alias": ["Ignis Dance", "火神"],
+        "alias": [
+            "Ignis Dance",
+            "火神"
+        ],
         "path": "09 Namco Original/Ignis Danse"
     },
     "Ii Aru Fanclub": {
@@ -4364,7 +4387,10 @@
         "path": "09 Namco Original/Jotei ～Imbiratuula～"
     },
     "Joubutsu 2000": {
-        "alias": ["成佛2000", "37564"],
+        "alias": [
+            "成佛2000",
+            "37564"
+        ],
         "path": "09 Namco Original/Joubutsu 2000"
     },
     "Jounetsu Tairiku": {
@@ -4588,7 +4614,10 @@
         "path": "03 Vocaloid/Karamari no Hana"
     },
     "Kare Kano Canon": {
-        "alias": ["亲亲卡农", "カレ・カノ・カノン"],
+        "alias": [
+            "亲亲卡农",
+            "カレ・カノ・カノン"
+        ],
         "path": "06 Classical/Kare Kano Canon"
     },
     "Karl no Uta -Autumn Pondside Version-": {
@@ -4782,7 +4811,9 @@
         "path": "01 Pop/Kibun Joujou↑↑"
     },
     "Kidaruma 2000": {
-        "alias": ["黄色达摩2000"],
+        "alias": [
+            "黄色达摩2000"
+        ],
         "path": "09 Namco Original/Kidaruma 2000"
     },
     "Kien Banjou Kagura": {
@@ -5046,7 +5077,10 @@
         "path": "09 Namco Original/Koi-kurenai"
     },
     "Koibumi 2000": {
-        "alias": ["恋文2000","情书2000"],
+        "alias": [
+            "恋文2000",
+            "情书2000"
+        ],
         "path": "09 Namco Original/Koibumi 2000"
     },
     "Koigeba": {
@@ -7518,7 +7552,9 @@
         "path": "01 Pop/RYUSEI"
     },
     "Rabbit Hole": {
-        "alias": ["兔子洞"],
+        "alias": [
+            "兔子洞"
+        ],
         "path": "03 Vocaloid/Rabbit Hole"
     },
     "Racing the Storm": {
@@ -7530,7 +7566,10 @@
         "path": "06 Classical/Radetzky March"
     },
     "Radiant": {
-        "alias": ["明日方舟", "Arknights"],
+        "alias": [
+            "明日方舟",
+            "Arknights"
+        ],
         "path": "07 Game Music/Radiant"
     },
     "Radio Taisou Dai Ichi": {
@@ -9988,7 +10027,9 @@
         "path": "02 Anime/VAMOLA! Kyoryuger"
     },
     "VERTeX": {
-        "alias": ["水神"],
+        "alias": [
+            "水神"
+        ],
         "path": "07 Game Music/VERTeX"
     },
     "VICTORIA": {
