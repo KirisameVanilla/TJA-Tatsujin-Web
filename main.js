@@ -412,29 +412,29 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
 
     configs.forEach(config => {
       const apiItem = document.createElement('div');
-      apiItem.className = 'api-item';
+      apiItem.className = 'flex justify-between items-center p-4 border-b border-gray-200 bg-white transition-colors duration-200 hover:bg-gray-50 last:border-b-0';
       const proxyStatus = config.useProxy !== false ? '🟢' : '🔴';
       apiItem.innerHTML = `
-        <div class="api-info">
-          <div class="api-name">
-            <span class="api-type-badge">${config.type.toUpperCase()}</span>
+        <div class="flex-1">
+          <div class="font-semibold mb-1 text-gray-800 flex items-center gap-2">
+            <span class="inline-block bg-red-500 text-white py-0.5 px-2 rounded-xl text-xs mr-2">${config.type.toUpperCase()}</span>
             ${config.name}
-            <span class="proxy-status" title="${config.useProxy !== false ? i18n.t('proxyEnabled') : i18n.t('proxyDisabled')}">${proxyStatus}</span>
+            <span class="text-xs" title="${config.useProxy !== false ? i18n.t('proxyEnabled') : i18n.t('proxyDisabled')}">${proxyStatus}</span>
           </div>
-          <div class="api-details">${config.host}/${config.owner}/${config.repo}</div>
+          <div class="text-sm text-gray-600">${config.host}/${config.owner}/${config.repo}</div>
         </div>
-        <div class="api-actions">
-          <button class="api-action-btn edit" title="${i18n.t('editApi')}" data-id="${config.id}">
+        <div class="flex gap-2">
+          <button class="bg-transparent border-0 cursor-pointer p-2 rounded transition-colors duration-200 text-blue-600 hover:bg-gray-200" title="${i18n.t('editApi')}" data-id="${config.id}">
             <i class="fas fa-edit"></i>
           </button>
-          <button class="api-action-btn delete" title="${i18n.t('deleteApi')}" data-id="${config.id}">
+          <button class="bg-transparent border-0 cursor-pointer p-2 rounded transition-colors duration-200 text-red-600 hover:bg-gray-200" title="${i18n.t('deleteApi')}" data-id="${config.id}">
             <i class="fas fa-trash"></i>
           </button>
         </div>
       `;
 
-      const editBtn = apiItem.querySelector('.edit');
-      const deleteBtn = apiItem.querySelector('.delete');
+      const editBtn = apiItem.querySelector('[title="' + i18n.t('editApi') + '"]');
+      const deleteBtn = apiItem.querySelector('[title="' + i18n.t('deleteApi') + '"]');
 
       editBtn.addEventListener('click', () => editApi(config.id));
       deleteBtn.addEventListener('click', () => deleteApi(config.id));

@@ -124,16 +124,7 @@ body {
     transform: rotate(180deg);
 }
 
-/* 主题设置按钮组样式 */
-.theme-actions {
-    min-width: 200px;
-}
-
-.theme-actions button {
-    font-size: 14px;
-    white-space: nowrap;
-}
-
+/* Header 渐变背景 */
 header {
     background: linear-gradient(135deg, rgb(237, 0, 0) 0%, rgb(237, 116, 0) 100%) !important;
 }
@@ -141,100 +132,14 @@ header {
 /* 语言切换按钮样式 */
 .language-switch {
     position: absolute;
-    left: 1.25rem; /* left-5 */
+    left: 1.25rem;
     top: 50%;
     transform: translateY(-50%);
 }
 
-.language-btn {
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: white;
-    padding: 8px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 14px;
-    transition: all 0.1s ease;
-}
-
-.language-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(1.05);
-}
-
-.language-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    min-width: 120px;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.1s ease;
-    margin-top: 8px;
-}
-
-.language-dropdown.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.language-option {
-    padding: 10px 15px;
-    color: #333;
-    cursor: pointer;
-    transition: all 0.1s ease;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.language-option:last-child {
-    border-bottom: none;
-}
-
-.language-option:hover {
-    background-color: #f8f9fa;
-}
-
-.language-option.active {
-    background-color: #e74c3c;
-    color: white;
-}
-
-.language-text {
-    font-weight: 500;
-}
-
-/* 列表项的特殊样式 - 这些需要通过JavaScript动态添加类来实现 */
-.result-item {
-    padding: 1rem 0.75rem;
-    border-bottom: 1px solid #f3f4f6;
-    cursor: pointer;
-    transition: background-color 0.1s;
-}
-
-.result-item:hover {
-    background-color: #fef2f2;
-}
-
-.result-item.selected {
-    background-color: #fee2e2;
-    color: #ef4444;
-    font-weight: bold;
-    border-left: 4px solid #ef4444;
-}
-
 /* 开关按钮的特殊样式 - Tailwind 无法处理的复杂伪元素 */
 input:checked + .slider {
-    background-color: #ef4444; /* red-500 */
+    background-color: #ef4444;
 }
 
 input:checked + .slider .slider-dot {
@@ -244,92 +149,6 @@ input:checked + .slider .slider-dot {
 .slider .slider-dot {
     width: 18px;
     height: 18px;
-}
-
-/* 修复width和height */
-.w-4\.5 {
-    width: 1.125rem; /* 18px */
-}
-
-.h-4\.5 {
-    height: 1.125rem; /* 18px */
-}
-
-/* API项目的动态样式 */
-.api-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    border-bottom: 1px solid #e5e7eb;
-    background-color: white;
-    transition: background-color 0.2s;
-}
-
-.api-item:last-child {
-    border-bottom: none;
-}
-
-.api-item:hover {
-    background-color: #f9fafb;
-}
-
-.api-info {
-    flex: 1;
-}
-
-.api-name {
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-    color: #1f2937;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.proxy-status {
-    font-size: 0.75rem;
-}
-
-.api-details {
-    font-size: 0.875rem;
-    color: #6b7280;
-}
-
-.api-type-badge {
-    display: inline-block;
-    background-color: #ef4444;
-    color: white;
-    padding: 0.125rem 0.5rem;
-    border-radius: 0.75rem;
-    font-size: 0.75rem;
-    margin-right: 0.5rem;
-}
-
-.api-actions {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.api-action-btn {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 0.25rem;
-    transition: background-color 0.2s;
-}
-
-.api-action-btn:hover {
-    background-color: #e5e7eb;
-}
-
-.api-action-btn.edit {
-    color: #2563eb;
-}
-
-.api-action-btn.delete {
-    color: #dc2626;
 }
 
 /* 弹窗显示动画 */
@@ -359,60 +178,11 @@ input:checked + .slider .slider-dot {
     }
 }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
-    .settings-btn {
-        width: 3rem !important;
-        height: 3rem !important;
-        font-size: 1.125rem !important;
-        bottom: 1.25rem !important;
-        right: 1.25rem !important;
-    }
-    
-    .modal-content {
-        width: 91.666667% !important;
-        margin: 0.625rem !important;
-    }
-    
-    .modal-header {
-        padding: 1rem !important;
-    }
-    
-    .modal-body {
-        padding: 1rem !important;
-    }
-    
-    .modal-body .config-row input, 
-    .modal-body .config-row select {
-        padding: 0.625rem !important;
-        font-size: 0.875rem !important;
-    }
-
-    /* 语言切换按钮的响应式样式 */
-    .language-switch {
-        position: absolute;
-        left: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    .language-btn {
-        padding: 6px 10px;
-        font-size: 12px;
-    }
-
-    .language-dropdown {
-        min-width: 100px;
-    }
+/* 修复width和height */
+.w-4\.5 {
+    width: 1.125rem;
 }
 
-@media (max-width: 600px) {
-    main {
-        padding: 1rem !important;
-    }
-
-    button#start {
-        font-size: 1rem !important;
-        padding: 0.625rem 1.25rem !important;
-    }
+.h-4\.5 {
+    height: 1.125rem;
 }

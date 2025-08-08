@@ -269,16 +269,16 @@ class I18n {
     const languageSwitch = document.createElement('div');
     languageSwitch.className = 'language-switch';
     languageSwitch.innerHTML = `
-      <button class="language-btn" title="${this.t('languageSwitch')}">
+      <button class="bg-white/20 border border-white/30 text-white px-3 py-2 rounded-md cursor-pointer flex items-center gap-1.5 text-sm transition-all duration-100 hover:bg-white/30 hover:scale-105" title="${this.t('languageSwitch')}">
         <i class="fas fa-globe"></i>
-        <span class="language-text">${this.currentLanguage === 'zh-CN' ? '中' : 'EN'}</span>
+        <span class="font-medium">${this.currentLanguage === 'zh-CN' ? '中' : 'EN'}</span>
       </button>
-      <div class="language-dropdown">
-        <div class="language-option ${this.currentLanguage === 'zh-CN' ? 'active' : ''}" data-lang="zh-CN">
-          中文
+      <div class="absolute top-full left-0 bg-white border border-gray-300 rounded-md shadow-lg min-w-[120px] z-[1000] opacity-0 invisible -translate-y-2 transition-all duration-100 mt-2">
+        <div class="px-4 py-2.5 text-gray-700 cursor-pointer transition-all duration-100 border-b border-gray-200 last:border-b-0 hover:bg-gray-50 ${this.currentLanguage === 'zh-CN' ? 'bg-red-500 text-white' : ''}" data-lang="zh-CN">
+          <span class="font-medium">中文</span>
         </div>
-        <div class="language-option ${this.currentLanguage === 'en' ? 'active' : ''}" data-lang="en">
-          English
+        <div class="px-4 py-2.5 text-gray-700 cursor-pointer transition-all duration-100 border-b border-gray-200 last:border-b-0 hover:bg-gray-50 ${this.currentLanguage === 'en' ? 'bg-red-500 text-white' : ''}" data-lang="en">
+          <span class="font-medium">English</span>
         </div>
       </div>
     `;
@@ -292,14 +292,20 @@ class I18n {
   }
 
   bindLanguageSwitchEvents(languageSwitch) {
-    const btn = languageSwitch.querySelector('.language-btn');
-    const dropdown = languageSwitch.querySelector('.language-dropdown');
-    const options = languageSwitch.querySelectorAll('.language-option');
+    const btn = languageSwitch.querySelector('button');
+    const dropdown = languageSwitch.querySelector('div:nth-child(2)'); // 第二个div是下拉菜单
+    const options = languageSwitch.querySelectorAll('[data-lang]');
 
     // 点击按钮显示/隐藏下拉菜单
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
-      dropdown.classList.toggle('show');
+      if (dropdown.classList.contains('opacity-0')) {
+        dropdown.classList.remove('opacity-0', 'invisible', '-translate-y-2');
+        dropdown.classList.add('opacity-100', 'visible', 'translate-y-0');
+      } else {
+        dropdown.classList.add('opacity-0', 'invisible', '-translate-y-2');
+        dropdown.classList.remove('opacity-100', 'visible', 'translate-y-0');
+      }
     });
 
     // 点击选项切换语言
@@ -310,21 +316,29 @@ class I18n {
         this.setLanguage(lang);
 
         // 更新按钮文本
-        const languageText = btn.querySelector('.language-text');
+        const languageText = btn.querySelector('span');
         languageText.textContent = lang === 'zh-CN' ? '中' : 'EN';
 
         // 更新选中状态
-        options.forEach(opt => opt.classList.remove('active'));
-        option.classList.add('active');
+        options.forEach(opt => {
+          opt.classList.remove('bg-red-500', 'text-white');
+          opt.classList.add('text-gray-700');
+        });
+        option.classList.add('bg-red-500', 'text-white');
+        option.classList.remove('text-gray-700');
 
         // 隐藏下拉菜单
-        dropdown.classList.remove('show');
+        dropdown.classList.add('opacity-0', 'invisible', '-translate-y-2');
+        dropdown.classList.remove('opacity-100', 'visible', 'translate-y-0');
       });
     });
 
     // 点击其他地方隐藏下拉菜单
     document.addEventListener('click', () => {
-      dropdown.classList.remove('show');
+      if (!dropdown.classList.contains('opacity-0')) {
+        dropdown.classList.add('opacity-0', 'invisible', '-translate-y-2');
+        dropdown.classList.remove('opacity-100', 'visible', 'translate-y-0');
+      }
     });
   }
 
