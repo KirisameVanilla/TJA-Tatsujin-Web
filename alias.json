@@ -424,7 +424,10 @@
         "path": "01 Pop/Age♂Age♂EVERY☆Knight"
     },
     "Ahoy!! Warera Houshou Kaizokudan☆": {
-        "alias": [],
+        "alias": [
+            "Ahoy!! 我ら宝鐘海賊団☆",
+            "宝钟玛琳"
+        ],
         "path": "01 Pop/Ahoy!! Warera Houshou Kaizokudan☆"
     },
     "Ai De Cheng Bao": {
@@ -648,7 +651,9 @@
         "path": "01 Pop/Ambivalent"
     },
     "Ame to Petra": {
-        "alias": [],
+        "alias": [
+            "雨和佩特拉"
+        ],
         "path": "03 Vocaloid/Ame to Petra"
     },
     "Amefuri Otsuki": {
@@ -684,7 +689,9 @@
         "path": "01 Pop/Anata to"
     },
     "Anata to Tu-lat-tat-ta♪": {
-        "alias": [],
+        "alias": [
+            "邋遢遢"
+        ],
         "path": "01 Pop/Anata to Tu-lat-tat-ta♪"
     },
     "Anataboshi": {
@@ -696,11 +703,17 @@
         "path": "01 Pop/And You"
     },
     "Angel Dream": {
-        "alias": [],
+        "alias": [
+            "天使之梦",
+            "彩虹社"
+        ],
         "path": "09 Namco Original/Angel Dream"
     },
     "Angel Dream -iDOLM@STER Version-": {
-        "alias": [],
+        "alias": [
+            "天使之梦",
+            "偶像大师"
+        ],
         "path": "07 Game Music/Angel Dream -iDOLM@STER Version-"
     },
     "Angel Halo": {
