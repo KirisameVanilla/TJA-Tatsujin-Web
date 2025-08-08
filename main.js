@@ -261,6 +261,8 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
   const themeStatus = document.getElementById('theme-status');
   const themeAuto = document.getElementById('theme-auto');
 
+  const previewBtn = document.getElementById('preview');
+
   let selectedKey = null;
   let editingApiId = null;
   let searchTimeout = null;
@@ -747,6 +749,7 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
         selectedKey = key;
         renderResults(keys);
         startBtn.disabled = false;
+        previewBtn.disabled = false;
         resetStatus();
       };
       resultsEl.appendChild(li);
@@ -754,12 +757,14 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
     if (keys.length === 0) {
       resultsEl.textContent = i18n.t('noResults') + ' (´･ω･`)?';
       startBtn.disabled = true;
+      previewBtn.disabled = true;
     }
   }
 
   searchInput.addEventListener('input', () => {
     selectedKey = null;
     startBtn.disabled = true;
+    previewBtn.disabled = true;
 
     if (searchTimeout) {
       clearTimeout(searchTimeout);
@@ -775,12 +780,70 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
   startBtn.addEventListener('click', async() => {
     if (!selectedKey) return;
     startBtn.disabled = true;
+    previewBtn.disabled = true;
     updateStatus(i18n.t('downloading') + '... (ﾟ▽ﾟ)/');
     try {
       await downloadFilesFromStructure(selectedKey, alias, zip);
     } catch (e) {
       updateStatus(i18n.t('downloadError') + ': ' + e.message + ' (；一_一)');
     }
+    startBtn.disabled = false;
+    previewBtn.disabled = false;
+  });
+
+  // 预览按钮事件
+  previewBtn.addEventListener('click', async() => {
+    if (!selectedKey) return;
+    previewBtn.disabled = true;
+    startBtn.disabled = true;
+    updateStatus(i18n.t('startGeneratingPreviewZip'));
+    try {
+      // 复用下载逻辑，但不触发下载，而是postMessage
+      const ref = 'master';
+      const basePath = alias[selectedKey].path;
+      const files = await getFilesFromPath(basePath);
+      if (!files || files.length === 0) {
+        updateStatus(i18n.t('noResults') + ' (⊙_⊙)？');
+        return;
+      }
+      const apiConfig = getRandomApiConfig();
+      if (!apiConfig) throw new Error(i18n.t('noApiConfigured'));
+      const baseURL = isProxyEnabled(apiConfig) ?
+        `https://ghproxy.vanillaaaa.org/https://${apiConfig.host}/${apiConfig.owner}/${apiConfig.repo}/raw/branch` :
+        `https://${apiConfig.host}/${apiConfig.owner}/${apiConfig.repo}/raw/branch`;
+      const zip = new JSZip();
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const fileUrl = `${baseURL}/${ref}/${file.fullPath}`;
+        const res = await fetch(fileUrl);
+        if (!res.ok) throw new Error(`${i18n.t('downloadError')}: ${res.status}`);
+        const blob = await res.blob();
+        zip.file(file.path, blob, { binary: true });
+      }
+      updateStatus('正在打包并发送...');
+      const content = await zip.generateAsync({ type: 'blob' });
+      // 这里填写目标页面地址
+      const win = window.open('https://viewer.taiko.vanillaaaa.org', '_blank');
+      // 等待新窗口加载后发送
+      const sendZip = () => {
+        win.postMessage({ type: 'zip', blob: content }, '*');
+      };
+      // 尝试多次发送，兼容新窗口未加载完
+      let tryCount = 0;
+      const trySend = () => {
+        if (win && win.postMessage) {
+          sendZip();
+        } else if (tryCount < 10) {
+          tryCount++;
+          setTimeout(trySend, 500);
+        }
+      };
+      setTimeout(trySend, 1000);
+      updateStatus('预览包已发送，切换到新标签页查看。');
+    } catch (e) {
+      updateStatus('预览失败: ' + e.message);
+    }
+    previewBtn.disabled = false;
     startBtn.disabled = false;
   });
 
