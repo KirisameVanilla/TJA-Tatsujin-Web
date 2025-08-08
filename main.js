@@ -2,6 +2,10 @@ import JSZip from 'jszip';
 import i18n from './i18n.js';
 import * as wanakana from 'wanakana';
 import { pinyin } from 'pinyin';
+import { showConfirm } from './confirm-dialog.js';
+
+// 添加到全局作用域，保持兼容性
+window.showConfirm = showConfirm;
 
 /**
  * 获取API配置列表
@@ -437,7 +441,7 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
       const deleteBtn = apiItem.querySelector('[title="' + i18n.t('deleteApi') + '"]');
 
       editBtn.addEventListener('click', () => editApi(config.id));
-      deleteBtn.addEventListener('click', () => deleteApi(config.id));
+      deleteBtn.addEventListener('click', async() => await deleteApi(config.id));
 
       apiList.appendChild(apiItem);
     });
@@ -536,8 +540,16 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
    * 删除指定ID的API配置
    * @param {number} id API配置的ID
    */
-  function deleteApi(id) {
-    if (confirm('确定要删除这个API配置吗？')) {
+  async function deleteApi(id) {
+    const confirmed = await window.showConfirm({
+      title: '删除确认',
+      message: '确定要删除这个API配置吗？',
+      type: 'warning',
+      confirmText: '确认',
+      cancelText: '取消'
+    });
+
+    if (confirmed) {
       const configs = getApiConfigs();
       const filtered = configs.filter(c => c.id !== id);
       saveApiConfigs(filtered);
