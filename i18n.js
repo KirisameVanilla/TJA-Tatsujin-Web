@@ -11,6 +11,8 @@ const translations = {
     // 主要内容
     searchPlaceholder: '输入搜索关键字',
     startDownload: '开始下载',
+    previewBtn: '预览谱面',
+    startGeneratingPreviewZip: '正在生成预览包……',
 
     // API 配置
     apiConfigTitle: '设置',
@@ -93,6 +95,8 @@ const translations = {
     // 主要内容
     searchPlaceholder: 'Enter search keywords',
     startDownload: 'Start Download',
+    previewBtn: 'Preview Chart',
+    startGeneratingPreviewZip: 'Start Generating Preview Zip',
 
     // API 配置
     apiConfigTitle: 'Settings',
