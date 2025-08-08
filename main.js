@@ -139,6 +139,7 @@ async function getFilesFromPath(basePath) {
         }
       }
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.warn(`Failed to fetch directory ${path}:`, e);
       throw e;
     }
@@ -155,58 +156,6 @@ async function getFilesFromPath(basePath) {
  * @param {JSZip} zip JSZip实例
  * @throws {Error} 当文件获取或下载失败时抛出错误
  */
-async function downloadFilesFromStructure(selectedKey, alias, zip) {
-  const ref = 'master';
-  const basePath = alias[selectedKey].path;
-
-  let files;
-  try {
-    updateStatus(i18n.t('fetchingFileList'));
-    files = await getFilesFromPath(basePath);
-  } catch (e) {
-    throw new Error(`${i18n.t('fetchFileListFailed')} ${e.message}`);
-  }
-
-  if (!files || files.length === 0) {
-    updateStatus(i18n.t('noResults') + ' (⊙_⊙)？');
-    return;
-  } else {
-    updateStatus(i18n.t('fetchFilesSuccess'));
-  }
-
-  const apiConfig = getRandomApiConfig();
-  if (!apiConfig) {
-    throw new Error(i18n.t('noApiConfigured'));
-  }
-
-  const baseURL = isProxyEnabled(apiConfig) ?
-    `https://ghproxy.vanillaaaa.org/https://${apiConfig.host}/${apiConfig.owner}/${apiConfig.repo}/raw/branch` :
-    `https://${apiConfig.host}/${apiConfig.owner}/${apiConfig.repo}/raw/branch`;
-
-  for (let i = 0; i < files.length; i++) {
-    const file = files[i];
-    const fileUrl = `${baseURL}/${ref}/${file.fullPath}`;
-    try {
-      updateStatus(`${i18n.t('downloading')} (${i + 1}/${files.length}): ${file.path} (◕‿◕)`);
-      const res = await fetch(fileUrl);
-      if (!res.ok) throw new Error(`${i18n.t('downloadError')}: ${res.status}`);
-      const blob = await res.blob();
-      zip.file(file.path, blob, { binary: true });
-    } catch (e) {
-      updateStatus(`${i18n.t('downloadError')} ${file.path}, ${i18n.t('errorLabel')} ${e.message} (；一_一)`);
-      return;
-    }
-  }
-
-  updateStatus(i18n.t('generatingZip'));
-  const content = await zip.generateAsync({ type: 'blob' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(content);
-  a.download = `${selectedKey}.zip`;
-  a.click();
-
-  updateStatus(`${i18n.t('downloadComplete')} ${i18n.formatFilesPackaged(files.length)} (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧`);
-}
 
 (async() => {
   let zip;
@@ -218,14 +167,53 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
     return;
   }
 
-  let alias;
+  // 原始 alias 数据（兼容旧版对象结构与新版数组/带 version 的结构）
+  let aliasRaw;
   try {
     updateStatus(i18n.t('loadingDataFiles'));
-    alias = await loadAlias();
+    aliasRaw = await loadAlias();
   } catch (e) {
     updateStatus(`${i18n.t('loadDataFilesFailed')} ` + e.message + ' (；へ：)');
     return;
   }
+
+  /**
+   * 将多种可能格式的 alias 数据统一转换为数组形式
+   * item 结构: { id, name, path, alias: [] }
+   */
+  function normalizeAlias(raw) {
+    if (!raw) return [];
+    // 新版格式 {version:2, items:[...]} 或 {items:[...]}
+    if (typeof raw === 'object' && raw.items && Array.isArray(raw.items)) {
+      return raw.items.map(it => ({
+        id: it.id || it.path,
+        name: it.name,
+        path: it.path,
+        alias: Array.isArray(it.alias) ? it.alias : []
+      }));
+    }
+    // 直接数组
+    if (Array.isArray(raw)) {
+      return raw.map(it => ({
+        id: it.id || it.path,
+        name: it.name,
+        path: it.path,
+        alias: Array.isArray(it.alias) ? it.alias : []
+      }));
+    }
+    // 旧版对象 { name: {path, alias: []}, ... }
+    if (typeof raw === 'object') {
+      return Object.entries(raw).map(([name, val]) => ({
+        id: (val && val.path) || name,
+        name,
+        path: val.path,
+        alias: Array.isArray(val.alias) ? val.alias : []
+      }));
+    }
+    return [];
+  }
+
+  const aliasItems = normalizeAlias(aliasRaw);
 
   updateStatus(i18n.t('loadingCompleted'));
 
@@ -257,7 +245,7 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
   const themeStatus = document.getElementById('theme-status');
   const themeAuto = document.getElementById('theme-auto');
 
-  let selectedKey = null;
+  let selectedItem = null; // 选中的条目对象
   let editingApiId = null;
   let searchTimeout = null;
 
@@ -537,6 +525,7 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
    * @param {number} id API配置的ID
    */
   function deleteApi(id) {
+    // eslint-disable-next-line no-alert
     if (confirm('确定要删除这个API配置吗？')) {
       const configs = getApiConfigs();
       const filtered = configs.filter(c => c.id !== id);
@@ -676,13 +665,13 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
    * @param {Array<string>} alias 别名数组
    * @returns {boolean} 是否匹配
    */
-  function smartMatch(query, target, alias) {
+  function smartMatch(query, target, aliasList) {
     const normalizedQuery = normalizeText(query);
     if (!normalizedQuery) return false;
 
     const queryTerms = generateSearchTerms(query);
 
-    const allTargets = [target, ...alias];
+    const allTargets = [target, ...(aliasList || [])];
     const allTargetTerms = allTargets.map(t => generateSearchTerms(t)).flat();
 
     for (const queryTerm of queryTerms) {
@@ -701,52 +690,47 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
    * @param {string} query 搜索查询字符串
    * @returns {Array<string>} 匹配的键名数组
    */
-  function filterKeys(query) {
+  function filterItems(query) {
     const q = query.trim();
     if (!q) return [];
-
-    const entries = Object.entries(alias);
-
-    const matchedKeys = [];
-    for (const [key, val] of entries) {
-      const isMatch = smartMatch(q, key, val.alias);
-      if (isMatch) {
-        matchedKeys.push(key);
-      }
+    const matched = [];
+    for (const item of aliasItems) {
+      if (smartMatch(q, item.name, item.alias)) matched.push(item);
     }
-
-    return matchedKeys;
+    return matched;
   }
 
   /**
    * 渲染搜索结果到UI列表
    * @param {Array<string>} keys 要显示的键名数组
    */
-  function renderResults(keys) {
+  function renderResults(items) {
     resultsEl.innerHTML = '';
-    keys.forEach(key => {
+    // 统计重名
+    const nameCounts = items.reduce((acc, it) => { acc[it.name] = (acc[it.name] || 0) + 1; return acc; }, {});
+    items.forEach(item => {
       const li = document.createElement('li');
       li.className = 'result-item px-4 py-3 border-b border-gray-100 cursor-pointer transition-colors duration-100 hover:bg-red-50';
-      li.textContent = key;
-      if (key === selectedKey) {
+      li.textContent = nameCounts[item.name] > 1 ? `${item.name} — ${item.path}` : item.name;
+      if (selectedItem && item.id === selectedItem.id) {
         li.classList.add('selected', 'bg-red-100', 'text-red-500', 'font-bold', 'border-l-4', 'border-red-500');
       }
       li.onclick = () => {
-        selectedKey = key;
-        renderResults(keys);
+        selectedItem = item;
+        renderResults(items);
         startBtn.disabled = false;
         resetStatus();
       };
       resultsEl.appendChild(li);
     });
-    if (keys.length === 0) {
+    if (items.length === 0) {
       resultsEl.textContent = i18n.t('noResults') + ' (´･ω･`)?';
       startBtn.disabled = true;
     }
   }
 
   searchInput.addEventListener('input', () => {
-    selectedKey = null;
+    selectedItem = null;
     startBtn.disabled = true;
 
     if (searchTimeout) {
@@ -754,18 +738,18 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
     }
 
     searchTimeout = setTimeout(() => {
-      const matchedKeys = filterKeys(searchInput.value);
-      renderResults(matchedKeys);
+      const matchedItems = filterItems(searchInput.value);
+      renderResults(matchedItems);
       resetStatus();
     }, 300);
   });
 
   startBtn.addEventListener('click', async() => {
-    if (!selectedKey) return;
+    if (!selectedItem) return;
     startBtn.disabled = true;
     updateStatus(i18n.t('downloading') + '... (ﾟ▽ﾟ)/');
     try {
-      await downloadFilesFromStructure(selectedKey, alias, zip);
+      await downloadFilesFromStructure(selectedItem, zip);
     } catch (e) {
       updateStatus(i18n.t('downloadError') + ': ' + e.message + ' (；一_一)');
     }
@@ -802,8 +786,8 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
   });
 
   window.addEventListener('languageChanged', () => {
-    const matchedKeys = filterKeys(searchInput.value);
-    renderResults(matchedKeys);
+    const matchedItems = filterItems(searchInput.value);
+    renderResults(matchedItems);
     resetStatus();
 
     renderApiList();
@@ -823,4 +807,60 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
       themeStatus.textContent = isAutoTheme ? i18n.t('autoThemeDay') : i18n.t('lightTheme');
     }
   });
+  // ================= 重新定义下载函数，支持基于条目对象 =================
 })();
+
+// 替换旧版本函数：改为接收条目对象（item: {name, path, ...}）
+async function downloadFilesFromStructure(item, zip) {
+  const ref = 'master';
+  const basePath = item.path;
+
+  let files;
+  try {
+    const i18nObj = i18n; // 复用同作用域 i18n（若在模块作用域已导入）
+    updateStatus(i18nObj.t('fetchingFileList'));
+    files = await getFilesFromPath(basePath);
+  } catch (e) {
+    throw new Error(`${i18n.t('fetchFileListFailed')} ${e.message}`);
+  }
+
+  if (!files || files.length === 0) {
+    updateStatus(i18n.t('noResults') + ' (⊙_⊙)？');
+    return;
+  } else {
+    updateStatus(i18n.t('fetchFilesSuccess'));
+  }
+
+  const apiConfig = (function() { try { return getRandomApiConfig(); } catch { return null; } })();
+  if (!apiConfig) {
+    throw new Error(i18n.t('noApiConfigured'));
+  }
+
+  const baseURL = isProxyEnabled(apiConfig) ?
+    `https://ghproxy.vanillaaaa.org/https://${apiConfig.host}/${apiConfig.owner}/${apiConfig.repo}/raw/branch` :
+    `https://${apiConfig.host}/${apiConfig.owner}/${apiConfig.repo}/raw/branch`;
+
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    const fileUrl = `${baseURL}/${ref}/${file.fullPath}`;
+    try {
+      updateStatus(`${i18n.t('downloading')} (${i + 1}/${files.length}): ${file.path} (◕‿◕)`);
+      const res = await fetch(fileUrl);
+      if (!res.ok) throw new Error(`${i18n.t('downloadError')}: ${res.status}`);
+      const blob = await res.blob();
+      zip.file(file.path, blob, { binary: true });
+    } catch (e) {
+      updateStatus(`${i18n.t('downloadError')} ${file.path}, ${i18n.t('errorLabel')} ${e.message} (；一_一)`);
+      return;
+    }
+  }
+
+  updateStatus(i18n.t('generatingZip'));
+  const content = await zip.generateAsync({ type: 'blob' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(content);
+  a.download = `${item.name}.zip`;
+  a.click();
+
+  updateStatus(`${i18n.t('downloadComplete')} ${i18n.formatFilesPackaged(files.length)} (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧`);
+}
