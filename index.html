@@ -40,12 +40,22 @@
     <span data-i18n="footerText">非官方项目，仅供学习交流。</span>
   </footer>
 
-  <!-- 设置按钮 -->
-  <button id="settings-btn"
-    class="right-5 md:right-8 bottom-5 md:bottom-8 z-50 fixed flex justify-center items-center bg-red-500 hover:bg-red-600 shadow-lg hover:shadow-xl border-0 rounded-full w-12 md:w-15 h-12 md:h-15 text-white text-lg md:text-2xl hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer"
-    title="设置">
-    <i class="fas fa-cog"></i>
-  </button>
+  <!-- 浮动按钮组 -->
+  <div class="right-5 md:right-8 bottom-5 md:bottom-8 z-50 floating-buttons fixed flex flex-col gap-4">
+    <!-- Discord 社区按钮 -->
+    <button id="discord-btn"
+      class="flex justify-center items-center bg-indigo-600 hover:bg-indigo-700 shadow-lg hover:shadow-xl border-0 rounded-full w-12 md:w-15 h-12 md:h-15 text-white text-lg md:text-2xl hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer"
+      data-i18n="discordCommunityBtn" title="Discord 社区">
+      <i class="fab fa-discord"></i>
+    </button>
+
+    <!-- 设置按钮 -->
+    <button id="settings-btn"
+      class="flex justify-center items-center bg-red-500 hover:bg-red-600 shadow-lg hover:shadow-xl border-0 rounded-full w-12 md:w-15 h-12 md:h-15 text-white text-lg md:text-2xl hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer"
+      title="设置">
+      <i class="fas fa-cog"></i>
+    </button>
+  </div>
 
   <!-- 设置弹窗 -->
   <div id="settings-modal"
@@ -150,6 +160,38 @@
               API</button>
             <button id="cancel-api" data-i18n="cancelApi"
               class="flex-1 bg-gray-500 hover:bg-gray-600 p-3 border-0 rounded-md text-white text-base transition-all duration-200 cursor-pointer">取消</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Discord 社区弹窗 -->
+  <div id="discord-modal"
+    class="hidden top-0 left-0 z-50 fixed justify-center items-center bg-transparent bg-opacity-100 backdrop-blur-sm w-full h-full modal">
+    <div
+      class="bg-white shadow-2xl rounded-xl w-[95%] sm:w-11/12 max-w-md max-h-4/5 overflow-y-auto animate-fade-in modal-content">
+      <div class="flex justify-between items-center p-4 sm:p-6 border-gray-200 border-b modal-header">
+        <h3 class="m-0 font-semibold text-indigo-600 text-xl">
+          <i class="mr-2 fab fa-discord"></i>
+          <span data-i18n="discordCommunityTitle">加入我们的 Discord 社区</span>
+        </h3>
+        <span
+          class="bg-transparent p-0 border-0 font-bold text-gray-400 hover:text-indigo-600 text-3xl leading-none transition-colors duration-300 cursor-pointer close">&times;</span>
+      </div>
+      <div class="p-4 sm:p-6 modal-body">
+        <div class="text-center">
+          <p class="mb-6 text-gray-600" data-i18n="discordCommunityDesc">
+            与其他玩家交流讨论，获取最新资讯，分享游戏心得
+          </p>
+          <div class="flex justify-center">
+            <div class="shadow-lg rounded-lg overflow-hidden">
+              <iframe src="https://discord.com/widget?id=1242365489817194512&theme=dark" width="320" height="400"
+                allowtransparency="true" frameborder="0" title="Discord 社区卡片"
+                sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+                class="border-0 rounded-lg">
+              </iframe>
+            </div>
           </div>
         </div>
       </div>

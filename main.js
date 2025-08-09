@@ -256,6 +256,10 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
   const settingsModal = document.getElementById('settings-modal');
   const closeModal = settingsModal.querySelector('.close');
 
+  const discordBtn = document.getElementById('discord-btn');
+  const discordModal = document.getElementById('discord-modal');
+  const discordCloseModal = discordModal.querySelector('.close');
+
   const themeToggle = document.getElementById('theme-toggle');
   const themeIcon = document.getElementById('theme-icon');
   const themeStatus = document.getElementById('theme-status');
@@ -823,7 +827,7 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
       updateStatus('正在打包并发送...');
       const content = await zip.generateAsync({ type: 'blob' });
       // 这里填写目标页面地址
-      const win = window.open('https://viewer.taiko.vanillaaaa.org', '_blank');
+      const win = window.open('http://localhost:5173', '_blank');
       // 等待新窗口加载后发送
       const sendZip = () => {
         win.postMessage({ type: 'zip', blob: content }, '*');
@@ -870,9 +874,27 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
     }
   });
 
+  // Discord 弹窗事件监听器
+  discordBtn.addEventListener('click', () => {
+    discordModal.classList.add('show');
+  });
+
+  discordCloseModal.addEventListener('click', () => {
+    discordModal.classList.remove('show');
+  });
+
+  discordModal.addEventListener('click', (e) => {
+    if (e.target === discordModal) {
+      discordModal.classList.remove('show');
+    }
+  });
+
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && settingsModal.classList.contains('show')) {
       settingsModal.classList.remove('show');
+    }
+    if (e.key === 'Escape' && discordModal.classList.contains('show')) {
+      discordModal.classList.remove('show');
     }
   });
 
