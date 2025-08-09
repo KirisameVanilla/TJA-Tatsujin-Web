@@ -827,7 +827,7 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
       updateStatus('正在打包并发送...');
       const content = await zip.generateAsync({ type: 'blob' });
       // 这里填写目标页面地址
-      const win = window.open('http://localhost:5173', '_blank');
+      const win = window.open('https://viewer.taiko.vanillaaaa.org', '_blank');
       // 等待新窗口加载后发送
       const sendZip = () => {
         win.postMessage({ type: 'zip', blob: content }, '*');
