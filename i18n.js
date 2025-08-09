@@ -70,6 +70,11 @@ const translations = {
     // 页脚
     footerText: '非官方项目，仅供学习交流。',
 
+    // Discord 社区
+    discordCommunityTitle: '加入我们的 Discord 社区',
+    discordCommunityDesc: '与其他玩家交流讨论，获取最新资讯，分享游戏心得',
+    discordCommunityBtn: 'Discord 社区',
+
     // 语言切换
     languageSwitch: '切换语言',
 
@@ -153,6 +158,11 @@ const translations = {
 
     // 页脚
     footerText: 'Unofficial project, for learning and communication only.',
+
+    // Discord 社区
+    discordCommunityTitle: 'Join Our Discord Community',
+    discordCommunityDesc: 'Chat with other players, get latest updates, and share your gaming experiences',
+    discordCommunityBtn: 'Discord Community',
 
     // 语言切换
     languageSwitch: 'Switch Language',

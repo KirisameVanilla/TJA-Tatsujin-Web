@@ -4,7 +4,7 @@
 :root {
     --primary-color: #e74c3c;
     --hover-color: #c0392b;
-    
+
     /* 浅色模式变量 */
     --bg-color: #f9fafb;
     --card-bg-color: #ffffff;
@@ -234,4 +234,22 @@ input:checked + .slider .slider-dot {
 
 .h-4\.5 {
     height: 1.125rem;
+}
+
+/* Discord 弹窗中的 iframe 响应式样式 */
+@media (max-width: 640px) {
+    #discord-modal iframe {
+        width: 280px !important;
+        height: 350px !important;
+        max-width: calc(100vw - 4rem);
+    }
+}
+
+/* 浮动按钮组动画增强 */
+.floating-buttons button {
+    transition: all 0.3s ease;
+}
+
+.floating-buttons button:hover {
+    transform: scale(1.1) translateY(-2px);
 }
