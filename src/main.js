@@ -2,7 +2,7 @@ import JSZip from 'jszip';
 import i18n from './i18n.js';
 import * as wanakana from 'wanakana';
 import { pinyin } from 'pinyin';
-import { showConfirm } from './confirm-dialog.js';
+import { showConfirm, showChoice } from './confirm-dialog.js';
 
 // 添加到全局作用域，保持兼容性
 window.showConfirm = showConfirm;
@@ -800,8 +800,28 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
     if (!selectedKey) return;
     previewBtn.disabled = true;
     startBtn.disabled = true;
-    updateStatus(i18n.t('startGeneratingPreviewZip'));
+
     try {
+      // 显示选择弹窗
+      const choice = await showChoice({
+        title: '选择预览工具',
+        message: '请选择使用哪个工具来预览谱面：',
+        choices: [
+          { text: 'TJA-Viewer - 在线谱面预览器', value: 'viewer' },
+          { text: 'TJA-Tools - 谱面工具集', value: 'tools' }
+        ],
+        type: 'info'
+      });
+
+      if (!choice) {
+        // 用户取消了选择
+        previewBtn.disabled = false;
+        startBtn.disabled = false;
+        return;
+      }
+
+      updateStatus(i18n.t('startGeneratingPreviewZip'));
+
       // 复用下载逻辑，但不触发下载，而是postMessage
       const ref = 'master';
       const basePath = alias[selectedKey].path;
@@ -826,8 +846,17 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
       }
       updateStatus('正在打包并发送...');
       const content = await zip.generateAsync({ type: 'blob' });
-      // 这里填写目标页面地址
-      const win = window.open('https://viewer.taiko.vanillaaaa.org', '_blank');
+
+      // 根据选择打开不同的网站
+      let targetUrl;
+      if (choice === 'viewer') {
+        targetUrl = 'https://viewer.taiko.vanillaaaa.org';
+      } else if (choice === 'tools') {
+        // 这里填写 TJA-Tools 的网址
+        targetUrl = 'http://localhost:8080/'; // 请替换为实际的 TJA-Tools 网址
+      }
+
+      const win = window.open(targetUrl, '_blank');
       // 等待新窗口加载后发送
       const sendZip = () => {
         win.postMessage({ type: 'zip', blob: content }, '*');

@@ -228,6 +228,166 @@ export function showConfirm(options) {
 }
 
 /**
+ * 显示选择弹窗，让用户在多个选项中选择
+ * @param {Object} options - 配置选项
+ * @param {string} options.title - 弹窗标题
+ * @param {string} options.message - 弹窗消息内容
+ * @param {Array} options.choices - 选择项数组，每个元素包含 {text: '显示文本', value: '返回值'}
+ * @param {string} options.type - 弹窗类型，默认为'info'
+ * @returns {Promise<string|null>} 用户选择的值，取消时返回null
+ */
+export function showChoice(options = {}) {
+  const {
+    title = '请选择',
+    message = '请选择一个选项：',
+    choices = [],
+    type = 'info'
+  } = options;
+
+  return new Promise((resolve) => {
+    // 移除已存在的弹窗
+    if (confirmInstance.overlay) {
+      confirmInstance.remove();
+    }
+
+    // 创建遮罩层
+    const overlay = document.createElement('div');
+    overlay.className = `
+      fixed inset-0 z-50 flex items-center justify-center 
+      bg-transparent bg-opacity-50 backdrop-blur-sm 
+      animate-fade-in
+    `.replace(/\s+/g, ' ').trim();
+
+    // 创建弹窗容器
+    const modal = document.createElement('div');
+    modal.className = `
+      bg-white dark:bg-gray-800 rounded-xl shadow-2xl 
+      w-11/12 max-w-md mx-4 
+      transform transition-all duration-300 
+      animate-scale-in
+    `.replace(/\s+/g, ' ').trim();
+
+    // 获取图标和颜色样式
+    const typeConfig = confirmInstance.getTypeConfig(type);
+
+    // 生成选择按钮HTML
+    const choiceButtons = choices.map(choice => `
+      <button 
+        class="choice-btn w-full px-4 py-3 text-left
+               bg-gray-50 dark:bg-gray-700 hover:bg-blue-50 dark:hover:bg-blue-900
+               border border-gray-200 dark:border-gray-600 hover:border-blue-300 dark:hover:border-blue-600
+               rounded-lg transition-all duration-200 font-medium
+               text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+        data-value="${confirmInstance.escapeHtml(choice.value)}"
+        type="button"
+      >
+        ${confirmInstance.escapeHtml(choice.text)}
+      </button>
+    `).join('');
+
+    // 弹窗内容
+    modal.innerHTML = `
+      <div class="p-6">
+        <!-- 图标和标题 -->
+        <div class="flex items-center mb-4">
+          <div class="${typeConfig.iconBg} rounded-full p-3 mr-4">
+            <i class="${typeConfig.icon} ${typeConfig.iconColor} text-xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+            ${confirmInstance.escapeHtml(title)}
+          </h3>
+        </div>
+        
+        <!-- 消息内容 -->
+        <div class="mb-6">
+          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+            ${confirmInstance.escapeHtml(message)}
+          </p>
+        </div>
+        
+        <!-- 选择按钮组 -->
+        <div class="space-y-2 mb-4">
+          ${choiceButtons}
+        </div>
+        
+        <!-- 取消按钮 -->
+        <div class="flex justify-end">
+          <button 
+            class="cancel-btn px-4 py-2 text-gray-600 dark:text-gray-300 
+                   bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600
+                   rounded-lg transition-colors duration-200 font-medium"
+            type="button"
+          >
+            取消
+          </button>
+        </div>
+      </div>
+    `;
+
+    // 绑定事件
+    const cancelBtn = modal.querySelector('.cancel-btn');
+    const choiceBtns = modal.querySelectorAll('.choice-btn');
+
+    const handleCancel = () => {
+      removeModal();
+      resolve(null);
+    };
+
+    const handleChoice = (value) => {
+      removeModal();
+      resolve(value);
+    };
+
+    const handleOverlayClick = (e) => {
+      if (e.target === overlay) {
+        handleCancel();
+      }
+    };
+
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') {
+        handleCancel();
+      }
+    };
+
+    const removeModal = () => {
+      if (overlay && overlay.parentNode) {
+        overlay.style.animation = 'fade-out 0.3s ease-out forwards';
+        modal.style.animation = 'scale-out 0.3s ease-out forwards';
+
+        setTimeout(() => {
+          if (overlay && overlay.parentNode) {
+            overlay.parentNode.removeChild(overlay);
+          }
+        }, 300);
+      }
+      document.removeEventListener('keydown', handleEscape);
+    };
+
+    cancelBtn.addEventListener('click', handleCancel);
+    choiceBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const value = btn.getAttribute('data-value');
+        handleChoice(value);
+      });
+    });
+    overlay.addEventListener('click', handleOverlayClick);
+    document.addEventListener('keydown', handleEscape);
+
+    // 添加到页面
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+
+    // 聚焦到第一个选择按钮
+    setTimeout(() => {
+      if (choiceBtns.length > 0) {
+        choiceBtns[0].focus();
+      }
+    }, 100);
+  });
+}
+
+/**
  * 创建新的确认弹窗实例
  * @returns {CustomConfirm} 新的确认弹窗实例
  */
@@ -239,5 +399,6 @@ export function createConfirm() {
 export default {
   CustomConfirm,
   showConfirm,
+  showChoice,
   createConfirm
 };
