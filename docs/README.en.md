@@ -1,6 +1,6 @@
 # TJA-Tatsujin
 
-English | [中文](../README.md)
+English | [日本語](./README.ja.md) | [中文](../README.md)
 
 A resource download site for Taiko no Tatsujin players, providing convenient chart search and download features. Supports custom data source configuration and is maintained by the community.
 
