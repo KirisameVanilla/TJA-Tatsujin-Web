@@ -176,6 +176,95 @@ const translations = {
     darkTheme: 'Dark Mode',
     autoThemeDay: 'Auto (Day)',
     autoThemeNight: 'Auto (Night)'
+  },
+
+  'ja': {
+    // 页面标题和元信息
+    title: 'TJA-Tatsujin',
+
+    // 页面头部
+    githubTitle: 'ソースコードを見る',
+    headerTitle: 'TJA-Tatsujin',
+
+    // 主要内容
+    searchPlaceholder: '検索キーワードを入力',
+    startDownload: 'ダウンロード開始',
+    previewBtn: '譜面プレビュー',
+    startGeneratingPreviewZip: 'プレビューZIPを生成中……',
+
+    // API 配置
+    apiConfigTitle: '設定',
+    apiListTitle: 'API設定リスト',
+    addApi: 'APIを追加',
+    addApiTitle: 'API設定を追加',
+    editApiTitle: 'API設定を編集',
+    apiTypeLabel: 'APIタイプ',
+    apiNameLabel: '設定名',
+    apiNamePlaceholder: '例：メインサーバー',
+    apiUseProxy: '加速プロキシを使用（推奨）',
+    saveApi: 'APIを保存',
+    cancelApi: 'キャンセル',
+    deleteApi: '削除',
+    editApi: '編集',
+    apiSaved: 'API設定が保存されました！',
+    apiDeleted: 'API設定が削除されました',
+    noApiConfigured: 'APIが設定されていません。まず追加してください',
+    apiConfigNotFound: 'API設定が見つかりません。最初に設定してください',
+    apiHostLabel: 'APIホスト',
+    apiHostPlaceholder: '例：xxx.xxx.xx',
+    repoOwnerLabel: 'リポジトリ所有者',
+    repoOwnerPlaceholder: '例：xxx',
+    repoNameLabel: 'リポジトリ名',
+    repoNamePlaceholder: '例：xxx',
+    configRequired: '完全なAPI設定情報を入力してください',
+    proxyEnabled: 'プロキシが有効になりました',
+    proxyDisabled: 'プロキシが無効になりました',
+
+    // 状态信息
+    greeting: 'こんにちは~ (*・ω・)ﾉ',
+    loadingAlias: 'alias.jsonの読み込みに失敗しました (；´д｀)ゞ',
+    searching: '検索中...',
+    downloading: 'ダウンロード中...',
+    downloadComplete: 'ダウンロード完了！',
+    downloadError: 'ダウンロード失敗！',
+    noResults: '関連する結果が見つかりません。もう一度お試しください',
+    fetchFilesSuccess: 'ファイルリストの取得に成功しました！',
+
+    // 初始化和加载相关
+    loadingJSZip: '圧縮ライブラリJSZipを読み込み中... (。-`ω´-)',
+    jsZipInitFailed: '初期化に失敗：圧縮ライブラリJSZipを読み込めませんでした。ネットワークを確認するかページを更新してください。 (；へ：)',
+    loadingDataFiles: 'データファイルを読み込み中... (。-`ω´-)',
+    loadDataFilesFailed: 'データファイルの読み込みに失敗：',
+    loadingCompleted: '読み込み完了！ (＾▽＾)',
+
+    // 文件操作相关
+    fetchingFileList: 'ファイルリストを取得中...',
+    fetchFileListFailed: 'ファイルリストの取得に失敗：',
+    generatingZip: 'ZIPファイルを生成中... (￣ω￣;)',
+    filesPackaged: 'ファイルをパッケージ化',
+    filesPackagedPrefix: '合計',
+    errorLabel: 'エラー：',
+
+    // 页脚
+    footerText: '非公式プロジェクトです。学習・交流目的のみ。',
+
+    // Discord 社区
+    discordCommunityTitle: 'Discordコミュニティに参加',
+    discordCommunityDesc: '他のプレイヤーと交流し、最新情報を入手し、ゲーム体験を共有しましょう',
+    discordCommunityBtn: 'Discordコミュニティ',
+
+    // 语言切换
+    languageSwitch: '言語切り替え',
+
+    // 主题切换
+    toggleTheme: 'テーマ切り替え',
+    autoTheme: '自動',
+    themeSettings: 'テーマ設定',
+    currentTheme: '現在のテーマ',
+    lightTheme: 'ライトモード',
+    darkTheme: 'ダークモード',
+    autoThemeDay: '自動選択（昼間）',
+    autoThemeNight: '自動選択（夜間）'
   }
 };
 
@@ -199,6 +288,11 @@ class I18n {
     // 如果是中文相关，返回中文
     if (browserLanguage.startsWith('zh')) {
       return 'zh-CN';
+    }
+
+    // 如果是日文相关，返回日文
+    if (browserLanguage.startsWith('ja')) {
+      return 'ja';
     }
 
     // 默认返回英文
@@ -254,7 +348,7 @@ class I18n {
     document.title = this.t('title');
 
     // 更新 HTML lang 属性
-    document.documentElement.lang = this.currentLanguage === 'zh-CN' ? 'zh-CN' : 'en';
+    document.documentElement.lang = this.currentLanguage;
 
     // 更新页面文本
     this.updateTexts();
@@ -282,14 +376,28 @@ class I18n {
     const header = document.querySelector('header');
     const languageSwitch = document.createElement('div');
     languageSwitch.className = 'language-switch';
+
+    // 获取当前语言的显示文本
+    const getLanguageText = (lang) => {
+      switch(lang) {
+      case 'zh-CN': return '中';
+      case 'ja': return '日';
+      case 'en': return 'EN';
+      default: return 'EN';
+      }
+    };
+
     languageSwitch.innerHTML = `
       <button class="bg-white/20 border border-white/30 text-white px-3 py-2 rounded-md cursor-pointer flex items-center gap-1.5 text-sm transition-all duration-100 hover:bg-white/30 hover:scale-105" title="${this.t('languageSwitch')}">
         <i class="fas fa-globe"></i>
-        <span class="font-medium">${this.currentLanguage === 'zh-CN' ? '中' : 'EN'}</span>
+        <span class="font-medium">${getLanguageText(this.currentLanguage)}</span>
       </button>
       <div class="absolute top-full left-0 bg-white border border-gray-300 rounded-md shadow-lg min-w-[120px] z-[1000] opacity-0 invisible -translate-y-2 transition-all duration-100 mt-2">
         <div class="px-4 py-2.5 text-gray-700 cursor-pointer transition-all duration-100 border-b border-gray-200 last:border-b-0 hover:bg-gray-50 ${this.currentLanguage === 'zh-CN' ? 'bg-red-500 text-white' : ''}" data-lang="zh-CN">
           <span class="font-medium">中文</span>
+        </div>
+        <div class="px-4 py-2.5 text-gray-700 cursor-pointer transition-all duration-100 border-b border-gray-200 last:border-b-0 hover:bg-gray-50 ${this.currentLanguage === 'ja' ? 'bg-red-500 text-white' : ''}" data-lang="ja">
+          <span class="font-medium">日本語</span>
         </div>
         <div class="px-4 py-2.5 text-gray-700 cursor-pointer transition-all duration-100 border-b border-gray-200 last:border-b-0 hover:bg-gray-50 ${this.currentLanguage === 'en' ? 'bg-red-500 text-white' : ''}" data-lang="en">
           <span class="font-medium">English</span>
@@ -331,7 +439,15 @@ class I18n {
 
         // 更新按钮文本
         const languageText = btn.querySelector('span');
-        languageText.textContent = lang === 'zh-CN' ? '中' : 'EN';
+        const getLanguageText = (lang) => {
+          switch(lang) {
+          case 'zh-CN': return '中';
+          case 'ja': return '日';
+          case 'en': return 'EN';
+          default: return 'EN';
+          }
+        };
+        languageText.textContent = getLanguageText(lang);
 
         // 更新选中状态
         options.forEach(opt => {

@@ -1,6 +1,6 @@
 # TJA-Tatsujin
 
-[English](./docs/README.en.md) | 中文
+[English](./docs/README.en.md) | [日本語](./docs/README.ja.md) | 中文
 
 一个为太鼓达人 (Taiko no Tatsujin) 玩家打造的谱面资源下载网站，提供便捷的谱面检索与下载功能。支持自定义数据源配置，由社区维护更新。
 
