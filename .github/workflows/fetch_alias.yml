@@ -26,7 +26,7 @@ jobs:
         run: pip install requests
 
       - name: Update alias.json
-        run: python fetch_alias.py
+        run: python .github/scripts/fetch_alias.py
 
       - name: Commit and push if alias.json changed
         run: |
