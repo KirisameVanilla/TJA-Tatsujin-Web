@@ -1,7 +1,6 @@
 # TJA-Tatsujin
 
-English | [中文版](./README.md)
-
+English | [中文](../README.md)
 
 A resource download site for Taiko no Tatsujin players, providing convenient chart search and download features. Supports custom data source configuration and is maintained by the community.
 
@@ -20,6 +19,7 @@ All data comes from user-configured public resources and is for learning and com
 - **Data Source**: User-Configurable
 
 This project supports users to configure their own API data sources in the web interface, including:
+
 - API Host Address
 - Repository Owner
 - Repository Name
@@ -31,7 +31,9 @@ After configuration, the system will fetch chart information from the specified 
 ## 🔧 Usage Instructions
 
 ### API Configuration
+
 On first use, you need to fill in the "API Configuration" section at the top of the webpage:
+
 1. **API Host** - The host address of the data source
 2. **Repository Owner** - The owner of the target repository
 3. **Repository Name** - The name of the target repository
@@ -39,6 +41,7 @@ On first use, you need to fill in the "API Configuration" section at the top of 
 After completing the configuration, click the "Save Configuration" button. The configuration information will be saved in the browser's local storage.
 
 ### Alias Management
+
 Aliases are used to search for charts. To modify chart aliases, please edit the `alias.json` file in the root directory.
 
 Follow the existing format in the file for additions or modifications, and ensure valid JSON syntax. Each key is a unique chart identifier (Song Name), and the value is a nested JSON object containing supported search aliases for that chart and its relative path in the data source repository. After editing, submit your changes to take effect on the website.
@@ -51,7 +54,7 @@ Follow the existing format in the file for additions or modifications, and ensur
 - **Build Tool**: Vite
 - **Deployment**: Cloudflare Pages
 - **Automation**: GitHub Actions
-- **Features**: 
+- **Features**:
   - Multi-language internationalization
   - Responsive design
   - Local storage configuration
@@ -67,7 +70,7 @@ Follow the existing format in the file for additions or modifications, and ensur
 
 ## 🤝 Contribution & Feedback
 
-Feel free to submit Issues or Pull Requests to help improve this project!  
+Feel free to submit Issues or Pull Requests to help improve this project!
 Whether it's fixing aliases, optimizing the UI, or enhancing search features, your contributions are greatly appreciated.
 
 - Submit Issues → [Issues](https://github.com/KirisameVanilla/TJA-Tatsujin/issues)
@@ -77,8 +80,8 @@ Whether it's fixing aliases, optimizing the UI, or enhancing search features, yo
 
 ## 📄 License
 
-This project does not own any song audio or copyrights, and only provides a general chart resource management tool.  
-All data comes from user-configured public data sources.  
+This project does not own any song audio or copyrights, and only provides a general chart resource management tool.
+All data comes from user-configured public data sources.
 Please use this tool within legal boundaries and do not use it for commercial purposes.
 
 ---
