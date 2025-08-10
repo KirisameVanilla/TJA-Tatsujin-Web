@@ -548,11 +548,11 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
    */
   async function deleteApi(id) {
     const confirmed = await window.showConfirm({
-      title: '删除确认',
-      message: '确定要删除这个API配置吗？',
+      title: i18n.t('deleteConfirmTitle'),
+      message: i18n.t('deleteConfirmMessage'),
       type: 'warning',
-      confirmText: '确认',
-      cancelText: '取消'
+      confirmText: i18n.t('confirmText'),
+      cancelText: i18n.t('cancelText')
     });
 
     if (confirmed) {
@@ -804,11 +804,11 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
     try {
       // 显示选择弹窗
       const choice = await showChoice({
-        title: '选择预览工具',
-        message: '请选择使用哪个工具来预览谱面：',
+        title: i18n.t('selectPreviewToolTitle'),
+        message: i18n.t('selectPreviewToolMessage'),
         choices: [
-          { text: 'TJA-Viewer - 在线谱面预览器', value: 'viewer' },
-          { text: 'TJA-Tools - 谱面工具集', value: 'tools' }
+          { text: 'TJA-Viewer', value: 'viewer' },
+          { text: 'TJA-Tools', value: 'tools' }
         ],
         type: 'info'
       });
@@ -852,8 +852,7 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
       if (choice === 'viewer') {
         targetUrl = 'https://viewer.taiko.vanillaaaa.org';
       } else if (choice === 'tools') {
-        // 这里填写 TJA-Tools 的网址
-        targetUrl = 'http://localhost:8080/'; // 请替换为实际的 TJA-Tools 网址
+        targetUrl = 'https://tools.taiko.vanillaaaa.org/';
       }
 
       const win = window.open(targetUrl, '_blank');

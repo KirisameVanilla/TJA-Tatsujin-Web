@@ -86,7 +86,15 @@ const translations = {
     lightTheme: '浅色模式',
     darkTheme: '深色模式',
     autoThemeDay: '自动选择 (白天)',
-    autoThemeNight: '自动选择 (夜晚)'
+    autoThemeNight: '自动选择 (夜晚)',
+
+    // 对话框
+    selectPreviewToolTitle: '选择预览工具',
+    selectPreviewToolMessage: '请选择使用哪个工具来预览谱面：',
+    deleteConfirmTitle: '删除确认',
+    deleteConfirmMessage: '确定要删除这个API配置吗？',
+    confirmText: '确认',
+    cancelText: '取消'
   },
 
   'en': {
@@ -175,7 +183,15 @@ const translations = {
     lightTheme: 'Light Mode',
     darkTheme: 'Dark Mode',
     autoThemeDay: 'Auto (Day)',
-    autoThemeNight: 'Auto (Night)'
+    autoThemeNight: 'Auto (Night)',
+
+    // 对话框
+    selectPreviewToolTitle: 'Select Preview Tool',
+    selectPreviewToolMessage: 'Please select which tool to use for previewing the chart:',
+    deleteConfirmTitle: 'Delete Confirmation',
+    deleteConfirmMessage: 'Are you sure you want to delete this API configuration?',
+    confirmText: 'Confirm',
+    cancelText: 'Cancel'
   },
 
   'ja': {
@@ -264,7 +280,15 @@ const translations = {
     lightTheme: 'ライトモード',
     darkTheme: 'ダークモード',
     autoThemeDay: '自動選択（昼間）',
-    autoThemeNight: '自動選択（夜間）'
+    autoThemeNight: '自動選択（夜間）',
+
+    // 对话框
+    selectPreviewToolTitle: 'プレビューツールを選択',
+    selectPreviewToolMessage: '譜面をプレビューするツールを選択してください：',
+    deleteConfirmTitle: '削除確認',
+    deleteConfirmMessage: 'このAPI設定を削除してもよろしいですか？',
+    confirmText: '確認',
+    cancelText: 'キャンセル'
   }
 };
 
