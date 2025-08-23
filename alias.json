@@ -8166,7 +8166,9 @@
         "path": "07 Game Music/Scarlet Lance"
     },
     "Scars of FAUNA": {
-        "alias": [],
+        "alias": [
+            "土神"
+        ],
         "path": "07 Game Music/Scars of FAUNA"
     },
     "School Days": {
@@ -10654,11 +10656,16 @@
         "path": "09 Namco Original/Yozakura Bladerz"
     },
     "Yozakura Ryouran Kanshasai": {
-        "alias": [],
+        "alias": [
+            "夜樱缭乱感谢祭"
+        ],
         "path": "09 Namco Original/Yozakura Ryouran Kanshasai"
     },
     "Yozakura Shanikusai": {
-        "alias": [],
+        "alias": [
+            "夜樱谢肉祭",
+            "夜桜謝肉祭"
+        ],
         "path": "09 Namco Original/Yozakura Shanikusai"
     },
     "Yozora no Shizuku": {
