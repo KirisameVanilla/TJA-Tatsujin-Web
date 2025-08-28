@@ -925,7 +925,7 @@
         "path": "05 Variety/BAROQUE HOEDOWN ～Electrical Parade Theme～"
     },
     "BATTLE NO. 1": {
-        "alias": [],
+        "alias": ["打架第一名"],
         "path": "05 Variety/BATTLE NO. 1"
     },
     "BBKKBKK": {
@@ -973,7 +973,7 @@
         "path": "02 Anime/BRAND NEW WORLD"
     },
     "Ba Luo Buo": {
-        "alias": [],
+        "alias": ["拔萝卜"],
         "path": "04 Children and Folk/Ba Luo Buo"
     },
     "Baby Shark": {
@@ -989,7 +989,7 @@
         "path": "07 Game Music/Back to Life"
     },
     "Bad Apple!!": {
-        "alias": [],
+        "alias": ["坏苹果"],
         "path": "05 Variety/Bad Apple!!"
     },
     "Bai Bai FIGHT": {
@@ -1073,7 +1073,7 @@
         "path": "04 Children and Folk/Beauty and the Beast"
     },
     "Behemoth": {
-        "alias": [],
+        "alias": ["贝希摩斯"],
         "path": "09 Namco Original/Behemoth"
     },
     "Believe in yourself": {
@@ -1089,7 +1089,7 @@
         "path": "01 Pop/Bibbidiba"
     },
     "Black Rose Apostle": {
-        "alias": [],
+        "alias": ["黑玫瑰"],
         "path": "09 Namco Original/Black Rose Apostle"
     },
     "Black★Rock Shooter": {
@@ -1117,7 +1117,7 @@
         "path": "02 Anime/Blue Bird"
     },
     "Blue Rose Ruin": {
-        "alias": [],
+        "alias": ["蓝玫瑰"],
         "path": "09 Namco Original/Blue Rose Ruin"
     },
     "Boku Doraemon": {
@@ -1177,7 +1177,7 @@
         "path": "09 Namco Original/Boukyaku no Tirnanog"
     },
     "Brain Power": {
-        "alias": [],
+        "alias": ["脑力"],
         "path": "05 Variety/Brain Power"
     },
     "Brand New Theater!": {
@@ -3703,11 +3703,11 @@
         "path": "05 Variety/He’s a Pirate"
     },
     "Hibana": {
-        "alias": [],
+        "alias": ["火花","七八十"],
         "path": "03 Vocaloid/Hibana"
     },
     "Hibike! Taiko no Tatsujin": {
-        "alias": [],
+        "alias": ["響け! 太鼓の達人", "响彻云霄！太鼓之达人"],
         "path": "09 Namco Original/Hibike! Taiko no Tatsujin"
     },
     "Hibike! Taiko no Tatsujin -Long Version-": {
@@ -6541,7 +6541,7 @@
         "path": "01 Pop/Natsu Iro"
     },
     "Natsu Matsuri": {
-        "alias": [],
+        "alias": ["夏祭り"],
         "path": "01 Pop/Natsu Matsuri"
     },
     "Natsu no Donasama": {
@@ -7441,7 +7441,7 @@
         "path": "02 Anime/Purigorota March"
     },
     "Purple Rose Fusion": {
-        "alias": [],
+        "alias": ["紫玫瑰"],
         "path": "09 Namco Original/Purple Rose Fusion"
     },
     "Purupuru Simple": {
@@ -7642,7 +7642,7 @@
         "path": "07 Game Music/Reason!!"
     },
     "Red Rose Evangel": {
-        "alias": [],
+        "alias": ["红玫瑰"],
         "path": "09 Namco Original/Red Rose Evangel"
     },
     "Rei -ZERO-": {
@@ -9538,7 +9538,7 @@
         "path": "06 Classical/Toccata and Fugue and Rock"
     },
     "Todoroke! Taiko no Tatsujin": {
-        "alias": [],
+        "alias": ["震天动地！太鼓之达人"],
         "path": "09 Namco Original/Todoroke! Taiko no Tatsujin"
     },
     "Together": {
@@ -9582,7 +9582,7 @@
         "path": "03 Vocaloid/Tokyo Teddy Bear"
     },
     "Tokyo Tokkyo-kyo Kyokakyoku Kyokuchou!!": {
-        "alias": [],
+        "alias": ["東京特許キョ許可局局長!!", "东京特许Kyo许可局局长!!"],
         "path": "09 Namco Original/Tokyo Tokkyo-kyo Kyokakyoku Kyokuchou!!"
     },
     "Tomare!": {
@@ -10330,7 +10330,7 @@
         "path": "07 Game Music/Where is the Target"
     },
     "White Rose Insanity": {
-        "alias": [],
+        "alias": ["白玫瑰"],
         "path": "09 Namco Original/White Rose Insanity"
     },
     "Who Am I": {
