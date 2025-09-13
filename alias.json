@@ -3407,6 +3407,10 @@
         "alias": [],
         "path": "09 Namco Original/Haikei, Gakkou ni te... -Long Version-"
     },
+    "Hajime": {
+        "alias": [],
+        "path": "07 Game Music/Hajime"
+    },
     "Hakanaki wa Gensho ni Mau": {
         "alias": [],
         "path": "09 Namco Original/Hakanaki wa Gensho ni Mau"
@@ -11086,6 +11090,10 @@
     "void setup": {
         "alias": [],
         "path": "09 Namco Original/void setup"
+    },
+    "vs VIGVANGS": {
+        "alias": [],
+        "path": "09 Namco Original/vs VIGVANGS"
     },
     "waitin’ for u": {
         "alias": [],
