@@ -6036,6 +6036,10 @@
         "alias": [],
         "path": "09 Namco Original/Megamina Sekai III"
     },
+    "Megitsune": {
+        "alias": [],
+        "path": "01 Pop/Megitsune"
+    },
     "Mei Hao Shi Guang": {
         "alias": [],
         "path": "01 Pop/Mei Hao Shi Guang"
@@ -7076,6 +7080,10 @@
         "alias": [],
         "path": "01 Pop/Osakana Tengoku"
     },
+    "Oshama Scramble!": {
+        "alias": [],
+        "path": "07 Game Music/Oshama Scramble!"
+    },
     "Oshiete, Kuma Tomo": {
         "alias": [],
         "path": "07 Game Music/Oshiete, Kuma Tomo"
@@ -7644,6 +7652,10 @@
     "Raise your flag": {
         "alias": [],
         "path": "02 Anime/Raise your flag"
+    },
+    "Rakuen CASINO GALAXY!": {
+        "alias": [],
+        "path": "03 Vocaloid/Rakuen CASINO GALAXY!"
     },
     "Ramen de Yo-Men!!": {
         "alias": [],
@@ -9309,6 +9321,10 @@
         "alias": [],
         "path": "07 Game Music/Tales of Zestiria Medley"
     },
+    "Tamamono": {
+        "alias": [],
+        "path": "01 Pop/Tamamono"
+    },
     "Tamashii Revolution": {
         "alias": [],
         "path": "01 Pop/Tamashii Revolution"
@@ -10114,6 +10130,10 @@
         "alias": [],
         "path": "09 Namco Original/VIVIVID"
     },
+    "Valsqotch": {
+        "alias": [],
+        "path": "07 Game Music/Valsqotch"
+    },
     "Vampire": {
         "alias": [],
         "path": "03 Vocaloid/Vampire"
@@ -10173,6 +10193,10 @@
     "WINDING ROAD": {
         "alias": [],
         "path": "01 Pop/WINDING ROAD"
+    },
+    "WINNER! Gozyuger!": {
+        "alias": [],
+        "path": "04 Children and Folk/WINNER! Gozyuger!"
     },
     "WISE-BONDMAN-STRIX": {
         "alias": [],
@@ -10851,7 +10875,7 @@
     },
     "Zenryoku Zenkai! Zenkaiger": {
         "alias": [],
-        "path": "02 Anime/Zenryoku Zenkai! Zenkaiger"
+        "path": "04 Children and Folk/Zenryoku Zenkai! Zenkaiger"
     },
     "Zero no Nocturne": {
         "alias": [],
