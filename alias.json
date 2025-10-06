@@ -3648,7 +3648,7 @@
     },
     "Hello Kitty": {
         "alias": [],
-        "path": "04 Children and Folk/Hello Kitty"
+        "path": "05 Variety/Hello Kitty"
     },
     "Hello! Don-chan": {
         "alias": [],
@@ -9418,6 +9418,10 @@
     "Tensai Bakabon": {
         "alias": [],
         "path": "02 Anime/Tensai Bakabon"
+    },
+    "Tenshi to Akuma": {
+        "alias": [],
+        "path": "02 Anime/Tenshi to Akuma"
     },
     "Tensou Sentai Goseiger": {
         "alias": [],
