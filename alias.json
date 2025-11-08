@@ -9492,7 +9492,7 @@
         "path": "04 Children and Folk/The Alphabet Song"
     },
     "The Carnivorous Carnival": {
-        "alias": [],
+        "alias": ["tcc"],
         "path": "09 Namco Original/The Carnivorous Carnival"
     },
     "The Distance of Love": {
@@ -9516,11 +9516,11 @@
         "path": "09 Namco Original/The Future of the Taiko Drum"
     },
     "The Gensokyo The Gods Loved": {
-        "alias": [],
+        "alias": ["神々が恋した幻想郷", "众神眷恋的幻想乡"],
         "path": "05 Variety/The Gensokyo The Gods Loved"
     },
     "The Highway No205 SSS": {
-        "alias": [],
+        "alias": ["潮騒205号SSS線"],
         "path": "09 Namco Original/The Highway No205 SSS"
     },
     "The Impression That I Get": {
@@ -10785,7 +10785,7 @@
         "path": "02 Anime/You’ve Got a Friend in Me"
     },
     "Yozakura Bladerz": {
-        "alias": [],
+        "alias": ["夜櫻ブレヰダアズ"],
         "path": "09 Namco Original/Yozakura Bladerz"
     },
     "Yozakura Ryouran Kanshasai": {
@@ -10806,7 +10806,7 @@
         "path": "07 Game Music/Yozora no Shizuku"
     },
     "Yo～i-don!": {
-        "alias": [],
+        "alias": ["よーいドン！","预～备砰！"],
         "path": "09 Namco Original/Yo～i-don!"
     },
     "Yu Zhou Xiao Jie": {
