@@ -1967,7 +1967,10 @@
         "path": "02 Anime/Dai-chan Kazoe Uta"
     },
     "Daibouken Tatsudon": {
-        "alias": ["大冒険タツドン", "大冒险TATSUDON"],
+        "alias": [
+            "大冒険タツドン",
+            "大冒险TATSUDON"
+        ],
         "path": "09 Namco Original/Daibouken Tatsudon"
     },
     "Daidaidaidaidaikirai": {
@@ -1983,7 +1986,10 @@
         "path": "01 Pop/Dairokkan"
     },
     "Dairokuten Maou": {
-        "alias": ["第六天魔王", "Demon King of the Sixth Heaven"],
+        "alias": [
+            "第六天魔王",
+            "Demon King of the Sixth Heaven"
+        ],
         "path": "09 Namco Original/Dairokuten Maou"
     },
     "Daisuki na Taiko no Ne": {
