@@ -1107,7 +1107,9 @@
         "path": "03 Vocaloid/Black★Rock Shooter"
     },
     "Blessed Bouquet Buskers": {
-        "alias": [],
+        "alias": [
+            "bbb"
+        ],
         "path": "09 Namco Original/Blessed Bouquet Buskers"
     },
     "Bling-Bang-Bang-Born": {
@@ -1515,7 +1517,9 @@
         "path": "09 Namco Original/Chaos Time"
     },
     "Chaos Time the DARK": {
-        "alias": [],
+        "alias": [
+            "†††カオスタイム the DARK†††"
+        ],
         "path": "09 Namco Original/Chaos Time the DARK"
     },
     "Charles": {
@@ -2406,7 +2410,9 @@
         "path": "09 Namco Original/Dragon of Autumn Shiuryu"
     },
     "Dragon of Divinity Shinryu": {
-        "alias": [],
+        "alias": [
+            "神竜 ～Shinryu～"
+        ],
         "path": "09 Namco Original/Dragon of Divinity Shinryu"
     },
     "Dragon of Ice Kooryu": {
@@ -4166,7 +4172,9 @@
         "path": "09 Namco Original/Ikasama Pirates"
     },
     "Ikazuchi": {
-        "alias": [],
+        "alias": [
+            "怒槌"
+        ],
         "path": "07 Game Music/Ikazuchi"
     },
     "Ike, Mekadon!": {
@@ -4557,7 +4565,9 @@
         "path": "09 Namco Original/KUSANAGI"
     },
     "Ka": {
-        "alias": [],
+        "alias": [
+            "彁"
+        ],
         "path": "09 Namco Original/Ka"
     },
     "Ka Ma Se": {
@@ -11018,7 +11028,9 @@
         "path": "09 Namco Original/Zoku Shimedore 2000"
     },
     "Zouo to Shuuaku no Hanataba": {
-        "alias": [],
+        "alias": [
+            "憎悪と丑悪の花束"
+        ],
         "path": "09 Namco Original/Zouo to Shuuaku no Hanataba"
     },
     "Zuizuizukkoro Bashi": {
