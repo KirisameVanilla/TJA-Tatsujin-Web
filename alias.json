@@ -1062,6 +1062,10 @@
         "alias": [],
         "path": "02 Anime/Be Somewhere"
     },
+    "Be The One": {
+        "alias": [],
+        "path": "04 Children and Folk/Be The One"
+    },
     "Be Your Wings": {
         "alias": [],
         "path": "01 Pop/Be Your Wings"
@@ -1076,7 +1080,7 @@
     },
     "Beauty and the Beast": {
         "alias": [],
-        "path": "04 Children and Folk/Beauty and the Beast"
+        "path": "01 Pop/Beauty and the Beast"
     },
     "Behemoth": {
         "alias": [
@@ -1391,6 +1395,10 @@
     "CYBERgenicALICE": {
         "alias": [],
         "path": "09 Namco Original/CYBERgenicALICE"
+    },
+    "Cafe de Party Night": {
+        "alias": [],
+        "path": "07 Game Music/Cafe de Party Night"
     },
     "Cafe de Party Night ～Dancho no Onayami Orera ga Marutto Byou de Kaiketsuhen～": {
         "alias": [],
@@ -3659,6 +3667,10 @@
         "alias": [],
         "path": "03 Vocaloid/Hatsune Miku no Gekishou"
     },
+    "Hatsune Miku no Shoushitsu": {
+        "alias": [],
+        "path": "03 Vocaloid/Hatsune Miku no Shoushitsu"
+    },
     "Hatsune Miku no Shoushitsu -Gekijouban-": {
         "alias": [],
         "path": "03 Vocaloid/Hatsune Miku no Shoushitsu -Gekijouban-"
@@ -4899,6 +4911,10 @@
         "alias": [],
         "path": "01 Pop/Kegarenaki Kusoyarou-domo"
     },
+    "Keigetsu ～Twilight Laurel～": {
+        "alias": [],
+        "path": "09 Namco Original/Keigetsu ～Twilight Laurel～"
+    },
     "Kenka Joutou": {
         "alias": [],
         "path": "01 Pop/Kenka Joutou"
@@ -5255,6 +5271,14 @@
     "Kokorobo": {
         "alias": [],
         "path": "09 Namco Original/Kokorobo"
+    },
+    "Koku Gin no Tsubasa": {
+        "alias": [],
+        "path": "07 Game Music/Koku Gin no Tsubasa"
+    },
+    "Koku Vyrn no Tsubasa": {
+        "alias": [],
+        "path": "07 Game Music/Koku Vyrn no Tsubasa"
     },
     "Kokushin Chronicle": {
         "alias": [],
@@ -7032,6 +7056,10 @@
         "alias": [],
         "path": "07 Game Music/Ohayou!! Asagohan"
     },
+    "Oira Ending": {
+        "alias": [],
+        "path": "07 Game Music/Oira Ending"
+    },
     "Ojamajo Carnival!!": {
         "alias": [],
         "path": "02 Anime/Ojamajo Carnival!!"
@@ -8416,6 +8444,10 @@
     "Sekai Fushigi Hakken! Opening Theme": {
         "alias": [],
         "path": "05 Variety/Sekai Fushigi Hakken! Opening Theme"
+    },
+    "Sekai o Sukuu Bokura no Ohanashi": {
+        "alias": [],
+        "path": "09 Namco Original/Sekai o Sukuu Bokura no Ohanashi"
     },
     "Sekai wa Anata ni Waraikakete Iru": {
         "alias": [],
