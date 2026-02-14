@@ -816,6 +816,10 @@
         "alias": [],
         "path": "09 Namco Original/Argent Memories"
     },
+    "Aria": {
+        "alias": [],
+        "path": "07 Game Music/Aria"
+    },
     "Arigatou": {
         "alias": [],
         "path": "01 Pop/Arigatou"
@@ -1367,6 +1371,10 @@
     "CHAOS RINGS": {
         "alias": [],
         "path": "07 Game Music/CHAOS RINGS"
+    },
+    "CHAOTiC BATTLE": {
+        "alias": [],
+        "path": "07 Game Music/CHAOTiC BATTLE"
     },
     "CHEMY STORY": {
         "alias": [],
@@ -9842,7 +9850,7 @@
     },
     "Tokyo Shandy Rendezvous": {
         "alias": [],
-        "path": "02 Anime/Tokyo Shandy Rendezvous"
+        "path": "01 Pop/Tokyo Shandy Rendezvous"
     },
     "Tokyo Soda -8-bit Edit-": {
         "alias": [],
