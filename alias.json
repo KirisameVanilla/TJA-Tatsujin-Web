@@ -1572,7 +1572,7 @@
     },
     "Cheers! Delicious Party Pretty Cure": {
         "alias": [],
-        "path": "02 Anime/Cheers! Delicious Party Pretty Cure"
+        "path": "04 Children and Folk/Cheers! Delicious Party Pretty Cure"
     },
     "Chengyao": {
         "alias": [],
@@ -2791,7 +2791,7 @@
     },
     "Favorite Days": {
         "alias": [],
-        "path": "01 Pop/Favorite Days"
+        "path": "05 Variety/Favorite Days"
     },
     "Feed A": {
         "alias": [],
@@ -3553,7 +3553,7 @@
     },
     "Hand Over": {
         "alias": [],
-        "path": "01 Pop/Hand Over"
+        "path": "05 Variety/Hand Over"
     },
     "HaneMari Taisou": {
         "alias": [],
@@ -3904,7 +3904,7 @@
     },
     "Hirogaru Sky! Precure ~Hero Girls~": {
         "alias": [],
-        "path": "02 Anime/Hirogaru Sky! Precure ~Hero Girls~"
+        "path": "04 Children and Folk/Hirogaru Sky! Precure ~Hero Girls~"
     },
     "Hito no Okane de Yakiniku o Shokushitai!": {
         "alias": [],
@@ -4078,7 +4078,7 @@
     },
     "Hyper Bass": {
         "alias": [],
-        "path": "01 Pop/Hyper Bass"
+        "path": "05 Variety/Hyper Bass"
     },
     "Hypnosis Mic -Division Battle Anthem-": {
         "alias": [],
@@ -4175,6 +4175,10 @@
     "Idol": {
         "alias": [],
         "path": "02 Anime/Idol"
+    },
+    "Idol Berserker": {
+        "alias": [],
+        "path": "05 Variety/Idol Berserker"
     },
     "Idol Kyousenshi": {
         "alias": [],
@@ -4379,7 +4383,7 @@
     },
     "Itadaki Babel": {
         "alias": [],
-        "path": "01 Pop/Itadaki Babel"
+        "path": "05 Variety/Itadaki Babel"
     },
     "Itoshi no Mille-sama": {
         "alias": [],
@@ -5139,7 +5143,7 @@
     },
     "Kisoutengai Fushigi wo Douzo": {
         "alias": [],
-        "path": "02 Anime/Kisoutengai Fushigi wo Douzo"
+        "path": "04 Children and Folk/Kisoutengai Fushigi wo Douzo"
     },
     "Kissa Rain": {
         "alias": [],
@@ -5988,7 +5992,7 @@
     },
     "Mani Mani": {
         "alias": [],
-        "path": "01 Pop/Mani Mani"
+        "path": "05 Variety/Mani Mani"
     },
     "Many wow bang!": {
         "alias": [],
@@ -6539,6 +6543,10 @@
     "Muteki no Girlfriend": {
         "alias": [],
         "path": "01 Pop/Muteki no Girlfriend"
+    },
+    "Muteki-teki Happiness": {
+        "alias": [],
+        "path": "02 Anime/Muteki-teki Happiness"
     },
     "My Last Stand": {
         "alias": [],
@@ -7841,6 +7849,10 @@
         "alias": [],
         "path": "02 Anime/Re member"
     },
+    "RePlay!!": {
+        "alias": [],
+        "path": "09 Namco Original/RePlay!!"
+    },
     "Real Life, Real Heart": {
         "alias": [],
         "path": "01 Pop/Real Life, Real Heart"
@@ -8615,7 +8627,7 @@
     },
     "Shining Lights": {
         "alias": [],
-        "path": "01 Pop/Shining Lights"
+        "path": "05 Variety/Shining Lights"
     },
     "Shining Star": {
         "alias": [],
@@ -10059,6 +10071,10 @@
         "alias": [],
         "path": "02 Anime/Tsumi to Batsu Inorazaru-mono Yo"
     },
+    "TsunagaRhythm": {
+        "alias": [],
+        "path": "09 Namco Original/TsunagaRhythm"
+    },
     "Tsunagare! Hirogare! Uchiagare!": {
         "alias": [],
         "path": "09 Namco Original/Tsunagare! Hirogare! Uchiagare!"
@@ -10696,6 +10712,10 @@
     "Wonderland": {
         "alias": [],
         "path": "02 Anime/Wonderland"
+    },
+    "World Keeps Turning": {
+        "alias": [],
+        "path": "09 Namco Original/World Keeps Turning"
     },
     "World is Mine": {
         "alias": [],
