@@ -1276,6 +1276,10 @@
         "alias": [],
         "path": "09 Namco Original/Bubbly☆Queen"
     },
+    "Bug": {
+        "alias": [],
+        "path": "07 Game Music/Bug"
+    },
     "Bukan Cinta Biasa": {
         "alias": [],
         "path": "01 Pop/Bukan Cinta Biasa"
@@ -1395,6 +1399,10 @@
     "CRUXNAUT": {
         "alias": [],
         "path": "09 Namco Original/CRUXNAUT"
+    },
+    "CRaZY": {
+        "alias": [],
+        "path": "07 Game Music/CRaZY"
     },
     "CUT! into the FUTURE": {
         "alias": [],
@@ -3700,7 +3708,7 @@
     },
     "Healin’ Good Pretty Cure Touch!!": {
         "alias": [],
-        "path": "02 Anime/Healin’ Good Pretty Cure Touch!!"
+        "path": "04 Children and Folk/Healin’ Good Pretty Cure Touch!!"
     },
     "Heart Slump Futari-bocchi": {
         "alias": [],
@@ -5798,7 +5806,7 @@
     },
     "Lupinranger vs Patranger": {
         "alias": [],
-        "path": "02 Anime/Lupinranger vs Patranger"
+        "path": "04 Children and Folk/Lupinranger vs Patranger"
     },
     "LΔchesis": {
         "alias": [],
@@ -6455,6 +6463,10 @@
     "Morainaki": {
         "alias": [],
         "path": "01 Pop/Morainaki"
+    },
+    "More! Jump! More!": {
+        "alias": [],
+        "path": "07 Game Music/More! Jump! More!"
     },
     "Mori no Kuma-san": {
         "alias": [],
@@ -9647,6 +9659,10 @@
         "alias": [],
         "path": "03 Vocaloid/Teo"
     },
+    "Teratera": {
+        "alias": [],
+        "path": "07 Game Music/Teratera"
+    },
     "Tetoris": {
         "alias": [],
         "path": "01 Pop/Tetoris"
@@ -9902,6 +9918,10 @@
     "Tonde Mite": {
         "alias": [],
         "path": "09 Namco Original/Tonde Mite"
+    },
+    "Tondemo-Wonderz": {
+        "alias": [],
+        "path": "07 Game Music/Tondemo-Wonderz"
     },
     "Tong Hua": {
         "alias": [],
@@ -11380,6 +11400,10 @@
     "thousand words": {
         "alias": [],
         "path": "05 Variety/thousand words"
+    },
+    "traveling": {
+        "alias": [],
+        "path": "01 Pop/traveling"
     },
     "travelling": {
         "alias": [],
