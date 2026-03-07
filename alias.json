@@ -1206,6 +1206,10 @@
         "alias": [],
         "path": "01 Pop/Boundless Oceans Vast Skies"
     },
+    "Bowling For Soup - Jimmy Neutron Theme": {
+        "alias": [],
+        "path": "02 Anime/Bowling For Soup - Jimmy Neutron Theme"
+    },
     "Brain Power": {
         "alias": [
             "脑力"
@@ -2737,6 +2741,10 @@
         ],
         "path": "07 Game Music/FUJIN Rumble"
     },
+    "FUNKASTIC": {
+        "alias": [],
+        "path": "01 Pop/FUNKASTIC"
+    },
     "FUNKTASTIC": {
         "alias": [],
         "path": "01 Pop/FUNKTASTIC"
@@ -2932,6 +2940,10 @@
     "Furusato": {
         "alias": [],
         "path": "06 Classical/Furusato"
+    },
+    "Fushichou to Narite": {
+        "alias": [],
+        "path": "09 Namco Original/Fushichou to Narite"
     },
     "Futari no Kessho -INNOCENCE-": {
         "alias": [],
@@ -3579,6 +3591,10 @@
         "alias": [],
         "path": "02 Anime/Happy Happy"
     },
+    "Happy Lucky Chappy": {
+        "alias": [],
+        "path": "02 Anime/Happy Lucky Chappy"
+    },
     "Happy Synthesizer": {
         "alias": [
             "快乐合成器"
@@ -4110,7 +4126,7 @@
     },
     "I Was Born to Love You": {
         "alias": [],
-        "path": "01 Pop/I Was Born to Love You"
+        "path": "05 Variety/I Was Born to Love You"
     },
     "I Wish For You": {
         "alias": [],
@@ -4423,7 +4439,7 @@
     },
     "I’m a Slave 4 U": {
         "alias": [],
-        "path": "01 Pop/I’m a Slave 4 U"
+        "path": "05 Variety/I’m a Slave 4 U"
     },
     "I★my★me★mine": {
         "alias": [],
@@ -5171,7 +5187,7 @@
     },
     "Kita Sakaba": {
         "alias": [],
-        "path": "01 Pop/Kita Sakaba"
+        "path": "05 Variety/Kita Sakaba"
     },
     "Kitto Motto Zutto": {
         "alias": [],
@@ -6876,7 +6892,7 @@
     },
     "Nihon Break Kogyo Shaka": {
         "alias": [],
-        "path": "01 Pop/Nihon Break Kogyo Shaka"
+        "path": "05 Variety/Nihon Break Kogyo Shaka"
     },
     "Nihon no Mikata -Nevada Kara Kimashita-": {
         "alias": [],
@@ -8003,6 +8019,10 @@
         "alias": [],
         "path": "07 Game Music/Roca Roja"
     },
+    "Rock the Dragon - Dragonball Z Theme": {
+        "alias": [],
+        "path": "02 Anime/Rock the Dragon - Dragonball Z Theme"
+    },
     "Rock the Dragon -Dragonball Z Theme-": {
         "alias": [],
         "path": "02 Anime/Rock the Dragon -Dragonball Z Theme-"
@@ -8595,7 +8615,7 @@
     },
     "Shima Uta": {
         "alias": [],
-        "path": "04 Children and Folk/Shima Uta"
+        "path": "01 Pop/Shima Uta"
     },
     "Shimedore 2000": {
         "alias": [
@@ -10459,7 +10479,7 @@
     },
     "WE ARE THE CHAMP ～THE NAME OF THE GAME～": {
         "alias": [],
-        "path": "01 Pop/WE ARE THE CHAMP ～THE NAME OF THE GAME～"
+        "path": "05 Variety/WE ARE THE CHAMP ～THE NAME OF THE GAME～"
     },
     "WINDING ROAD": {
         "alias": [],
@@ -10895,7 +10915,7 @@
         "alias": [
             "软软战车"
         ],
-        "path": "04 Children and Folk/Yawaraka Sensha"
+        "path": "05 Variety/Yawaraka Sensha"
     },
     "Ye Lai Ye Ai": {
         "alias": [],
