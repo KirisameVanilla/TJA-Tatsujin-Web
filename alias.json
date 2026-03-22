@@ -4606,7 +4606,7 @@
     },
     "Just Awake": {
         "alias": [],
-        "path": "02 Anime/Just Awake"
+        "path": "01 Pop/Just Awake"
     },
     "Just Dance": {
         "alias": [],
@@ -7983,6 +7983,10 @@
         "alias": [],
         "path": "07 Game Music/Ridge de Ridge de GO! GO! GO! -GMT Mashup-"
     },
+    "Rikka no Mai": {
+        "alias": [],
+        "path": "09 Namco Original/Rikka no Mai"
+    },
     "Rin": {
         "alias": [],
         "path": "09 Namco Original/Rin"
@@ -9308,6 +9312,10 @@
     "THE POLiCY": {
         "alias": [],
         "path": "02 Anime/THE POLiCY"
+    },
+    "THE REVO": {
+        "alias": [],
+        "path": "02 Anime/THE REVO"
     },
     "THE iDOLM@STER": {
         "alias": [],
