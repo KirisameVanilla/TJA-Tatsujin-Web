@@ -360,7 +360,7 @@ class I18n {
         <i class="fas fa-globe"></i>
         <span class="font-medium">${getLanguageText(this.currentLanguage)}</span>
       </button>
-      <div class="absolute top-full left-0 bg-white border border-gray-300 rounded-md shadow-lg min-w-[120px] z-[1000] opacity-0 invisible -translate-y-2 transition-all duration-100 mt-2">
+      <div class="absolute top-full left-0 bg-white border border-gray-300 rounded-md shadow-lg min-w-30 z-1000 opacity-0 invisible -translate-y-2 transition-all duration-100 mt-2">
         <div class="px-4 py-2.5 text-gray-700 cursor-pointer transition-all duration-100 border-b border-gray-200 last:border-b-0 hover:bg-gray-50 ${this.currentLanguage === 'zh-CN' ? 'bg-red-500 text-white' : ''}" data-lang="zh-CN">
           <span class="font-medium">中文</span>
         </div>

@@ -2,43 +2,19 @@
 
 English | [日本語](./README.ja.md) | [中文](../README.md)
 
-A resource download site for Taiko no Tatsujin players, providing convenient chart search and download features. Supports custom data source configuration and is maintained by the community.
+A resource download site for Taiko no Tatsujin players, providing convenient chart search and download features.
 
 ---
 
 ## 🚀 Project Overview
 
-TJA-Tatsujin is a static web project deployed on Cloudflare Pages, aiming to provide a clear and user-friendly chart download platform for Taiko no Tatsujin players. The project supports user-configurable data source APIs and enables quick chart lookup via alias search.
+TJA-Tatsujin is a static web project deployed on Cloudflare Pages, aiming to provide a clear and user-friendly chart download platform for Taiko no Tatsujin players.
 
-All data comes from user-configured public resources and is for learning and communication purposes only. Please respect the original authors' copyrights.
-
----
-
-## 📦 Data Source
-
-- **Data Source**: User-Configurable
-
-This project supports users to configure their own API data sources in the web interface, including:
-
-- API Host Address
-- Repository Owner
-- Repository Name
-
-After configuration, the system will fetch chart information from the specified data source and generate frontend-readable resource files for display.
+All data comes from public resources and is for learning and communication purposes only. Please respect the original authors' copyrights.
 
 ---
 
-## 🔧 Usage Instructions
-
-### API Configuration
-
-On first use, you need to fill in the "API Configuration" section at the top of the webpage:
-
-1. **API Host** - The host address of the data source
-2. **Repository Owner** - The owner of the target repository
-3. **Repository Name** - The name of the target repository
-
-After completing the configuration, click the "Save Configuration" button. The configuration information will be saved in the browser's local storage.
+## � Usage Instructions
 
 ### Alias Management
 
@@ -58,7 +34,6 @@ Follow the existing format in the file for additions or modifications, and ensur
   - Multi-language internationalization
   - Responsive design
   - Local storage configuration
-  - Dynamic API configuration
 
 ---
 
@@ -81,7 +56,7 @@ Whether it's fixing aliases, optimizing the UI, or enhancing search features, yo
 ## 📄 License
 
 This project does not own any song audio or copyrights, and only provides a general chart resource management tool.
-All data comes from user-configured public data sources.
+All data comes from public data sources.
 Please use this tool within legal boundaries and do not use it for commercial purposes.
 
 ---
