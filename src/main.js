@@ -82,10 +82,11 @@ async function getFilesFromPath(basePath) {
  * 通过alias动态获取文件并下载打包
  * @param {string} selectedKey 选中的键名
  * @param {Object} alias alias配置对象
- * @param {JSZip} zip JSZip实例
  * @throws {Error} 当文件获取或下载失败时抛出错误
  */
-async function downloadFilesFromStructure(selectedKey, alias, zip) {
+async function downloadFilesFromStructure(selectedKey, alias) {
+  // 创建新的 JSZip 实例，避免重复下载时文件累积
+  const zip = new JSZip();
   const ref = 'master';
   const basePath = alias[selectedKey].path;
 
@@ -132,15 +133,6 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
 }
 
 (async () => {
-  let zip;
-  try {
-    updateStatus(i18n.t('loadingJSZip'));
-    zip = new JSZip();
-  } catch (e) {
-    updateStatus(i18n.t('jsZipInitFailed'));
-    return;
-  }
-
   let alias;
   try {
     updateStatus(i18n.t('loadingDataFiles'));
@@ -533,7 +525,7 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
     previewBtn.disabled = true;
     updateStatus(i18n.t('downloading') + '... (ﾟ▽ﾟ)/');
     try {
-      await downloadFilesFromStructure(selectedKey, alias, zip);
+      await downloadFilesFromStructure(selectedKey, alias);
     } catch (e) {
       updateStatus(i18n.t('downloadError') + ': ' + e.message + ' (；一_一)');
     }
