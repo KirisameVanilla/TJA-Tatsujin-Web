@@ -7,64 +7,6 @@ import { showConfirm, showChoice } from './confirm-dialog.js';
 // 添加到全局作用域，保持兼容性
 window.showConfirm = showConfirm;
 
-/**
- * 获取API配置列表
- * @returns {Array} API配置列表数组
- */
-function getApiConfigs() {
-  const configs = localStorage.getItem('apiConfigs');
-  if (configs) {
-    return JSON.parse(configs);
-  }
-  return [];
-}
-
-/**
- * 保存API配置列表到localStorage
- * @param {Array} configs API配置列表数组
- */
-function saveApiConfigs(configs) {
-  localStorage.setItem('apiConfigs', JSON.stringify(configs));
-}
-
-/**
- * 从配置列表中随机获取一个API配置
- * @returns {Object|null} 随机选择的API配置对象，如果没有配置则返回null
- */
-function getRandomApiConfig() {
-  const configs = getApiConfigs();
-  if (configs.length === 0) {
-    updateStatus(i18n.t('noApiConfigured'));
-    return null;
-  }
-  const randomIndex = Math.floor(Math.random() * configs.length);
-  return configs[randomIndex];
-}
-
-/**
- * 兼容旧版本配置的迁移函数，将旧格式配置转换为新格式
- */
-function migrateOldConfig() {
-  const oldConfig = localStorage.getItem('apiConfig');
-  if (oldConfig && getApiConfigs().length === 0) {
-    const parsed = JSON.parse(oldConfig);
-    if (parsed.host && parsed.owner && parsed.repo) {
-      const newConfigs = [{
-        id: Date.now(),
-        type: 'gitea',
-        name: '迁移的配置',
-        host: parsed.host,
-        owner: parsed.owner,
-        repo: parsed.repo,
-        useProxy: parsed.useProxy !== undefined ? parsed.useProxy : true
-      }];
-      saveApiConfigs(newConfigs);
-
-      localStorage.removeItem('apiConfig');
-      localStorage.removeItem('generalConfig');
-    }
-  }
-}
 
 /**
  * 更新状态显示文本
@@ -79,15 +21,6 @@ function updateStatus(text) {
  */
 function resetStatus() {
   updateStatus(i18n.t('greeting'));
-}
-
-/**
- * 检查API配置是否启用代理
- * @param {Object} apiConfig API配置对象
- * @returns {boolean} 是否启用代理，默认为true
- */
-function isProxyEnabled(apiConfig) {
-  return apiConfig.useProxy !== undefined ? apiConfig.useProxy : true;
 }
 
 /**
@@ -108,14 +41,7 @@ async function loadAlias() {
  * @throws {Error} 当API未配置或请求失败时抛出错误
  */
 async function getFilesFromPath(basePath) {
-  const apiConfig = getRandomApiConfig();
-  if (!apiConfig) {
-    throw new Error(i18n.t('noApiConfigured'));
-  }
-
-  const baseURL = isProxyEnabled(apiConfig) ?
-    `https://ghproxy.vanillaaaa.org/https://${apiConfig.host}/api/v1/repos/${apiConfig.owner}/${apiConfig.repo}/contents` :
-    `https://${apiConfig.host}/api/v1/repos/${apiConfig.owner}/${apiConfig.repo}/contents`;
+  const baseURL = 'https://ghproxy.vanillaaaa.org/https://ese.tjadataba.se/api/v1/repos/ese/ese/contents';
   const files = [];
 
   async function fetchDirectoryContents(path) {
@@ -178,14 +104,7 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
     updateStatus(i18n.t('fetchFilesSuccess'));
   }
 
-  const apiConfig = getRandomApiConfig();
-  if (!apiConfig) {
-    throw new Error(i18n.t('noApiConfigured'));
-  }
-
-  const baseURL = isProxyEnabled(apiConfig) ?
-    `https://ghproxy.vanillaaaa.org/https://${apiConfig.host}/${apiConfig.owner}/${apiConfig.repo}/raw/branch` :
-    `https://${apiConfig.host}/${apiConfig.owner}/${apiConfig.repo}/raw/branch`;
+  const baseURL = 'https://ghproxy.vanillaaaa.org/https://ese.tjadataba.se/ese/ese/raw/branch';
 
   for (let i = 0; i < files.length; i++) {
     const file = files[i];
@@ -212,7 +131,7 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
   updateStatus(`${i18n.t('downloadComplete')} ${i18n.formatFilesPackaged(files.length)} (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧`);
 }
 
-(async() => {
+(async () => {
   let zip;
   try {
     updateStatus(i18n.t('loadingJSZip'));
@@ -233,24 +152,9 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
 
   updateStatus(i18n.t('loadingCompleted'));
 
-  migrateOldConfig();
-
   const searchInput = document.getElementById('search');
   const resultsEl = document.getElementById('results');
   const startBtn = document.getElementById('start');
-
-  const addApiBtn = document.getElementById('add-api');
-  const apiList = document.getElementById('api-list');
-  const apiForm = document.getElementById('api-form');
-  const apiFormTitle = document.getElementById('api-form-title');
-  const apiTypeInput = document.getElementById('api-type');
-  const apiNameInput = document.getElementById('api-name');
-  const apiHostInput = document.getElementById('api-host');
-  const repoOwnerInput = document.getElementById('repo-owner');
-  const repoNameInput = document.getElementById('repo-name');
-  const apiUseProxyInput = document.getElementById('api-use-proxy');
-  const saveApiBtn = document.getElementById('save-api');
-  const cancelApiBtn = document.getElementById('cancel-api');
 
   const settingsBtn = document.getElementById('settings-btn');
   const settingsModal = document.getElementById('settings-modal');
@@ -268,7 +172,6 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
   const previewBtn = document.getElementById('preview');
 
   let selectedKey = null;
-  let editingApiId = null;
   let searchTimeout = null;
 
   /**
@@ -408,163 +311,6 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
     updateThemeChangeSession();
   }
 
-  /**
-   * 渲染API配置列表到UI
-   */
-  function renderApiList() {
-    const configs = getApiConfigs();
-    apiList.innerHTML = '';
-
-    if (configs.length === 0) {
-      apiList.innerHTML = `<div style="padding: 2rem; text-align: center; color: #666;">${i18n.t('noApiConfigured')}</div>`;
-      return;
-    }
-
-    configs.forEach(config => {
-      const apiItem = document.createElement('div');
-      apiItem.className = 'flex justify-between items-center p-4 border-b border-gray-200 bg-white transition-colors duration-200 hover:bg-gray-50 last:border-b-0';
-      const proxyStatus = config.useProxy !== false ? '🟢' : '🔴';
-      apiItem.innerHTML = `
-        <div class="flex-1">
-          <div class="font-semibold mb-1 text-gray-800 flex items-center gap-2">
-            <span class="inline-block bg-red-500 text-white py-0.5 px-2 rounded-xl text-xs mr-2">${config.type.toUpperCase()}</span>
-            ${config.name}
-            <span class="text-xs" title="${config.useProxy !== false ? i18n.t('proxyEnabled') : i18n.t('proxyDisabled')}">${proxyStatus}</span>
-          </div>
-          <div class="text-sm text-gray-600">${config.host}/${config.owner}/${config.repo}</div>
-        </div>
-        <div class="flex gap-2">
-          <button class="bg-transparent border-0 cursor-pointer p-2 rounded transition-colors duration-200 text-blue-600 hover:bg-gray-200" title="${i18n.t('editApi')}" data-id="${config.id}">
-            <i class="fas fa-edit"></i>
-          </button>
-          <button class="bg-transparent border-0 cursor-pointer p-2 rounded transition-colors duration-200 text-red-600 hover:bg-gray-200" title="${i18n.t('deleteApi')}" data-id="${config.id}">
-            <i class="fas fa-trash"></i>
-          </button>
-        </div>
-      `;
-
-      const editBtn = apiItem.querySelector('[title="' + i18n.t('editApi') + '"]');
-      const deleteBtn = apiItem.querySelector('[title="' + i18n.t('deleteApi') + '"]');
-
-      editBtn.addEventListener('click', () => editApi(config.id));
-      deleteBtn.addEventListener('click', async() => await deleteApi(config.id));
-
-      apiList.appendChild(apiItem);
-    });
-  }
-
-  /**
-   * 显示添加或编辑API配置表单
-   * @param {Object|null} config 要编辑的配置对象，为null时表示添加新配置
-   */
-  function showApiForm(config = null) {
-    editingApiId = config ? config.id : null;
-    apiFormTitle.textContent = config ? i18n.t('editApiTitle') : i18n.t('addApiTitle');
-
-    if (config) {
-      apiTypeInput.value = config.type;
-      apiNameInput.value = config.name;
-      apiHostInput.value = config.host;
-      repoOwnerInput.value = config.owner;
-      repoNameInput.value = config.repo;
-      apiUseProxyInput.checked = config.useProxy !== false;
-    } else {
-      apiTypeInput.value = 'gitea';
-      apiNameInput.value = '';
-      apiHostInput.value = '';
-      repoOwnerInput.value = '';
-      repoNameInput.value = '';
-      apiUseProxyInput.checked = true;
-    }
-
-    apiForm.style.display = 'block';
-  }
-
-  /**
-   * 隐藏API配置表单
-   */
-  function hideApiForm() {
-    apiForm.style.display = 'none';
-    editingApiId = null;
-  }
-
-  /**
-   * 保存API配置（新增或更新）
-   */
-  function saveApi() {
-    const type = apiTypeInput.value;
-    const name = apiNameInput.value.trim();
-    const host = apiHostInput.value.trim();
-    const owner = repoOwnerInput.value.trim();
-    const repo = repoNameInput.value.trim();
-    const useProxy = apiUseProxyInput.checked;
-
-    if (!name || !host || !owner || !repo) {
-      updateStatus(i18n.t('configRequired') + ' (´･ω･`)');
-      return;
-    }
-
-    const configs = getApiConfigs();
-
-    if (editingApiId) {
-      const index = configs.findIndex(c => c.id === editingApiId);
-      if (index !== -1) {
-        configs[index] = { ...configs[index], type, name, host, owner, repo, useProxy };
-      }
-    } else {
-      const newConfig = {
-        id: Date.now(),
-        type,
-        name,
-        host,
-        owner,
-        repo,
-        useProxy
-      };
-      configs.push(newConfig);
-    }
-
-    saveApiConfigs(configs);
-    renderApiList();
-    hideApiForm();
-    updateStatus(i18n.t('apiSaved') + ' (＾▽＾)');
-  }
-
-  /**
-   * 编辑指定ID的API配置
-   * @param {number} id API配置的ID
-   */
-  function editApi(id) {
-    const configs = getApiConfigs();
-    const config = configs.find(c => c.id === id);
-    if (config) {
-      showApiForm(config);
-    }
-  }
-
-  /**
-   * 删除指定ID的API配置
-   * @param {number} id API配置的ID
-   */
-  async function deleteApi(id) {
-    const confirmed = await window.showConfirm({
-      title: i18n.t('deleteConfirmTitle'),
-      message: i18n.t('deleteConfirmMessage'),
-      type: 'warning',
-      confirmText: i18n.t('confirmText'),
-      cancelText: i18n.t('cancelText')
-    });
-
-    if (confirmed) {
-      const configs = getApiConfigs();
-      const filtered = configs.filter(c => c.id !== id);
-      saveApiConfigs(filtered);
-      renderApiList();
-      updateStatus(i18n.t('apiDeleted') + ' (＾▽＾)');
-    }
-  }
-
-  renderApiList();
 
   const searchCache = {
     pinyin: new Map(),
@@ -643,10 +389,10 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
    * @returns {Object} 包含toKatakana和toHiragana属性的对象
    */
   function convertKana(text) {
-    const toKatakana = text.replace(/[\u3041-\u3096]/g, function(match) {
+    const toKatakana = text.replace(/[\u3041-\u3096]/g, function (match) {
       return String.fromCharCode(match.charCodeAt(0) + 0x60);
     });
-    const toHiragana = text.replace(/[\u30a1-\u30f6]/g, function(match) {
+    const toHiragana = text.replace(/[\u30a1-\u30f6]/g, function (match) {
       return String.fromCharCode(match.charCodeAt(0) - 0x60);
     });
     return { toKatakana, toHiragana };
@@ -781,7 +527,7 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
     }, 300);
   });
 
-  startBtn.addEventListener('click', async() => {
+  startBtn.addEventListener('click', async () => {
     if (!selectedKey) return;
     startBtn.disabled = true;
     previewBtn.disabled = true;
@@ -796,7 +542,7 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
   });
 
   // 预览按钮事件
-  previewBtn.addEventListener('click', async() => {
+  previewBtn.addEventListener('click', async () => {
     if (!selectedKey) return;
     previewBtn.disabled = true;
     startBtn.disabled = true;
@@ -830,11 +576,7 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
         updateStatus(i18n.t('noResults') + ' (⊙_⊙)？');
         return;
       }
-      const apiConfig = getRandomApiConfig();
-      if (!apiConfig) throw new Error(i18n.t('noApiConfigured'));
-      const baseURL = isProxyEnabled(apiConfig) ?
-        `https://ghproxy.vanillaaaa.org/https://${apiConfig.host}/${apiConfig.owner}/${apiConfig.repo}/raw/branch` :
-        `https://${apiConfig.host}/${apiConfig.owner}/${apiConfig.repo}/raw/branch`;
+      const baseURL = 'https://ghproxy.vanillaaaa.org/https://ese.tjadataba.se/ese/ese/raw/branch';
       const zip = new JSZip();
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
@@ -878,10 +620,6 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
     previewBtn.disabled = false;
     startBtn.disabled = false;
   });
-
-  addApiBtn.addEventListener('click', () => showApiForm());
-  saveApiBtn.addEventListener('click', saveApi);
-  cancelApiBtn.addEventListener('click', hideApiForm);
 
   themeToggle.addEventListener('click', toggleTheme);
   themeAuto.addEventListener('click', setAutoTheme);
@@ -930,13 +668,6 @@ async function downloadFilesFromStructure(selectedKey, alias, zip) {
     const matchedKeys = filterKeys(searchInput.value);
     renderResults(matchedKeys);
     resetStatus();
-
-    renderApiList();
-
-    apiNameInput.placeholder = i18n.t('apiNamePlaceholder');
-    apiHostInput.placeholder = i18n.t('apiHostPlaceholder');
-    repoOwnerInput.placeholder = i18n.t('repoOwnerPlaceholder');
-    repoNameInput.placeholder = i18n.t('repoNamePlaceholder');
 
     const currentTheme = document.documentElement.getAttribute('data-theme');
     const savedTheme = localStorage.getItem('theme');

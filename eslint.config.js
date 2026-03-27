@@ -52,7 +52,6 @@ export default [
       'array-bracket-spacing': ['error', 'never'], // 数组方括号空格
 
       // 函数
-      'space-before-function-paren': ['error', 'never'], // 函数名后不要空格
       'function-paren-newline': ['error', 'consistent'], // 函数参数换行保持一致
 
       // 其他

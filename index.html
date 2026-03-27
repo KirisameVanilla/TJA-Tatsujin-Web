@@ -41,7 +41,7 @@
   </footer>
 
   <!-- 浮动按钮组 -->
-  <div class="right-5 md:right-8 bottom-5 md:bottom-8 z-50 floating-buttons fixed flex flex-col gap-4">
+  <div class="right-5 md:right-8 bottom-5 md:bottom-8 z-50 fixed flex flex-col gap-4 floating-buttons">
     <!-- Discord 社区按钮 -->
     <button id="discord-btn"
       class="flex justify-center items-center bg-indigo-600 hover:bg-indigo-700 shadow-lg hover:shadow-xl border-0 rounded-full w-12 md:w-15 h-12 md:h-15 text-white text-lg md:text-2xl hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer"
@@ -63,7 +63,7 @@
     <div
       class="bg-white shadow-2xl rounded-xl w-[95%] sm:w-11/12 max-w-lg max-h-4/5 overflow-y-auto animate-fade-in modal-content">
       <div class="flex justify-between items-center p-4 sm:p-6 border-gray-200 border-b modal-header">
-        <h3 data-i18n="apiConfigTitle" class="m-0 font-semibold text-red-500 text-xl">设置</h3>
+        <h3 data-i18n="settingsTitle" class="m-0 font-semibold text-red-500 text-xl">设置</h3>
         <span
           class="bg-transparent p-0 border-0 font-bold text-gray-400 hover:text-red-500 text-3xl leading-none transition-colors duration-300 cursor-pointer close">&times;</span>
       </div>
@@ -95,71 +95,6 @@
                 <span data-i18n="autoTheme">自动</span>
               </button>
             </div>
-          </div>
-        </div>
-
-        <div class="mb-8 config-section">
-          <div class="flex justify-between items-center mb-4 section-header">
-            <h4 data-i18n="apiListTitle" class="m-0 text-gray-800 text-lg">API 配置列表</h4>
-            <button id="add-api"
-              class="flex justify-center items-center bg-red-500 hover:bg-red-600 border-0 rounded-full w-8 h-8 text-white hover:scale-110 transition-all duration-200 cursor-pointer add-btn"
-              data-i18n="addApi" title="添加 API">
-              <i class="fas fa-plus"></i>
-            </button>
-          </div>
-          <div id="api-list" class="bg-gray-50 border border-gray-200 rounded-lg max-h-80 overflow-y-auto api-list">
-            <!-- API 配置项将动态添加到这里 -->
-          </div>
-        </div>
-
-        <!-- 添加/编辑 API 表单 -->
-        <div id="api-form" class="hidden bg-gray-50 mt-4 p-6 border border-gray-200 rounded-lg api-form">
-          <h4 id="api-form-title" data-i18n="addApiTitle" class="m-0 mb-4 text-gray-800">添加 API 配置</h4>
-          <div class="flex flex-col mb-4 config-row">
-            <label for="api-type" data-i18n="apiTypeLabel" class="mb-2 font-medium text-gray-800">API 类型:</label>
-            <select id="api-type"
-              class="p-2.5 sm:p-3 border-2 border-gray-300 focus:border-red-500 rounded-lg outline-none text-sm sm:text-base transition-colors duration-300">
-              <option value="gitea">Gitea</option>
-              <option value="github">GitHub</option>
-              <option value="gitlab">GitLab</option>
-            </select>
-          </div>
-          <div class="flex flex-col mb-4 config-row">
-            <label for="api-name" data-i18n="apiNameLabel" class="mb-2 font-medium text-gray-800">配置名称:</label>
-            <input id="api-name" type="text" data-i18n="apiNamePlaceholder" placeholder="例如: 主服务器"
-              class="p-2.5 sm:p-3 border-2 border-gray-300 focus:border-red-500 rounded-lg outline-none text-sm sm:text-base transition-colors duration-300" />
-          </div>
-          <div class="flex flex-col mb-4 config-row">
-            <label for="api-host" data-i18n="apiHostLabel" class="mb-2 font-medium text-gray-800">API 主机地址:</label>
-            <input id="api-host" type="text" data-i18n="apiHostPlaceholder" placeholder="例如: xxx.xxx.xx"
-              class="p-2.5 sm:p-3 border-2 border-gray-300 focus:border-red-500 rounded-lg outline-none text-sm sm:text-base transition-colors duration-300" />
-          </div>
-          <div class="flex flex-col mb-4 config-row">
-            <label for="repo-owner" data-i18n="repoOwnerLabel" class="mb-2 font-medium text-gray-800">仓库所有者:</label>
-            <input id="repo-owner" type="text" data-i18n="repoOwnerPlaceholder" placeholder="例如: xxx"
-              class="p-2.5 sm:p-3 border-2 border-gray-300 focus:border-red-500 rounded-lg outline-none text-sm sm:text-base transition-colors duration-300" />
-          </div>
-          <div class="flex flex-col mb-4 config-row">
-            <label for="repo-name" data-i18n="repoNameLabel" class="mb-2 font-medium text-gray-800">仓库名称:</label>
-            <input id="repo-name" type="text" data-i18n="repoNamePlaceholder" placeholder="例如: xxx"
-              class="p-2.5 sm:p-3 border-2 border-gray-300 focus:border-red-500 rounded-lg outline-none text-sm sm:text-base transition-colors duration-300" />
-          </div>
-          <div class="flex flex-col mb-4 config-row">
-            <label class="inline-flex relative items-center gap-2 text-sm cursor-pointer switch-label">
-              <input type="checkbox" id="api-use-proxy" class="sr-only" />
-              <span class="relative bg-gray-400 rounded-full w-11 h-6 transition-all duration-100 slider">
-                <span
-                  class="top-0.5 left-0.5 absolute bg-white rounded-full w-4.5 h-4.5 transition-transform duration-100 slider-dot"></span>
-              </span>
-              <span data-i18n="apiUseProxy">使用加速代理</span>
-            </label>
-          </div>
-          <div class="flex gap-4 mt-6 form-actions">
-            <button id="save-api" data-i18n="saveApi"
-              class="flex-1 bg-red-500 hover:bg-red-600 p-3 border-0 rounded-md text-white text-base transition-all duration-200 cursor-pointer">保存
-              API</button>
-            <button id="cancel-api" data-i18n="cancelApi"
-              class="flex-1 bg-gray-500 hover:bg-gray-600 p-3 border-0 rounded-md text-white text-base transition-all duration-200 cursor-pointer">取消</button>
           </div>
         </div>
       </div>

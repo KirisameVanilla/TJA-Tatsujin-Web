@@ -14,34 +14,6 @@ const translations = {
     previewBtn: '预览谱面',
     startGeneratingPreviewZip: '正在生成预览包……',
 
-    // API 配置
-    apiConfigTitle: '设置',
-    apiListTitle: 'API 配置列表',
-    addApi: '添加 API',
-    addApiTitle: '添加 API 配置',
-    editApiTitle: '编辑 API 配置',
-    apiTypeLabel: 'API 类型',
-    apiNameLabel: '配置名称',
-    apiNamePlaceholder: '例如: 主服务器',
-    apiUseProxy: '使用加速代理（推荐开启）',
-    saveApi: '保存 API',
-    cancelApi: '取消',
-    deleteApi: '删除',
-    editApi: '编辑',
-    apiSaved: 'API 配置已保存！',
-    apiDeleted: 'API 配置已删除',
-    noApiConfigured: '未配置任何 API，请先添加',
-    apiConfigNotFound: '未找到API配置，请先设置',
-    apiHostLabel: 'API 主机地址',
-    apiHostPlaceholder: '例如: xxx.xxx.xx',
-    repoOwnerLabel: '仓库所有者',
-    repoOwnerPlaceholder: '例如: xxx',
-    repoNameLabel: '仓库名称',
-    repoNamePlaceholder: '例如: xxx',
-    configRequired: '请填写完整的API配置信息',
-    proxyEnabled: '代理已启用',
-    proxyDisabled: '代理已禁用',
-
     // 状态信息
     greeting: '你好~ (*・ω・)ﾉ',
     loadingAlias: '加载 alias.json 失败啦 (；´д｀)ゞ',
@@ -110,34 +82,6 @@ const translations = {
     startDownload: 'Start Download',
     previewBtn: 'Preview Chart',
     startGeneratingPreviewZip: 'Start Generating Preview Zip',
-
-    // API 配置
-    apiConfigTitle: 'Settings',
-    apiListTitle: 'API Configuration List',
-    addApi: 'Add API',
-    addApiTitle: 'Add API Configuration',
-    editApiTitle: 'Edit API Configuration',
-    apiTypeLabel: 'API Type',
-    apiNameLabel: 'Configuration Name',
-    apiNamePlaceholder: 'e.g.: Main Server',
-    apiUseProxy: 'Use acceleration proxy (recommended)',
-    saveApi: 'Save API',
-    cancelApi: 'Cancel',
-    deleteApi: 'Delete',
-    editApi: 'Edit',
-    apiSaved: 'API configuration saved!',
-    apiDeleted: 'API configuration deleted',
-    noApiConfigured: 'No API configured, please add one first',
-    apiConfigNotFound: 'API configuration not found, please set it first',
-    apiHostLabel: 'API Host',
-    apiHostPlaceholder: 'e.g.: xxx.xxx.xx',
-    repoOwnerLabel: 'Repository Owner',
-    repoOwnerPlaceholder: 'e.g.: xxx',
-    repoNameLabel: 'Repository Name',
-    repoNamePlaceholder: 'e.g.: xxx',
-    configRequired: 'Please fill in complete API configuration',
-    proxyEnabled: 'Proxy enabled',
-    proxyDisabled: 'Proxy disabled',
 
     // 状态信息
     greeting: 'Hello~ (*・ω・)ﾉ',
@@ -403,11 +347,11 @@ class I18n {
 
     // 获取当前语言的显示文本
     const getLanguageText = (lang) => {
-      switch(lang) {
-      case 'zh-CN': return '中';
-      case 'ja': return '日';
-      case 'en': return 'EN';
-      default: return 'EN';
+      switch (lang) {
+        case 'zh-CN': return '中';
+        case 'ja': return '日';
+        case 'en': return 'EN';
+        default: return 'EN';
       }
     };
 
@@ -464,11 +408,11 @@ class I18n {
         // 更新按钮文本
         const languageText = btn.querySelector('span');
         const getLanguageText = (lang) => {
-          switch(lang) {
-          case 'zh-CN': return '中';
-          case 'ja': return '日';
-          case 'en': return 'EN';
-          default: return 'EN';
+          switch (lang) {
+            case 'zh-CN': return '中';
+            case 'ja': return '日';
+            case 'en': return 'EN';
+            default: return 'EN';
           }
         };
         languageText.textContent = getLanguageText(lang);
