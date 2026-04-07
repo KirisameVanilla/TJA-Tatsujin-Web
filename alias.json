@@ -1590,6 +1590,10 @@
         "alias": [],
         "path": "01 Pop/Chengyao"
     },
+    "Cherry Pop": {
+        "alias": [],
+        "path": "03 Vocaloid/Cherry Pop"
+    },
     "Chicken Game": {
         "alias": [],
         "path": "09 Namco Original/Chicken Game"
@@ -5213,6 +5217,10 @@
         "alias": [],
         "path": "07 Game Music/Knuckle Heads ～Ouburoukou～"
     },
+    "Kodomo Otona Hero": {
+        "alias": [],
+        "path": "04 Children and Folk/Kodomo Otona Hero"
+    },
     "Koi": {
         "alias": [],
         "path": "01 Pop/Koi"
@@ -8339,6 +8347,10 @@
         ],
         "path": "09 Namco Original/Saitama 2000"
     },
+    "Saitama 2001": {
+        "alias": [],
+        "path": "09 Namco Original/Saitama 2001"
+    },
     "Sakasama Sekai": {
         "alias": [],
         "path": "07 Game Music/Sakasama Sekai"
@@ -10069,7 +10081,7 @@
     },
     "Trust・Last": {
         "alias": [],
-        "path": "01 Pop/Trust・Last"
+        "path": "04 Children and Folk/Trust・Last"
     },
     "Try Everything": {
         "alias": [],
@@ -11156,6 +11168,10 @@
     "Yuuwaku": {
         "alias": [],
         "path": "01 Pop/Yuuwaku"
+    },
+    "ZOMEKI THUNDER": {
+        "alias": [],
+        "path": "09 Namco Original/ZOMEKI THUNDER"
     },
     "Zankoku na Yoru ni Kagayake": {
         "alias": [],
