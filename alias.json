@@ -1844,7 +1844,7 @@
     },
     "Connected World": {
         "alias": [],
-        "path": "01 Pop/Connected World"
+        "path": "05 Variety/Connected World"
     },
     "Coquette": {
         "alias": [],
@@ -9850,6 +9850,10 @@
         "alias": [],
         "path": "07 Game Music/The world is all one!!"
     },
+    "Theme of Naoki Hanzawa ~Main Title~": {
+        "alias": [],
+        "path": "05 Variety/Theme of Naoki Hanzawa ~Main Title~"
+    },
     "Theremin Rhapsody": {
         "alias": [],
         "path": "09 Namco Original/Theremin Rhapsody"
@@ -11476,6 +11480,10 @@
     "twinkle night": {
         "alias": [],
         "path": "01 Pop/twinkle night"
+    },
+    "twinkle night (feat. somunia)": {
+        "alias": [],
+        "path": "05 Variety/twinkle night (feat. somunia)"
     },
     "ultra soul": {
         "alias": [],
